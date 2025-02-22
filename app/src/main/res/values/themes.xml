@@ -1,9 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ArmazenDigital" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Tema base da aplicação -->
+    <style name="Base.Theme.ArmazemDigital" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Aqui são definidos os itens do tema -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorSecondary">@color/gray</item>
+        <item name="android:windowBackground">@color/gray</item>
+        <item name="android:textColor">@color/yellow</item>
     </style>
 
-    <style name="Theme.ArmazenDigital" parent="Base.Theme.ArmazenDigital" />
+    <style name="Theme.ArmazemDigital" parent="Base.Theme.ArmazemDigital" />
 </resources>
