@@ -1,13 +1,20 @@
-package br.com.thiago.armazemdigital;
+package br.com.thiago.armazemdigital.activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import br.com.thiago.armazemdigital.ArmazemDigitalApp;
+import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.ActivityMainBinding;
+import br.com.thiago.armazemdigital.utils.DialogUtil;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -21,6 +28,30 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
         setupNavigation();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.actionInfoSystem) {
+            showInfoDialog();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showInfoDialog() {
+        String versionName = ((ArmazemDigitalApp) getApplication()).getVersionName();
+        AlertDialog dialog = DialogUtil.createInfoDialog(this, versionName);
+        dialog.show();
     }
 
     private void setupNavigation() {

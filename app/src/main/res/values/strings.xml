@@ -5,4 +5,9 @@
     <string name="title_item_menu_movimentar">Movimentar</string>
     <string name="title_item_menu_estoque">Estoque</string>
     <string name="title_item_menu_configuracao">Configurações</string>
+    <string name="info_title">Informações do Sistema</string>
+    <string name="info_made_by">Desenvolvido por Thiago Carvalho Füllenbach</string>
+    <string name="info_version">Versão do App: %s</string>
+    <string name="n_a">N/A</string>
+    <string name="dialog_button_ok">OK</string>
 </resources>
