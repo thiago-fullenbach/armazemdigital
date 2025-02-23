@@ -3,10 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentTeste">
+    app:startDestination="@id/itemMenuCadastro">
+    <!-- IDs de fragments devem ser iguais aos dos itens no menu_main_activity -->
     <fragment
-        android:id="@+id/fragmentTeste"
-        android:name="br.com.thiago.armazemdigital.FragmentTeste"
-        android:label="fragment_teste"
-        tools:layout="@layout/fragment_teste" />
+        android:id="@+id/itemMenuCadastro"
+        android:name="br.com.thiago.armazemdigital.fragments.CadastroFragment"
+        android:label="fragment_cadastro"
+        tools:layout="@layout/fragment_cadastro" />
+    <fragment
+        android:id="@+id/itemMenuMovimentacao"
+        android:name="br.com.thiago.armazemdigital.fragments.MovimentacaoFragment"
+        android:label="fragment_movimentacao"
+        tools:layout="@layout/fragment_movimentacao" />
+    <fragment
+        android:id="@+id/itemMenuEstoque"
+        android:name="br.com.thiago.armazemdigital.fragments.EstoqueFragment"
+        android:label="fragment_estoque"
+        tools:layout="@layout/fragment_estoque" />
+    <fragment
+        android:id="@+id/itemMenuConfiguracao"
+        android:name="br.com.thiago.armazemdigital.fragments.ConfiguracaoFragment"
+        android:label="fragment_configuracao"
+        tools:layout="@layout/fragment_configuracao" />
 </navigation>

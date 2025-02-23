@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Armazem Digital</string>
     <string name="action_settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_item_menu_cadastro">Cadastros</string>
+    <string name="title_item_menu_movimentar">Movimentar</string>
+    <string name="title_item_menu_estoque">Estoque</string>
+    <string name="title_item_menu_configuracao">Configurações</string>
 </resources>
