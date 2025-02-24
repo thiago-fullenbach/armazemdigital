@@ -15,4 +15,9 @@
     <string name="label_btn_cadastro_categoria">Cadastro de Categorias</string>
     <string name="label_btn_novo_cadastro_produto">Cadastrar Produto</string>
     <string name="txt_sem_cadastro_produto">Não existem produtos cadastrados</string>
+    <string name="content_description_imagem_cadastro_produto">Imagem do Produto Cadastrado</string>
+    <string name="txt_exemplo_nome_produto">Produto de Exemplo</string>
+    <string name="txt_exemplo_descricao_produto">Descrição de Exemplo</string>
+    <string name="txt_exemplo_categoria_produto">Categoria Exemplo</string>
+    <string name="txt_exemplo_preco_produto">R$ 5,00</string>
 </resources>
