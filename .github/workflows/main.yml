@@ -1,0 +1,28 @@
+name: Build Project
+
+on:
+  push:
+    branches: [ "main", "develop", "feature/*", "bug/*", "release/*", "hotfix/*" ]
+  pull_request:
+    branches: [ "main", "develop", "feature/*", "bug/*", "release/*", "hotfix/*" ]
+    types:
+      - closed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.pull_request.merged == true
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'jetbrains'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew build
