@@ -2,9 +2,9 @@ name: Build Project
 
 on:
   push:
-    branches: [ "main", "develop", "feature/*", "bug/*", "release/*" "hotfix/*" ]
+    branches: [ "main", "develop", "feature/*", "bug/*", "release/*", "hotfix/*" ]
   pull_request:
-    branches: [ "main", "develop", "feature/*", "bug/*", "release/*" "hotfix/*" ]
+    branches: [ "main", "develop", "feature/*", "bug/*", "release/*", "hotfix/*" ]
     types:
       - closed
 
