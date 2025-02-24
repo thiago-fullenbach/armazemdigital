@@ -7,6 +7,7 @@
     tools:context=".fragments.CadastroFragment">
 
     <TextView
+        android:id="@+id/tv_texto_cadastro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/title_item_menu_cadastro" />

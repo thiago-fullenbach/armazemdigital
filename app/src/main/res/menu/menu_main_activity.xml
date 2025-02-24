@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- IDs de itens devem ser iguais aos dos fragments no nav_graph -->
     <item
-        android:id="@+id/itemMenuCadastro"
+        android:id="@+id/item_menu_cadastro"
         android:title="@string/title_item_menu_cadastro"
         android:icon="@drawable/ic_menu_cadastro" />
 
     <item
-        android:id="@+id/itemMenuMovimentacao"
+        android:id="@+id/item_menu_movimentacao"
         android:title="@string/title_item_menu_movimentar"
         android:icon="@drawable/ic_menu_movimentacao" />
 
     <item
-        android:id="@+id/itemMenuEstoque"
+        android:id="@+id/item_menu_estoque"
         android:title="@string/title_item_menu_estoque"
         android:icon="@drawable/ic_menu_estoque" />
 
     <item
-        android:id="@+id/itemMenuConfiguracao"
+        android:id="@+id/item_menu_configuracao"
         android:title="@string/title_item_menu_configuracao"
         android:icon="@drawable/ic_menu_configuracao" />
 </menu>

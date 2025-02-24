@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.actionInfoSystem) {
+        if(id == R.id.action_info_system) {
             showInfoDialog();
             return true;
         }
