@@ -3,6 +3,9 @@ package br.com.thiago.armazemdigital;
 import android.app.Application;
 import android.content.pm.PackageManager;
 
+/**
+ * Classe da aplicação.
+ */
 public class ArmazemDigitalApp extends Application {
     /** Função para obter o versionName da aplicação.
      *
