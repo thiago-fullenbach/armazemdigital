@@ -9,8 +9,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_lista_cadastro_produto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        tools:listitem="@layout/list_item_cadastro_produto"
+        app:layout_constraintBottom_toTopOf="@+id/btn_novo_cadastro_produto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_aviso_sem_produto"
