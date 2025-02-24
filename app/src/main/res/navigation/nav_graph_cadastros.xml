@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_cadastro"
+    app:startDestination="@id/item_menu_cadastro">
+    <fragment
+        android:id="@+id/item_menu_cadastro"
+        android:name="br.com.thiago.armazemdigital.fragments.CadastroFragment"
+        android:label="fragment_cadastro"
+        tools:layout="@layout/fragment_cadastro" >
+        <action
+            android:id="@+id/action_item_menu_cadastro_to_listagem_cadastro_produto_fragment"
+            app:destination="@id/listagem_cadastro_produto_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listagem_cadastro_produto_fragment"
+        android:name="br.com.thiago.armazemdigital.fragments.cadastros.ListagemCadastroProdutoFragment"
+        android:label="fragment_listagem_cadastro_produto"
+        tools:layout="@layout/fragment_listagem_cadastro_produto" />
+</navigation>

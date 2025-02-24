@@ -8,7 +8,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
+import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroBinding;
 
 public class CadastroFragment extends Fragment {
@@ -33,16 +36,12 @@ public class CadastroFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        binding.btnCadastroProduto.setOnClickListener(view -> goToCadastroProduto());
+        binding.btnCadastroProduto.setOnClickListener(view -> {
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.action_item_menu_cadastro_to_listagem_cadastro_produto_fragment);
+        });
         binding.btnCadastroFornecedor.setOnClickListener(view -> goToCadastroFornecedor());
         binding.btnCadastroCategoria.setOnClickListener(view -> goToCadastroCategoria());
-    }
-
-    private void goToCadastroProduto() {
-        Toast toast = new Toast(getContext());
-        toast.setText("Acessou tela de cadastro de produtos!");
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     private void goToCadastroFornecedor() {
