@@ -12,8 +12,8 @@ public class MovimentacaoRepository {
         this.movimentacaoDao = movimentacaoDao;
     }
 
-    public void insertMovimentacao(Movimentacao movimentacao) {
-        movimentacaoDao.insert(movimentacao);
+    public long insertMovimentacao(Movimentacao movimentacao) {
+        return movimentacaoDao.insert(movimentacao);
     }
 
     public void updateMovimentacao(Movimentacao movimentacao) {
@@ -26,5 +26,9 @@ public class MovimentacaoRepository {
 
     public List<Movimentacao> getMovimentacoes(int limit, int offset) {
         return movimentacaoDao.getMovimentacoes(limit, offset);
+    }
+
+    public Movimentacao getMovimentacao(long id) {
+        return movimentacaoDao.getMovimentacao(id);
     }
 }

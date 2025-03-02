@@ -1,6 +1,7 @@
 package br.com.thiago.armazemdigital.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -17,4 +18,11 @@ public class Categoria {
     private String name;
     private String description;
     private Date dateCreated;
+
+    @Ignore
+    public Categoria(String name, String description, Date dateCreated) {
+        this.name = name;
+        this.description = description;
+        this.dateCreated = dateCreated;
+    }
 }

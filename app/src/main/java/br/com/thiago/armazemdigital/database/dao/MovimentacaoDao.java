@@ -11,4 +11,7 @@ import br.com.thiago.armazemdigital.model.Movimentacao;
 public interface MovimentacaoDao extends BaseDao<Movimentacao> {
     @Query("SELECT * FROM movimentacao ORDER BY id DESC LIMIT :limit OFFSET :offset")
     List<Movimentacao> getMovimentacoes(int limit, int offset);
+
+    @Query("SELECT * FROM movimentacao WHERE id = :id")
+    Movimentacao getMovimentacao(long id);
 }

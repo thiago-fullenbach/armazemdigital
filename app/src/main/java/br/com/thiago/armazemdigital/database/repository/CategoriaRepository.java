@@ -12,8 +12,8 @@ public class CategoriaRepository {
         this.categoriaDao = categoriaDao;
     }
 
-    public void insetCategoria(Categoria categoria) {
-        categoriaDao.insert(categoria);
+    public long insetCategoria(Categoria categoria) {
+        return categoriaDao.insert(categoria);
     }
 
     public void updateCategoria(Categoria categoria) {
@@ -26,5 +26,9 @@ public class CategoriaRepository {
 
     public List<Categoria> getCategorias(int limit, int offset) {
         return categoriaDao.getCategorias(limit, offset);
+    }
+
+    public Categoria getCategoria(long id) {
+        return categoriaDao.getCategoria(id);
     }
 }

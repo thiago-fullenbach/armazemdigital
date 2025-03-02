@@ -12,8 +12,8 @@ public class ProdutoRepository {
         this.produtoDao = produtoDao;
     }
 
-    public void insertProduto(Produto produto) {
-        produtoDao.insert(produto);
+    public long insertProduto(Produto produto) {
+        return produtoDao.insert(produto);
     }
 
     public void updateProduto(Produto produto) {

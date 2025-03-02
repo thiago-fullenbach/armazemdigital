@@ -8,7 +8,7 @@ import androidx.room.Update;
 @Dao
 public interface BaseDao<T> {
     @Insert
-    void insert(T t);
+    long insert(T t);
 
     @Update
     void update(T t);

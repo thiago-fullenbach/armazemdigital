@@ -12,8 +12,8 @@ public class FornecedorRepository {
         this.fornecedorDao = fornecedorDao;
     }
 
-    public void insertFornecedor(Fornecedor fornecedor) {
-        fornecedorDao.insert(fornecedor);
+    public long insertFornecedor(Fornecedor fornecedor) {
+        return fornecedorDao.insert(fornecedor);
     }
 
     public void updateFornecedor(Fornecedor fornecedor) {
