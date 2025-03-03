@@ -114,6 +114,6 @@ public class FornecimentoRepositoryTest {
         assertNotNull(fornecimento);
         assertEquals(fornecimentoMock, fornecimento);
 
-        verify(fornecimentoDao).getFornecimentosBySupplier(supplierIdMock);
+        verify(fornecimentoDao).getFornecimentoProductSupplier(productIdMock, supplierIdMock);
     }
 }
