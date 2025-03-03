@@ -24,7 +24,7 @@ public class ArmazemDigitalApp extends Application {
         try {
             return packageManager.getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
-            return getString(R.string.n_a);
+            return getString(R.string.n_f);
         }
     }
 

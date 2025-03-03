@@ -11,7 +11,7 @@
     <string name="label_btn_cadastro_fornecedor">Cadastro de Fornecedores</string>
     <string name="label_btn_cadastro_produto">Cadastro de Produtos</string>
     <string name="label_btn_novo_cadastro_produto">Cadastrar Produto</string>
-    <string name="n_a">N/A</string>
+    <string name="n_f">N/F</string>
     <string name="title_item_menu_cadastro">Cadastros</string>
     <string name="title_item_menu_configuracao">Configurações</string>
     <string name="title_item_menu_estoque">Estoque</string>
