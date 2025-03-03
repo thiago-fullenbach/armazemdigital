@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.activity.database.dao;
+package br.com.thiago.armazemdigital.database.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,16 +17,12 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import br.com.thiago.armazemdigital.activity.utils.TestUtils;
 import br.com.thiago.armazemdigital.database.ArmazemDigitalDb;
-import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
-import br.com.thiago.armazemdigital.database.dao.FornecedorDao;
-import br.com.thiago.armazemdigital.database.dao.FornecimentoDao;
-import br.com.thiago.armazemdigital.database.dao.ProdutoDao;
 import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.model.Fornecedor;
 import br.com.thiago.armazemdigital.model.Fornecimento;
 import br.com.thiago.armazemdigital.model.Produto;
+import br.com.thiago.armazemdigital.utils.AndroidTestUtils;
 
 @RunWith(AndroidJUnit4.class)
 public class FornecimentoDaoTest {
@@ -50,62 +46,62 @@ public class FornecimentoDaoTest {
 
     @Test
     public void insertAndRetrieve() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
-        Produto produto = TestUtils.getProdutoForTests(categoria.getId());
+        Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        Fornecedor fornecedor = TestUtils.getFornecedorForTests();
+        Fornecedor fornecedor = AndroidTestUtils.createFornecedorForTests();
         fornecedor.setId(fornecedorDao.insert(fornecedor));
 
-        Fornecimento fornecimento = TestUtils.getFornecimentoForTests(produto.getId(), fornecedor.getId());
+        Fornecimento fornecimento = AndroidTestUtils.createFornecimentoForTests(produto.getId(), fornecedor.getId());
         fornecimentoDao.insert(fornecimento);
 
         List<Fornecimento> fornecimentosBanco = fornecimentoDao.getFornecimentos();
         Fornecimento fornecimentoBanco = fornecimentoDao.getFornecimentoProductSupplier(produto.getId(), fornecedor.getId());
 
-        assertNotNull("Falha ao cadastrar fornecimento", fornecimentoBanco);
-        assertNotNull("Falha ao cadastrar fornecimento", fornecimentosBanco);
-        assertEquals("Falha ao cadastrar fornecimento", fornecimento, fornecimentoBanco);
-        assertEquals("Falha ao cadastrar fornecimento", 1, fornecimentosBanco.size());
+        assertNotNull(fornecimentoBanco);
+        assertNotNull(fornecimentosBanco);
+        assertEquals(fornecimento, fornecimentoBanco);
+        assertEquals(1, fornecimentosBanco.size());
 
         fornecimentosBanco = fornecimentoDao.getFornecimentosByProduct(produto.getId());
 
-        assertEquals("Falha ao cadastrar fornecimento", produto.getId(), fornecimentoBanco.getProductId());
-        assertNotNull("Falha ao cadastrar fornecimento", fornecimentosBanco);
-        assertEquals("Falha ao cadastrar fornecimento", 1, fornecimentosBanco.size());
+        assertEquals(produto.getId(), fornecimentoBanco.getProductId());
+        assertNotNull(fornecimentosBanco);
+        assertEquals(1, fornecimentosBanco.size());
 
         fornecimentosBanco = fornecimentoDao.getFornecimentosBySupplier(fornecedor.getId());
 
-        assertEquals("Falha ao cadastrar fornecimento", fornecedor.getId(), fornecimentoBanco.getSupplierId());
-        assertNotNull("Falha ao cadastrar fornecimento", fornecimentosBanco);
-        assertEquals("Falha ao cadastrar fornecimento", 1, fornecimentosBanco.size());
+        assertEquals(fornecedor.getId(), fornecimentoBanco.getSupplierId());
+        assertNotNull(fornecimentosBanco);
+        assertEquals(1, fornecimentosBanco.size());
     }
 
     @Test
     public void insertAndDelete() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
-        Produto produto = TestUtils.getProdutoForTests(categoria.getId());
+        Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        Fornecedor fornecedor = TestUtils.getFornecedorForTests();
+        Fornecedor fornecedor = AndroidTestUtils.createFornecedorForTests();
         fornecedor.setId(fornecedorDao.insert(fornecedor));
 
-        Fornecimento fornecimento = TestUtils.getFornecimentoForTests(produto.getId(), fornecedor.getId());
+        Fornecimento fornecimento = AndroidTestUtils.createFornecimentoForTests(produto.getId(), fornecedor.getId());
         fornecimentoDao.insert(fornecimento);
 
         fornecimento = fornecimentoDao.getFornecimentoProductSupplier(produto.getId(), fornecedor.getId());
 
-        assertNotNull("Falha ao cadastrar movimentação", fornecimento);
+        assertNotNull(fornecimento);
 
         fornecimentoDao.delete(fornecimento);
 
         fornecimento = fornecimentoDao.getFornecimentoProductSupplier(produto.getId(), fornecedor.getId());
 
-        assertNull("Falha ao deletar movimentação", fornecimento);
+        assertNull(fornecimento);
     }
 
     @After

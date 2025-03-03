@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.activity.utils;
+package br.com.thiago.armazemdigital.utils;
 
 import java.util.Date;
 
@@ -11,18 +11,18 @@ import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 
 /**
  * Classe utilitária para criação de instâncias de classes de teste.
- * Essa classe deve existir apenas para testes.
+ * Essa classe deve existir apenas para testes do android.
  */
-public class TestUtils {
+public class AndroidTestUtils {
 
     /**Cria um produto utilizado para testes automatizados.
      * Uma categoria deve ter sido cadastrada no banco em memória antes da chamada dessa função.
-     * @see TestUtils#getCategoriaForTests()
+     * @see AndroidTestUtils#createCategoriaForTests()
      *
      * @param categoriaId Id da categoria cadastrada no banco em memória.
      * @return Produto com informações preenchidas.
      */
-    public static Produto getProdutoForTests(long categoriaId) {
+    public static Produto createProdutoForTests(long categoriaId) {
         return new Produto(
                 categoriaId,
                 null,
@@ -38,7 +38,7 @@ public class TestUtils {
      *
      * @return Fornecedor com informações preenchidas.
      */
-    public static Fornecedor getFornecedorForTests() {
+    public static Fornecedor createFornecedorForTests() {
         return new Fornecedor(
                 "Fornecedor Teste",
                 "(11) 92222-2222",
@@ -55,14 +55,14 @@ public class TestUtils {
 
     /**Cria um fornecimento utilizado para testes automatizados.
      * Um produto e um fornecedor devem ser cadastrados no banco em memória antes da chamada dessa função.
-     * @see TestUtils#getProdutoForTests(long)
-     * @see TestUtils#getFornecedorForTests()
+     * @see AndroidTestUtils#createProdutoForTests(long)
+     * @see AndroidTestUtils#createFornecedorForTests()
      *
      * @param produtoId ID do produto cadastrado.
      * @param fornecedorId ID do fornecedor cadastrado.
      * @return Fornecimento com informações preenchidas.
      */
-    public static Fornecimento getFornecimentoForTests(long produtoId, long fornecedorId) {
+    public static Fornecimento createFornecimentoForTests(long produtoId, long fornecedorId) {
         return new Fornecimento(produtoId, fornecedorId);
     }
 
@@ -70,7 +70,7 @@ public class TestUtils {
      *
      * @return Categoria com informações preenchidas.
      */
-    public static Categoria getCategoriaForTests() {
+    public static Categoria createCategoriaForTests() {
         return new Categoria(
                 "Categoria Teste",
                 "Categoria utilizada para testes",
@@ -80,12 +80,12 @@ public class TestUtils {
 
     /** Cria uma movimentação utilizada para testes automatizados.
      * Um produto deve ser cadastrado no banco em memória antes da chamada dessa função.
-     * @see TestUtils#getProdutoForTests(long)
+     * @see AndroidTestUtils#createProdutoForTests(long)
      *
      * @param produtoId ID do produto cadastrado.
      * @return Movimentação com informações preenchidas.
      */
-    public static Movimentacao getMovimentacaoForTests(long produtoId) {
+    public static Movimentacao createMovimentacaoForTests(long produtoId) {
         return new Movimentacao(
                 produtoId,
                 "Thiago",

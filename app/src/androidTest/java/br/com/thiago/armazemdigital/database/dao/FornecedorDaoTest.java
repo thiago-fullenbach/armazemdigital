@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.activity.database.dao;
+package br.com.thiago.armazemdigital.database.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -18,10 +18,9 @@ import org.junit.runner.RunWith;
 import java.util.Date;
 import java.util.List;
 
-import br.com.thiago.armazemdigital.activity.utils.TestUtils;
 import br.com.thiago.armazemdigital.database.ArmazemDigitalDb;
-import br.com.thiago.armazemdigital.database.dao.FornecedorDao;
 import br.com.thiago.armazemdigital.model.Fornecedor;
+import br.com.thiago.armazemdigital.utils.AndroidTestUtils;
 
 @RunWith(AndroidJUnit4.class)
 public class FornecedorDaoTest {
@@ -39,21 +38,21 @@ public class FornecedorDaoTest {
 
     @Test
     public void insertAndRetrieve() {
-        Fornecedor fornecedor = TestUtils.getFornecedorForTests();
+        Fornecedor fornecedor = AndroidTestUtils.createFornecedorForTests();
         fornecedor.setId(fornecedorDao.insert(fornecedor));
 
         List<Fornecedor> fornecedoresBanco = fornecedorDao.getFornecedores(10, 0);
         Fornecedor fornecedorBanco = fornecedorDao.getFornecedor(fornecedor.getId());
 
-        assertNotNull("Falha ao cadastrar fornecedor", fornecedorBanco);
-        assertNotNull("Falha ao cadastrar fornecedor", fornecedoresBanco);
-        assertEquals("Falha ao cadastrar fornecedor", fornecedor, fornecedorBanco);
-        assertEquals("Falha ao cadastrar fornecedor", 1, fornecedoresBanco.size());
+        assertNotNull(fornecedorBanco);
+        assertNotNull(fornecedoresBanco);
+        assertEquals(fornecedor, fornecedorBanco);
+        assertEquals(1, fornecedoresBanco.size());
     }
 
     @Test
     public void insertAndUpdate() {
-        Fornecedor fornecedor = TestUtils.getFornecedorForTests();
+        Fornecedor fornecedor = AndroidTestUtils.createFornecedorForTests();
         fornecedor.setId(fornecedorDao.insert(fornecedor));
 
         String nome = "Outro nome";
@@ -81,32 +80,32 @@ public class FornecedorDaoTest {
 
         fornecedor = fornecedorDao.getFornecedor(fornecedor.getId());
 
-        assertNotNull("Falha ao obter fornecedor do banco de dados", fornecedor);
-        assertEquals("Falha ao atualizar fornecedor: nomes não batem", nome, fornecedor.getName());
-        assertEquals("Falha ao atualizar fornecedor: emails não batem", email, fornecedor.getEmail());
-        assertEquals("Falha ao atualizar fornecedor: telefones não batem", phone, fornecedor.getPhone());
-        assertEquals("Falha ao atualizar fornecedor: CEPs não batem", zipCode, fornecedor.getZipCode());
-        assertEquals("Falha ao atualizar fornecedor: estados não batem", state, fornecedor.getState());
-        assertEquals("Falha ao atualizar fornecedor: cidades não batem", city, fornecedor.getCity());
-        assertEquals("Falha ao atualizar fornecedor: endereços não batem", al1, fornecedor.getAddressLine1());
-        assertEquals("Falha ao atualizar fornecedor: complementos não batem", al2, fornecedor.getAddressLine2());
-        assertEquals("Falha ao atualizar fornecedor: números não batem", number, fornecedor.getNumber());
+        assertNotNull(fornecedor);
+        assertEquals(nome, fornecedor.getName());
+        assertEquals(email, fornecedor.getEmail());
+        assertEquals(phone, fornecedor.getPhone());
+        assertEquals(zipCode, fornecedor.getZipCode());
+        assertEquals(state, fornecedor.getState());
+        assertEquals(city, fornecedor.getCity());
+        assertEquals(al1, fornecedor.getAddressLine1());
+        assertEquals(al2, fornecedor.getAddressLine2());
+        assertEquals(number, fornecedor.getNumber());
     }
 
     @Test
     public void insertAndDelete() {
-        Fornecedor fornecedor = TestUtils.getFornecedorForTests();
+        Fornecedor fornecedor = AndroidTestUtils.createFornecedorForTests();
         fornecedor.setId(fornecedorDao.insert(fornecedor));
 
         fornecedor = fornecedorDao.getFornecedor(fornecedor.getId());
 
-        assertNotNull("Falha ao cadastrar fornecedor", fornecedor);
+        assertNotNull(fornecedor);
 
         fornecedorDao.delete(fornecedor);
 
         fornecedor = fornecedorDao.getFornecedor(fornecedor.getId());
 
-        assertNull("Falha ao deletar fornecedor", fornecedor);
+        assertNull(fornecedor);
     }
 
     @After

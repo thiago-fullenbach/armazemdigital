@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.activity.database.dao.view;
+package br.com.thiago.armazemdigital.database.dao.view;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -16,16 +16,15 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import br.com.thiago.armazemdigital.activity.utils.TestUtils;
 import br.com.thiago.armazemdigital.database.ArmazemDigitalDb;
 import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
 import br.com.thiago.armazemdigital.database.dao.MovimentacaoDao;
 import br.com.thiago.armazemdigital.database.dao.ProdutoDao;
-import br.com.thiago.armazemdigital.database.dao.view.ProdutoEstoqueDao;
 import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
 import br.com.thiago.armazemdigital.model.view.ProdutoEstoque;
+import br.com.thiago.armazemdigital.utils.AndroidTestUtils;
 
 @RunWith(AndroidJUnit4.class)
 public class ProdutoEstoqueDaoTest {
@@ -49,13 +48,13 @@ public class ProdutoEstoqueDaoTest {
 
     @Test
     public void retrieve() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
-        Produto produto = TestUtils.getProdutoForTests(categoria.getId());
+        Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        Movimentacao movimentacao = TestUtils.getMovimentacaoForTests(produto.getId());
+        Movimentacao movimentacao = AndroidTestUtils.createMovimentacaoForTests(produto.getId());
         movimentacao.setId(movimentacaoDao.insert(movimentacao));
 
         // Simula entrada
@@ -64,13 +63,13 @@ public class ProdutoEstoqueDaoTest {
 
         List<ProdutoEstoque> produtosEmEstoque = produtoEstoqueDao.getProdutosEstoque(10, 0);
 
-        assertNotNull("Falha ao obter produto em estoque", produtosEmEstoque);
-        assertEquals("Falha ao obter produto em estoque", 1, produtosEmEstoque.size());
-        assertEquals("Falha ao obter produto em estoque", produto.getUrlImage(), produtosEmEstoque.get(0).getUrlImageProduct());
-        assertEquals("Falha ao obter produto em estoque", produto.getName(), produtosEmEstoque.get(0).getNameProduct());
-        assertEquals("Falha ao obter produto em estoque", produto.getDescription(), produtosEmEstoque.get(0).getDescProduct());
-        assertEquals("Falha ao obter produto em estoque", (Long) 20000L, produtosEmEstoque.get(0).getQtt());
-        assertEquals("Falha ao obter produto em estoque", movimentacao.getDateMovement(), produtosEmEstoque.get(0).getDateMovement());
+        assertNotNull(produtosEmEstoque);
+        assertEquals(1, produtosEmEstoque.size());
+        assertEquals(produto.getUrlImage(), produtosEmEstoque.get(0).getUrlImageProduct());
+        assertEquals(produto.getName(), produtosEmEstoque.get(0).getNameProduct());
+        assertEquals(produto.getDescription(), produtosEmEstoque.get(0).getDescProduct());
+        assertEquals((Long) 20000L, produtosEmEstoque.get(0).getQtt());
+        assertEquals(movimentacao.getDateMovement(), produtosEmEstoque.get(0).getDateMovement());
     }
 
     @After

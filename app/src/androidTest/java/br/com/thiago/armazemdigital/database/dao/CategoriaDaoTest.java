@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.activity.database.dao;
+package br.com.thiago.armazemdigital.database.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,10 +17,9 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import br.com.thiago.armazemdigital.activity.utils.TestUtils;
 import br.com.thiago.armazemdigital.database.ArmazemDigitalDb;
-import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
 import br.com.thiago.armazemdigital.model.Categoria;
+import br.com.thiago.armazemdigital.utils.AndroidTestUtils;
 
 @RunWith(AndroidJUnit4.class)
 public class CategoriaDaoTest {
@@ -41,16 +40,16 @@ public class CategoriaDaoTest {
      */
     @Test
     public void insertAndRetrieve() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
         List<Categoria> categoriasBanco = categoriaDao.getCategorias(10, 0);
         Categoria categoriaBanco = categoriaDao.getCategoria(categoria.getId());
 
-        assertNotNull("Falha ao cadastrar categoria", categoriaBanco);
-        assertNotNull("Falha ao cadastrar categoria", categoriasBanco);
-        assertEquals("Falha ao cadastrar categoria", categoria, categoriaBanco);
-        assertEquals("Falha ao cadastrar categoria", 1, categoriasBanco.size());
+        assertNotNull(categoriaBanco);
+        assertNotNull(categoriasBanco);
+        assertEquals(categoria, categoriaBanco);
+        assertEquals(1, categoriasBanco.size());
     }
 
     /**
@@ -58,12 +57,12 @@ public class CategoriaDaoTest {
      */
     @Test
     public void insertAndUpdate() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
         categoria = categoriaDao.getCategoria(categoria.getId());
 
-        assertNotNull("Falha ao obter categoria do banco de dados", categoria);
+        assertNotNull(categoria);
 
         String nome = "Outro nome";
         String descricao = "Outra descricao";
@@ -75,9 +74,9 @@ public class CategoriaDaoTest {
 
         categoria = categoriaDao.getCategoria(categoria.getId());
 
-        assertNotNull("Falha ao obter categoria do banco de dados", categoria);
-        assertEquals("Falha ao atualizar categoria: nomes não batem", nome, categoria.getName());
-        assertEquals("Falha ao atualizar categoria: descrições não batem", descricao, categoria.getDescription());
+        assertNotNull(categoria);
+        assertEquals(nome, categoria.getName());
+        assertEquals(descricao, categoria.getDescription());
     }
 
     /**
@@ -85,18 +84,18 @@ public class CategoriaDaoTest {
      */
     @Test
     public void insertAndDelete() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
         categoria = categoriaDao.getCategoria(categoria.getId());
 
-        assertNotNull("Falha ao obter categoria do banco de dados", categoria);
+        assertNotNull(categoria);
 
         categoriaDao.delete(categoria);
 
         categoria = categoriaDao.getCategoria(categoria.getId());
 
-        assertNull("Falha ao deletar categoria do banco de dados", categoria);
+        assertNull(categoria);
     }
 
     @After

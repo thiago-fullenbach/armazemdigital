@@ -1,6 +1,7 @@
 package br.com.thiago.armazemdigital.model.view;
 
 import androidx.room.DatabaseView;
+import androidx.room.Ignore;
 
 import java.util.Date;
 
@@ -16,4 +17,13 @@ public class ProdutoEstoque {
     private String descProduct;
     private Date dateMovement;
     private Long qtt;
+
+    @Ignore
+    public ProdutoEstoque(String urlImageProduct, String nameProduct, String descProduct, Date dateMovement, Long qtt) {
+        this.urlImageProduct = urlImageProduct;
+        this.nameProduct = nameProduct;
+        this.descProduct = descProduct;
+        this.dateMovement = dateMovement;
+        this.qtt = qtt;
+    }
 }

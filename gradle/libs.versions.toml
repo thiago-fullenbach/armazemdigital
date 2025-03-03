@@ -12,6 +12,8 @@ lombok = "1.18.36"
 roomCommon = "2.6.1"
 roomRuntime = "2.6.1"
 roomCompiler = "2.6.1"
+mockitoCore = "5.11.0"
+mockitoInline = "5.2.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -26,6 +28,8 @@ lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" 
 room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomRuntime" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+mockitoCore = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
+mockitoInline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockitoInline" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

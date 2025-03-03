@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.activity.database.dao;
+package br.com.thiago.armazemdigital.database.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,15 +17,12 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import br.com.thiago.armazemdigital.activity.utils.TestUtils;
 import br.com.thiago.armazemdigital.database.ArmazemDigitalDb;
-import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
-import br.com.thiago.armazemdigital.database.dao.MovimentacaoDao;
-import br.com.thiago.armazemdigital.database.dao.ProdutoDao;
 import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
+import br.com.thiago.armazemdigital.utils.AndroidTestUtils;
 
 @RunWith(AndroidJUnit4.class)
 public class MovimentacaoDaoTest {
@@ -47,33 +44,33 @@ public class MovimentacaoDaoTest {
 
     @Test
     public void insertAndRetrieve() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
-        Produto produto = TestUtils.getProdutoForTests(categoria.getId());
+        Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        Movimentacao movimentacao = TestUtils.getMovimentacaoForTests(produto.getId());
+        Movimentacao movimentacao = AndroidTestUtils.createMovimentacaoForTests(produto.getId());
         movimentacao.setId(movimentacaoDao.insert(movimentacao));
 
         List<Movimentacao> movimentacoesBanco = movimentacaoDao.getMovimentacoes(10, 0);
         Movimentacao movimentacaoBanco = movimentacaoDao.getMovimentacao(movimentacao.getId());
 
-        assertNotNull("Falha ao cadastrar movimentacao", movimentacaoBanco);
-        assertNotNull("Falha ao cadastrar movimentacao", movimentacoesBanco);
-        assertEquals("Falha ao cadastrar movimentacao", movimentacao, movimentacaoBanco);
-        assertEquals("Falha ao cadastrar movimentacao", 1, movimentacoesBanco.size());
+        assertNotNull(movimentacaoBanco);
+        assertNotNull(movimentacoesBanco);
+        assertEquals(movimentacao, movimentacaoBanco);
+        assertEquals(1, movimentacoesBanco.size());
     }
 
     @Test
     public void insertAndUpdate() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
-        Produto produto = TestUtils.getProdutoForTests(categoria.getId());
+        Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        Movimentacao movimentacao = TestUtils.getMovimentacaoForTests(produto.getId());
+        Movimentacao movimentacao = AndroidTestUtils.createMovimentacaoForTests(produto.getId());
         movimentacao.setId(movimentacaoDao.insert(movimentacao));
 
         String nomeUsuario = "Outro usuário";
@@ -92,34 +89,34 @@ public class MovimentacaoDaoTest {
         movimentacao.setObservation(observacao);
         movimentacao.setTypeMovement(tipoMovimentacao);
 
-        assertNotNull("Falha ao obter movimentação do banco de dados", movimentacao);
-        assertEquals("Falha ao atualizar movimentacao: nome de usuário não bate", nomeUsuario, movimentacao.getUsername());
-        assertEquals("Falha ao atualizar movimentacao: quantidade não bate", (Long) qtd, movimentacao.getQtt());
-        assertEquals("Falha ao atualizar movimentacao: razão não bate", razao, movimentacao.getReason());
-        assertEquals("Falha ao atualizar movimentacao: observação não bate", observacao, movimentacao.getObservation());
-        assertEquals("Falha ao atualizar movimentacao: tipo de movimentação não bate", tipoMovimentacao, movimentacao.getTypeMovement());
+        assertNotNull(movimentacao);
+        assertEquals(nomeUsuario, movimentacao.getUsername());
+        assertEquals((Long) qtd, movimentacao.getQtt());
+        assertEquals(razao, movimentacao.getReason());
+        assertEquals(observacao, movimentacao.getObservation());
+        assertEquals(tipoMovimentacao, movimentacao.getTypeMovement());
     }
 
     @Test
     public void insertAndDelete() {
-        Categoria categoria = TestUtils.getCategoriaForTests();
+        Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
-        Produto produto = TestUtils.getProdutoForTests(categoria.getId());
+        Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        Movimentacao movimentacao = TestUtils.getMovimentacaoForTests(produto.getId());
+        Movimentacao movimentacao = AndroidTestUtils.createMovimentacaoForTests(produto.getId());
         movimentacao.setId(movimentacaoDao.insert(movimentacao));
 
         movimentacao = movimentacaoDao.getMovimentacao(movimentacao.getId());
 
-        assertNotNull("Falha ao cadastrar movimentação", produto);
+        assertNotNull(produto);
 
         movimentacaoDao.delete(movimentacao);
 
         movimentacao = movimentacaoDao.getMovimentacao(movimentacao.getId());
 
-        assertNull("Falha ao deletar movimentação", movimentacao);
+        assertNull(movimentacao);
     }
 
     @After
