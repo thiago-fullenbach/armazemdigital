@@ -1,14 +1,29 @@
 package br.com.thiago.armazemdigital.model.view;
 
+import androidx.room.DatabaseView;
+import androidx.room.Ignore;
+
+import java.util.Date;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@DatabaseView(value = "SELECT produto.urlImage as urlImageProduct, produto.name as nameProduct, produto.description as descProduct, movimentacao.dateMovement, produto.qtt FROM produto INNER JOIN movimentacao ON produto.id = movimentacao.productId ORDER BY dateMovement DESC")
 public class ProdutoEstoque {
+    private String urlImageProduct;
     private String nameProduct;
     private String descProduct;
-    private Long percDiff;
-    private boolean belowMinimal;
+    private Date dateMovement;
     private Long qtt;
+
+    @Ignore
+    public ProdutoEstoque(String urlImageProduct, String nameProduct, String descProduct, Date dateMovement, Long qtt) {
+        this.urlImageProduct = urlImageProduct;
+        this.nameProduct = nameProduct;
+        this.descProduct = descProduct;
+        this.dateMovement = dateMovement;
+        this.qtt = qtt;
+    }
 }

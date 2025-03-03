@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Armazem Digital</string>
     <string name="action_settings">Settings</string>
+    <string name="db_file_name">armazem_digital_db</string>
+    <string name="dialog_button_ok">OK</string>
+    <string name="title_item_menu_cadastro">Cadastros</string>
+    <string name="title_item_menu_movimentar">Movimentar</string>
+    <string name="title_item_menu_estoque">Estoque</string>
+    <string name="title_item_menu_configuracao">Configurações</string>
     <string name="dialog_button_ok">OK</string>
     <string name="info_title">Informações do Sistema</string>
     <string name="info_made_by">Desenvolvido por Thiago Carvalho Füllenbach</string>
