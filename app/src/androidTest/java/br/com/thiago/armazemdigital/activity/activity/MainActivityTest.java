@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.activity;
+package br.com.thiago.armazemdigital.activity.activity;
 
 import android.content.Context;
 
@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import br.com.thiago.armazemdigital.R;
+import br.com.thiago.armazemdigital.activity.MainActivity;
 
 /**
  * Testes de interface da MainActivity
@@ -33,22 +34,22 @@ public class MainActivityTest {
     public void testNavigation() {
         Espresso.onView(ViewMatchers.withId(R.id.item_menu_cadastro))
                 .perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.tv_texto_cadastro))
+        Espresso.onView(ViewMatchers.withId(R.id.fragment_cadastros))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
         Espresso.onView(ViewMatchers.withId(R.id.item_menu_movimentacao))
                 .perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.tv_texto_movimentacao))
+        Espresso.onView(ViewMatchers.withId(R.id.fragment_movimentacao))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
         Espresso.onView(ViewMatchers.withId(R.id.item_menu_estoque))
                 .perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.tv_texto_estoque))
+        Espresso.onView(ViewMatchers.withId(R.id.fragment_estoque))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
         Espresso.onView(ViewMatchers.withId(R.id.item_menu_configuracao))
                 .perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.tv_texto_configuracao))
+        Espresso.onView(ViewMatchers.withId(R.id.fragment_configuracao))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 

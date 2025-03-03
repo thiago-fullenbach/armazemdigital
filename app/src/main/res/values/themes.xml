@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Tema base da aplicação -->
     <style name="Base.Theme.ArmazemDigital" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Aqui são definidos os itens do tema -->
@@ -9,4 +9,22 @@
     </style>
 
     <style name="Theme.ArmazemDigital" parent="Base.Theme.ArmazemDigital" />
+
+    <style name="botaoCadastro">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layoutDirection">ltr</item>
+    </style>
+
+    <style name="botaoNovoCadastro">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layoutDirection">ltr</item>
+    </style>
+
+    <style name="textoSemCadastros">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">26sp</item>
+    </style>
 </resources>
