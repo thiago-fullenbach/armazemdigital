@@ -16,9 +16,9 @@
 
     <fragment
         android:id="@+id/listagem_cadastro_produto_fragment"
-        android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.ListagemCadastroProdutoFragment"
+        android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.ListagemProdutoFragment"
         android:label="fragment_listagem_cadastro_produto"
-        tools:layout="@layout/fragment_listagem_cadastro_produto">
+        tools:layout="@layout/fragment_listagem_produto">
         <action
             android:id="@+id/action_item_to_cadastro_produto_fragment"
             app:destination="@+id/cadastro_produto_fragment"/>

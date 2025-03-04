@@ -18,21 +18,21 @@ import java.util.List;
 
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
-import br.com.thiago.armazemdigital.adapters.cadastro.produto.ListagemCadastroProdutosAdapter;
+import br.com.thiago.armazemdigital.adapters.cadastro.produto.ListagemProdutosAdapter;
 import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepository;
-import br.com.thiago.armazemdigital.databinding.FragmentListagemCadastroProdutoBinding;
+import br.com.thiago.armazemdigital.databinding.FragmentListagemProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
-import br.com.thiago.armazemdigital.viewmodel.ListagemCadastradoProdutosViewModel;
+import br.com.thiago.armazemdigital.viewmodel.ListagemProdutosViewModel;
 import br.com.thiago.armazemdigital.viewmodel.factory.ListagemCadastradoProdutosViewModelFactory;
 
-public class ListagemCadastroProdutoFragment extends BaseFragment<FragmentListagemCadastroProdutoBinding> {
-    private ListagemCadastradoProdutosViewModel mViewModel;
-    private ListagemCadastroProdutosAdapter mAdapter;
+public class ListagemProdutoFragment extends BaseFragment<FragmentListagemProdutoBinding> {
+    private ListagemProdutosViewModel mViewModel;
+    private ListagemProdutosAdapter mAdapter;
     private boolean isLoading = false;
 
-    public ListagemCadastroProdutoFragment() {
+    public ListagemProdutoFragment() {
         // Required empty public constructor
     }
 
@@ -43,9 +43,9 @@ public class ListagemCadastroProdutoFragment extends BaseFragment<FragmentListag
         ProdutoCadastroRepository produtoCadastroRepository = new ProdutoCadastroRepository(ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).produtoCadastroDao());
         ListagemCadastradoProdutosViewModelFactory factory = new ListagemCadastradoProdutosViewModelFactory(produtoCadastroRepository);
 
-        mAdapter = new ListagemCadastroProdutosAdapter(new ArrayList<>());
+        mAdapter = new ListagemProdutosAdapter(new ArrayList<>());
 
-        mViewModel = new ViewModelProvider(this, factory).get(ListagemCadastradoProdutosViewModel.class);
+        mViewModel = new ViewModelProvider(this, factory).get(ListagemProdutosViewModel.class);
 
         mViewModel.isLoading.observe(this, isLoading -> {
             mAdapter.showIsLoading(isLoading);
@@ -59,8 +59,8 @@ public class ListagemCadastroProdutoFragment extends BaseFragment<FragmentListag
     }
 
     @Override
-    protected FragmentListagemCadastroProdutoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
-        return FragmentListagemCadastroProdutoBinding.inflate(inflater, container, false);
+    protected FragmentListagemProdutoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragmentListagemProdutoBinding.inflate(inflater, container, false);
     }
 
     @Override

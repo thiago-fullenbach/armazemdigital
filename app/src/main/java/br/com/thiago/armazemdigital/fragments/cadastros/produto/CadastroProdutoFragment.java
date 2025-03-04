@@ -11,9 +11,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFormFragment;
+import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 
-public class CadastroProdutoFragment extends BaseCadastroFormFragment<FragmentCadastroProdutoBinding> {
+public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadastroProdutoBinding> {
     public CadastroProdutoFragment() {
         // Required empty public constructor
     }

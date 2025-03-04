@@ -14,10 +14,10 @@ import br.com.thiago.armazemdigital.adapters.BaseAdapter;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.MoneyUtil;
 
-public class ListagemCadastroProdutosAdapter extends BaseAdapter<ListagemCadastroProdutosAdapter.CadastroProdutoViewHolder, ProdutoCadastro> {
+public class ListagemProdutosAdapter extends BaseAdapter<ListagemProdutosAdapter.CadastroProdutoViewHolder, ProdutoCadastro> {
     private final List<ProdutoCadastro> mProdutos;
 
-    public ListagemCadastroProdutosAdapter(List<ProdutoCadastro> mProdutos) {
+    public ListagemProdutosAdapter(List<ProdutoCadastro> mProdutos) {
         this.mProdutos = mProdutos;
     }
 

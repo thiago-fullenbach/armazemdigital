@@ -11,7 +11,7 @@ import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepo
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.IntegerUtil;
 
-public class ListagemCadastradoProdutosViewModel extends ViewModel {
+public class ListagemProdutosViewModel extends ViewModel {
     private static final int ITENS_POR_PAGINA = 10;
     private final ProdutoCadastroRepository produtoCadastroRepository;
     private final MutableLiveData<List<ProdutoCadastro>> _produtosCadastrados = new MutableLiveData<>(new ArrayList<>());
@@ -21,7 +21,7 @@ public class ListagemCadastradoProdutosViewModel extends ViewModel {
     public LiveData<Boolean> isLoading = _isLoading;
     public LiveData<List<ProdutoCadastro>> produtosCadastrados = _produtosCadastrados;
 
-    public ListagemCadastradoProdutosViewModel(ProdutoCadastroRepository produtoCadastroRepository) {
+    public ListagemProdutosViewModel(ProdutoCadastroRepository produtoCadastroRepository) {
         this.produtoCadastroRepository = produtoCadastroRepository;
         loadMoreItens();
     }
