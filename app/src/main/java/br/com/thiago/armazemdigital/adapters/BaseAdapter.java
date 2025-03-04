@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import br.com.thiago.armazemdigital.R;
+import br.com.thiago.armazemdigital.utils.ListUtil;
 
 public abstract class BaseAdapter<V extends RecyclerView.ViewHolder, I> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int ITEM_VIEW = 1;
@@ -33,7 +35,7 @@ public abstract class BaseAdapter<V extends RecyclerView.ViewHolder, I> extends 
 
     @Override
     public final int getItemCount() {
-        return getListItem().size();
+        return getListItem().size() + (isLoading ? 1 : 0);
     }
 
     @Override
@@ -47,10 +49,12 @@ public abstract class BaseAdapter<V extends RecyclerView.ViewHolder, I> extends 
         notifyDataSetChanged();
     }
 
-    public final void setListData(List<I> itens) {
-        getListItem().clear();
-        getListItem().addAll(itens);
-        notifyItemRangeInserted(0, itens.size());
+    public final void setListData(@Nullable List<I> itens) {
+        if(!ListUtil.isNullOrEmpty(itens)) {
+            getListItem().clear();
+            getListItem().addAll(itens);
+            notifyItemRangeInserted(0, itens.size());
+        }
     }
 
     protected abstract int getLayoutId();

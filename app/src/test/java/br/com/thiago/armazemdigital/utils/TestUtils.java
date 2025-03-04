@@ -9,6 +9,7 @@ import br.com.thiago.armazemdigital.model.Fornecimento;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
+import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.model.view.ProdutoEstoque;
 
 /**
@@ -160,6 +161,14 @@ public class TestUtils {
                 new ProdutoEstoque(null, "Produto Teste 1", "Produto Teste", new Date(), 500L),
                 new ProdutoEstoque(null, "Produto Teste 2", "Produto Teste", new Date(), 500L),
                 new ProdutoEstoque(null, "Produto Teste 3", "Produto Teste", new Date(), 500L)
+        );
+    }
+
+    public static List<ProdutoCadastro> createProdutosCadastroForTests() {
+        return List.of(
+                new ProdutoCadastro(null, "Produto Teste 1", "Produto Teste", "Categoria Teste", 500L),
+                new ProdutoCadastro(null, "Produto Teste 2", "Produto Teste", "Categoria Teste", 500L),
+                new ProdutoCadastro(null, "Produto Teste 3", "Produto Teste", "Categoria Teste", 500L)
         );
     }
 }

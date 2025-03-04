@@ -37,7 +37,5 @@ public class ProdutoEstoqueRepositoryTest {
         assertEquals(produtosEstoqueMock, produtosEstoque);
 
         verify(produtoEstoqueDao).getProdutosEstoque(produtosEstoqueMock.size(), 0);
-
-
     }
 }

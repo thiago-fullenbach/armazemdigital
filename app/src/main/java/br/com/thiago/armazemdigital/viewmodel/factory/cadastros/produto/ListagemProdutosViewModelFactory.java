@@ -1,16 +1,16 @@
-package br.com.thiago.armazemdigital.viewmodel.factory;
+package br.com.thiago.armazemdigital.viewmodel.factory.cadastros.produto;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepository;
-import br.com.thiago.armazemdigital.viewmodel.ListagemProdutosViewModel;
+import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutosViewModel;
 
-public class ListagemCadastradoProdutosViewModelFactory implements ViewModelProvider.Factory {
+public class ListagemProdutosViewModelFactory implements ViewModelProvider.Factory {
     private final ProdutoCadastroRepository produtoCadastroRepository;
 
-    public ListagemCadastradoProdutosViewModelFactory(ProdutoCadastroRepository produtoCadastroRepository) {
+    public ListagemProdutosViewModelFactory(ProdutoCadastroRepository produtoCadastroRepository) {
         this.produtoCadastroRepository = produtoCadastroRepository;
     }
 

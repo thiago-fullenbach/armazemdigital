@@ -1,4 +1,6 @@
 <resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_name">Armazem Digital</string>
     <string name="action_settings">Settings</string>
     <string name="content_description_imagem_cadastro_produto">Imagem do Produto Cadastrado</string>
@@ -11,18 +13,18 @@
     <string name="label_btn_cadastro_fornecedor">Cadastro de Fornecedores</string>
     <string name="label_btn_cadastro_produto">Cadastro de Produtos</string>
     <string name="label_btn_novo_cadastro_produto">Cadastrar Produto</string>
+    <string name="label_btn_novo_cadastro_categoria">Cadastrar Categoria</string>
     <string name="n_f">N/F</string>
     <string name="title_item_menu_cadastro">Cadastros</string>
     <string name="title_item_menu_configuracao">Configurações</string>
     <string name="title_item_menu_estoque">Estoque</string>
     <string name="title_item_menu_movimentar">Movimentar</string>
     <string name="txt_exemplo_categoria_produto">Categoria Exemplo</string>
-    <string name="txt_exemplo_descricao_produto">Descrição de Exemplo</string>
+    <string name="txt_exemplo_descricao">Descrição de Exemplo</string>
     <string name="txt_exemplo_nome_produto">Produto de Exemplo</string>
     <string name="txt_exemplo_preco_produto">R$ 5,00</string>
     <string name="txt_sem_cadastro_produto">Não existem produtos cadastrados</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_sem_cadastro_categoria">Não existem categorias cadastradas</string>
     <string name="hint_et_nome_produto">Nome do Produto</string>
     <string name="hint_et_descricao_produto">Descrição do Produto</string>
     <string name="hint_et_preco_produto">Preço do Produto</string>
@@ -31,4 +33,5 @@
     <string name="hint_mactv_fornecedor_produto">Fornecedores do Produto</string>
     <string name="label_btn_cancelar_cadastro">Cancelar Cadastro</string>
     <string name="label_btn_salvar_cadastro">Salvar Cadastro</string>
+    <string name="txt_exemplo_nome_categoria">Categoria de Exemplo</string>
 </resources>

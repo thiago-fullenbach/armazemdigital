@@ -13,7 +13,7 @@
         android:layout_marginBottom="16dp"
         android:visibility="gone"
         tools:listitem="@layout/list_item_cadastro_produto"
-        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_cadastro_produto"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cadastrar_produto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,13 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txt_sem_cadastro_produto"
-        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_cadastro_produto"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cadastrar_produto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_salvar_cadastro_produto"
+        android:id="@+id/btn_cadastrar_produto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

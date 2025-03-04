@@ -1,5 +1,8 @@
 package br.com.thiago.armazemdigital.database.repository;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
@@ -24,6 +27,11 @@ public class CategoriaRepository {
         categoriaDao.delete(categoria);
     }
 
+    public LiveData<List<Categoria>> getCategoriasLiveData(int limit, int offset) {
+        return categoriaDao.getCategoriasLiveData(limit, offset);
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     public List<Categoria> getCategorias(int limit, int offset) {
         return categoriaDao.getCategorias(limit, offset);
     }

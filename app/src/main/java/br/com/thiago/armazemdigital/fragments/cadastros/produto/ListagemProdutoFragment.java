@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,13 +17,14 @@ import java.util.List;
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.cadastro.produto.ListagemProdutosAdapter;
+import br.com.thiago.armazemdigital.database.dao.view.ProdutoCadastroDao;
 import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
-import br.com.thiago.armazemdigital.viewmodel.ListagemProdutosViewModel;
-import br.com.thiago.armazemdigital.viewmodel.factory.ListagemCadastradoProdutosViewModelFactory;
+import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutosViewModel;
+import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.produto.ListagemProdutosViewModelFactory;
 
 public class ListagemProdutoFragment extends BaseFragment<FragmentListagemProdutoBinding> {
     private ListagemProdutosViewModel mViewModel;
@@ -40,8 +39,9 @@ public class ListagemProdutoFragment extends BaseFragment<FragmentListagemProdut
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ProdutoCadastroRepository produtoCadastroRepository = new ProdutoCadastroRepository(ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).produtoCadastroDao());
-        ListagemCadastradoProdutosViewModelFactory factory = new ListagemCadastradoProdutosViewModelFactory(produtoCadastroRepository);
+        ProdutoCadastroDao produtoCadastroDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).produtoCadastroDao();
+        ProdutoCadastroRepository produtoCadastroRepository = new ProdutoCadastroRepository(produtoCadastroDao);
+        ListagemProdutosViewModelFactory factory = new ListagemProdutosViewModelFactory(produtoCadastroRepository);
 
         mAdapter = new ListagemProdutosAdapter(new ArrayList<>());
 
@@ -52,7 +52,7 @@ public class ListagemProdutoFragment extends BaseFragment<FragmentListagemProdut
             this.isLoading = isLoading;
         });
 
-        mViewModel.produtosCadastrados.observe(this, produtos -> {
+        mViewModel.itens.observe(this, produtos -> {
             mAdapter.setListData(produtos);
             showProductList(produtos);
         });
@@ -66,10 +66,7 @@ public class ListagemProdutoFragment extends BaseFragment<FragmentListagemProdut
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mBinding.btnSalvarCadastroProduto.setOnClickListener(v -> {
-            NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.action_item_to_cadastro_produto_fragment);
-        });
+        mBinding.btnCadastrarProduto.setOnClickListener(v -> navigateToFragment(R.id.action_item_to_cadastro_produto_fragment));
 
         mBinding.rvListaCadastroProduto.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

@@ -1,5 +1,8 @@
 package br.com.thiago.armazemdigital.database.repository;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import br.com.thiago.armazemdigital.database.dao.ProdutoDao;
@@ -24,6 +27,11 @@ public class ProdutoRepository {
         produtoDao.delete(produto);
     }
 
+    public LiveData<List<Produto>> getProdutosLiveData(int limit, int offset) {
+        return produtoDao.getProdutosLiveData(limit, offset);
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     public List<Produto> getProdutos(int limit, int offset) {
         return produtoDao.getProdutos(limit, offset);
     }

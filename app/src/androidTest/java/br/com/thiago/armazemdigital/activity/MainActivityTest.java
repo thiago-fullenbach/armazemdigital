@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.activity.activity;
+package br.com.thiago.armazemdigital.activity;
 
 import android.content.Context;
 
@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import br.com.thiago.armazemdigital.R;
-import br.com.thiago.armazemdigital.activity.MainActivity;
 
 /**
  * Testes de interface da MainActivity
@@ -32,17 +31,17 @@ public class MainActivityTest {
      */
     @Test
     public void testNavigation() {
-        Espresso.onView(ViewMatchers.withId(R.id.item_menu_cadastro))
+        Espresso.onView(ViewMatchers.withId(R.id.nav_graph_cadastro))
                 .perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.fragment_cadastros))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
-        Espresso.onView(ViewMatchers.withId(R.id.item_menu_movimentacao))
+        Espresso.onView(ViewMatchers.withId(R.id.nav_graph_movimentacao))
                 .perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.fragment_movimentacao))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
-        Espresso.onView(ViewMatchers.withId(R.id.item_menu_estoque))
+        Espresso.onView(ViewMatchers.withId(R.id.nav_graph_estoque))
                 .perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.fragment_estoque))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
