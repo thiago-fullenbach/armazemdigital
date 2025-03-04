@@ -1,0 +1,55 @@
+package br.com.thiago.armazemdigital.fragments.cadastros.produto;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+
+import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
+import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFormFragment;
+
+public class CadastroProdutoFragment extends BaseCadastroFormFragment<FragmentCadastroProdutoBinding> {
+    public CadastroProdutoFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected FragmentCadastroProdutoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragmentCadastroProdutoBinding.inflate(inflater, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mBinding.btnCancelarCadastroProduto.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.popBackStack();
+        });
+    }
+
+    @Override
+    protected void salvarDados() {
+        // TODO: Implementar
+    }
+
+    @Override
+    protected boolean validarDados() {
+        // TODO: Implementar
+        return false;
+    }
+
+    @Override
+    protected void carregarDados() {
+        // TODO: Implementar
+    }
+}

@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.fragments;
+package br.com.thiago.armazemdigital.fragments.cadastros;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,15 +7,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroBinding;
+import br.com.thiago.armazemdigital.fragments.BaseFragment;
 
-public class CadastroFragment extends Fragment {
-    private FragmentCadastroBinding binding;
+public class CadastroFragment extends BaseFragment<FragmentCadastroBinding> {
 
     public CadastroFragment() {
         // Required empty public constructor
@@ -27,21 +27,19 @@ public class CadastroFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentCadastroBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    protected FragmentCadastroBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragmentCadastroBinding.inflate(inflater, container, false);
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        binding.btnCadastroProduto.setOnClickListener(view -> {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mBinding.btnCadastroProduto.setOnClickListener(v -> {
             NavController navController = NavHostFragment.findNavController(this);
             navController.navigate(R.id.action_item_menu_cadastro_to_listagem_cadastro_produto_fragment);
         });
-        binding.btnCadastroFornecedor.setOnClickListener(view -> goToCadastroFornecedor());
-        binding.btnCadastroCategoria.setOnClickListener(view -> goToCadastroCategoria());
+        mBinding.btnCadastroFornecedor.setOnClickListener(v -> goToCadastroFornecedor());
+        mBinding.btnCadastroCategoria.setOnClickListener(v -> goToCadastroCategoria());
     }
 
     private void goToCadastroFornecedor() {

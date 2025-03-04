@@ -6,7 +6,7 @@
     app:startDestination="@id/item_menu_movimentacao">
     <fragment
         android:id="@+id/item_menu_movimentacao"
-        android:name="br.com.thiago.armazemdigital.fragments.MovimentacaoFragment"
+        android:name="br.com.thiago.armazemdigital.fragments.movimentacao.MovimentacaoFragment"
         android:label="fragment_movimentacao"
         tools:layout="@layout/fragment_movimentacao" />
 </navigation>

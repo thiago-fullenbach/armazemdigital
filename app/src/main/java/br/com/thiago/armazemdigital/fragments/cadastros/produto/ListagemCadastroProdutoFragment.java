@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.fragments.cadastros;
+package br.com.thiago.armazemdigital.fragments.cadastros.produto;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,16 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
-import br.com.thiago.armazemdigital.adapters.ListagemCadastroProdutosAdapter;
+import br.com.thiago.armazemdigital.R;
+import br.com.thiago.armazemdigital.adapters.cadastro.produto.ListagemCadastroProdutosAdapter;
 import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemCadastroProdutoBinding;
+import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
 import br.com.thiago.armazemdigital.viewmodel.ListagemCadastradoProdutosViewModel;
 import br.com.thiago.armazemdigital.viewmodel.factory.ListagemCadastradoProdutosViewModelFactory;
 
-public class ListagemCadastroProdutoFragment extends Fragment {
-    private FragmentListagemCadastroProdutoBinding mBinding;
+public class ListagemCadastroProdutoFragment extends BaseFragment<FragmentListagemCadastroProdutoBinding> {
     private ListagemCadastradoProdutosViewModel mViewModel;
     private ListagemCadastroProdutosAdapter mAdapter;
     private boolean isLoading = false;
@@ -56,8 +59,18 @@ public class ListagemCadastroProdutoFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    protected FragmentListagemCadastroProdutoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragmentListagemCadastroProdutoBinding.inflate(inflater, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mBinding.btnSalvarCadastroProduto.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.action_item_to_cadastro_produto_fragment);
+        });
+
         mBinding.rvListaCadastroProduto.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -74,13 +87,6 @@ public class ListagemCadastroProdutoFragment extends Fragment {
                 }
             }
         });
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mBinding = FragmentListagemCadastroProdutoBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
     }
 
     private void showProductList(List<ProdutoCadastro> produtoCadastros) {

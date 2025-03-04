@@ -5,7 +5,7 @@
     android:id="@+id/fragment_cadastros"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.CadastroFragment">
+    tools:context=".fragments.cadastros.CadastroFragment">
 
     <Button
         android:id="@+id/btn_cadastro_produto"

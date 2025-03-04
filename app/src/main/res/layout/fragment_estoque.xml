@@ -4,7 +4,7 @@
     android:id="@+id/fragment_estoque"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.EstoqueFragment">
+    tools:context=".fragments.estoque.EstoqueFragment">
 
     <TextView
         android:id="@+id/tv_texto_estoque"

@@ -17,9 +17,19 @@
     </style>
 
     <style name="botaoNovoCadastro">
+        <item name="backgroundTint">@color/yellow</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:layoutDirection">ltr</item>
+        <item name="rippleColor">@color/gray_semi_transparent</item>
+    </style>
+
+    <style name="botaoCancelarCadastro">
+        <item name="backgroundTint">@color/light_gray</item>
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layoutDirection">ltr</item>
+        <item name="rippleColor">@color/yellow_semi_transparent</item>
     </style>
 
     <style name="textoSemCadastros">

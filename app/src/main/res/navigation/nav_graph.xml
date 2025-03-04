@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/item_menu_configuracao"
-        android:name="br.com.thiago.armazemdigital.fragments.ConfiguracaoFragment"
+        android:name="br.com.thiago.armazemdigital.fragments.configuracao.ConfiguracaoFragment"
         android:label="fragment_configuracao"
         tools:layout="@layout/fragment_configuracao" />
 </navigation>

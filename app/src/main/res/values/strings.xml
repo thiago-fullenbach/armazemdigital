@@ -21,4 +21,14 @@
     <string name="txt_exemplo_nome_produto">Produto de Exemplo</string>
     <string name="txt_exemplo_preco_produto">R$ 5,00</string>
     <string name="txt_sem_cadastro_produto">Não existem produtos cadastrados</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_et_nome_produto">Nome do Produto</string>
+    <string name="hint_et_descricao_produto">Descrição do Produto</string>
+    <string name="hint_et_preco_produto">Preço do Produto</string>
+    <string name="hint_actv_unidade_medida_produto">Unidade de Medida do Produto</string>
+    <string name="hint_actv_categoria_produto">Categoria do Produto</string>
+    <string name="hint_mactv_fornecedor_produto">Fornecedores do Produto</string>
+    <string name="label_btn_cancelar_cadastro">Cancelar Cadastro</string>
+    <string name="label_btn_salvar_cadastro">Salvar Cadastro</string>
 </resources>

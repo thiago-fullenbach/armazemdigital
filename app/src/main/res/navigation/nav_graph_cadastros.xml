@@ -6,7 +6,7 @@
     app:startDestination="@id/item_menu_cadastro">
     <fragment
         android:id="@+id/item_menu_cadastro"
-        android:name="br.com.thiago.armazemdigital.fragments.CadastroFragment"
+        android:name="br.com.thiago.armazemdigital.fragments.cadastros.CadastroFragment"
         android:label="fragment_cadastro"
         tools:layout="@layout/fragment_cadastro" >
         <action
@@ -16,7 +16,17 @@
 
     <fragment
         android:id="@+id/listagem_cadastro_produto_fragment"
-        android:name="br.com.thiago.armazemdigital.fragments.cadastros.ListagemCadastroProdutoFragment"
+        android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.ListagemCadastroProdutoFragment"
         android:label="fragment_listagem_cadastro_produto"
-        tools:layout="@layout/fragment_listagem_cadastro_produto" />
+        tools:layout="@layout/fragment_listagem_cadastro_produto">
+        <action
+            android:id="@+id/action_item_to_cadastro_produto_fragment"
+            app:destination="@+id/cadastro_produto_fragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/cadastro_produto_fragment"
+        android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.CadastroProdutoFragment"
+        android:label="fragment_listagem_cadastro_produto"
+        tools:layout="@layout/fragment_cadastro_produto"/>
 </navigation>
