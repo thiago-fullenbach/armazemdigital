@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
@@ -31,10 +29,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mBinding.btnCancelarCadastroProduto.setOnClickListener(v -> {
-            NavController navController = NavHostFragment.findNavController(this);
-            navController.popBackStack();
-        });
+        mBinding.btnCancelarCadastroProduto.setOnClickListener(v -> navigateBack());
     }
 
     @Override
