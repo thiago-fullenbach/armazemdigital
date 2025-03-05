@@ -5,8 +5,13 @@ import android.icu.text.DecimalFormatSymbols;
 
 import java.util.Locale;
 
+/**
+ * Utilitário para exibição de valores monetários.
+ */
 public class MoneyUtil {
-    /**
+    /** Formata valor Long como String para ser exibido em telas.
+     * Tenha em mente que todos os valores decimais são representados como inteiros dividos por 100.
+     *
      * @param money Valor monetário a ser convertido.
      * @return String formatada com duas
      */

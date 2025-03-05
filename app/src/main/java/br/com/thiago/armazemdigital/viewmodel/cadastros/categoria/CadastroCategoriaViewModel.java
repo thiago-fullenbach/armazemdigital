@@ -13,6 +13,7 @@ public class CadastroCategoriaViewModel extends ViewModel {
     private final CategoriaRepository categoriaRepository;
     private final MutableLiveData<String> nome = new MutableLiveData<>();
     private final MutableLiveData<String> descricao = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> success = new MutableLiveData<>();
 
     public CadastroCategoriaViewModel(CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
@@ -24,6 +25,10 @@ public class CadastroCategoriaViewModel extends ViewModel {
 
     public LiveData<String> getDescricao() {
         return descricao;
+    }
+
+    public LiveData<Boolean> getSuccess() {
+        return success;
     }
 
     public void setNome(String nomeCategoria) {
@@ -41,9 +46,33 @@ public class CadastroCategoriaViewModel extends ViewModel {
                     descricao.getValue(),
                     new Date());
 
-            categoriaRepository.insertCategoria(categoria);
+            success.postValue(categoriaRepository.insertCategoria(categoria) > 0);
         });
 
         saveThread.start();
+    }
+
+    public void updateCategoria(long id) {
+        Thread updateThread = new Thread(() -> {
+            Categoria categoria = categoriaRepository.getCategoria(id);
+
+            categoria.setName(nome.getValue());
+            categoria.setDescription(descricao.getValue());
+
+            success.postValue(categoriaRepository.updateCategoria(categoria) > 0);
+        });
+
+        updateThread.start();
+    }
+
+    public void carregarCategoria(long id) {
+        Thread loadThread = new Thread(() -> {
+            Categoria categoria = categoriaRepository.getCategoria(id);
+
+            nome.postValue(categoria.getName());
+            descricao.postValue(categoria.getDescription());
+        });
+
+        loadThread.start();
     }
 }

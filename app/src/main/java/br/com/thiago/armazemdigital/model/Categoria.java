@@ -25,4 +25,11 @@ public class Categoria {
         this.description = description;
         this.dateCreated = dateCreated;
     }
+
+    @Ignore
+    public Categoria(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 }

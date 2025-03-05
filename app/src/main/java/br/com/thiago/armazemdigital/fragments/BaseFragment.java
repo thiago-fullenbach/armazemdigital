@@ -30,7 +30,11 @@ public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
     }
 
     protected void navigateToFragment(int resourceId) {
+        navigateToFragment(resourceId, null);
+    }
+
+    protected void navigateToFragment(int resourceId, @Nullable Bundle bundle) {
         NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(resourceId);
+        navController.navigate(resourceId, bundle);
     }
 }

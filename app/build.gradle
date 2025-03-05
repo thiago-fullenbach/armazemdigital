@@ -47,4 +47,5 @@ dependencies {
     androidTestImplementation libs.espresso.core
     annotationProcessor libs.lombok
     annotationProcessor libs.room.compiler
+    annotationProcessor libs.navigation.generator
 }

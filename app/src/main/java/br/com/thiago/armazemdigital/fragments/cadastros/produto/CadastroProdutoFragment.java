@@ -33,7 +33,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
     }
 
     @Override
-    protected void salvarDados() {
+    protected void salvarDados(long id) {
         // TODO: Implementar
     }
 
@@ -44,7 +44,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
     }
 
     @Override
-    protected void carregarDados() {
+    protected void carregarDados(long id) {
         // TODO: Implementar
     }
 }

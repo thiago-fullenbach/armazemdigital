@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import br.com.thiago.armazemdigital.adapters.BaseAdapter;
 import br.com.thiago.armazemdigital.databinding.ListItemCadastroCategoriaBinding;
@@ -15,9 +16,10 @@ import br.com.thiago.armazemdigital.model.Categoria;
 
 public class ListagemCategoriaAdapter extends BaseAdapter<ListItemCadastroCategoriaBinding, ListagemCategoriaAdapter.CadastroCategoriaViewHolder, Categoria> {
     private final List<Categoria> mCategorias;
-
-    public ListagemCategoriaAdapter(List<Categoria> mCategorias) {
+    private final Consumer<Categoria> mListener;
+    public ListagemCategoriaAdapter(List<Categoria> mCategorias, Consumer<Categoria> mListener) {
         this.mCategorias = mCategorias;
+        this.mListener = mListener;
     }
 
     @Override
@@ -41,6 +43,11 @@ public class ListagemCategoriaAdapter extends BaseAdapter<ListItemCadastroCatego
             Categoria categoria = mCategorias.get(position);
             cadastroCategoriaViewHolder.tvNomeCategoria.setText(categoria.getName());
             cadastroCategoriaViewHolder.tvDescCategoria.setText(categoria.getDescription());
+            holder.itemView.setOnClickListener(v -> {
+                if(mListener != null) {
+                    mListener.accept(categoria);
+                }
+            });
         }
     }
 

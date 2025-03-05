@@ -19,12 +19,12 @@ public class CategoriaRepository {
         return categoriaDao.insert(categoria);
     }
 
-    public void updateCategoria(Categoria categoria) {
-        categoriaDao.update(categoria);
+    public int updateCategoria(Categoria categoria) {
+        return categoriaDao.update(categoria);
     }
 
-    public void deleteCategoria(Categoria categoria) {
-        categoriaDao.delete(categoria);
+    public int deleteCategoria(Categoria categoria) {
+        return categoriaDao.delete(categoria);
     }
 
     public LiveData<List<Categoria>> getCategoriasLiveData() {

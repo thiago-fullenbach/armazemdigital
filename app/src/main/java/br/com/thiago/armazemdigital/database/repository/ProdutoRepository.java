@@ -19,12 +19,12 @@ public class ProdutoRepository {
         return produtoDao.insert(produto);
     }
 
-    public void updateProduto(Produto produto) {
-        produtoDao.update(produto);
+    public int updateProduto(Produto produto) {
+        return produtoDao.update(produto);
     }
 
-    public void deleteProduto(Produto produto) {
-        produtoDao.delete(produto);
+    public int deleteProduto(Produto produto) {
+        return produtoDao.delete(produto);
     }
 
     public LiveData<List<Produto>> getProdutosLiveData() {

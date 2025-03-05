@@ -27,13 +27,28 @@ public class DialogUtil {
         return builder.create();
     }
 
+    /** Cria dialog de erro de cadastro
+     *
+     * @param context Contexto da atividade atual
+     * @return AlertDialog informando erro durante o cadastro
+     */
     public static AlertDialog createErrorDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        builder.setTitle("Erro ao Salvar cadastro");
-        builder.setMessage("Verifique informações fornecidas.");
+        builder.setTitle(R.string.error_register_title);
+        builder.setMessage(R.string.error_register_message);
         builder.setPositiveButton(R.string.dialog_button_ok, (dialogInterface, i) -> dialogInterface.dismiss());
         builder.setCancelable(false);
+
+        return builder.create();
+    }
+
+    public static AlertDialog createSaveErrorDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setTitle(R.string.error_register_title);
+        builder.setMessage("Erro ao salvar dados de cadastro.");
+        builder.setPositiveButton(R.string.dialog_button_ok, (dialogInterface, i) -> dialogInterface.dismiss());
 
         return builder.create();
     }

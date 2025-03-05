@@ -11,8 +11,8 @@ public interface BaseDao<T> {
     long insert(T t);
 
     @Update
-    void update(T t);
+    int update(T t);
 
     @Delete
-    void delete(T t);
+    int delete(T t);
 }

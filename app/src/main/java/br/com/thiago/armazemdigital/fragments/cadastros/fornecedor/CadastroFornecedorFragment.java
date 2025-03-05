@@ -24,7 +24,7 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
     }
 
     @Override
-    protected void salvarDados() {
+    protected void salvarDados(long id) {
 
     }
 
@@ -34,7 +34,7 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
     }
 
     @Override
-    protected void carregarDados() {
+    protected void carregarDados(long id) {
 
     }
 }

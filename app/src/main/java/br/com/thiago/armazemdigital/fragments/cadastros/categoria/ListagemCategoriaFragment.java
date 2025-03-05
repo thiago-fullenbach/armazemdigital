@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +21,8 @@ import br.com.thiago.armazemdigital.databinding.FragmentListagemCategoriaBinding
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.utils.ListUtil;
+import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
+import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.ListagemCategoriasViewModel;
 import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.categoria.ListagemCategoriasViewModelFactory;
 
@@ -46,27 +47,40 @@ public class ListagemCategoriaFragment extends BaseFragment<FragmentListagemCate
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Inicializa tela com carregamento
-        mBinding.pbLoadingListCategorias.setVisibility(View.VISIBLE);
-        mBinding.rvListaCadastroCategoria.setVisibility(View.GONE);
-        mBinding.tvAvisoSemCategoria.setVisibility(View.GONE);
-
-        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
-        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
-        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaRepository);
-
-        mAdapter = new ListagemCategoriaAdapter(new ArrayList<>());
-        mBinding.rvListaCadastroCategoria.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        mBinding.rvListaCadastroCategoria.setAdapter(mAdapter);
-
-        mViewModel = new ViewModelProvider(this, factory).get(ListagemCategoriasViewModel.class);
+        showLoadingList();
+        initViewModel();
 
         mViewModel.getItens().observe(getViewLifecycleOwner(), categorias -> {
             mAdapter.setListData(categorias);
             showProductList(categorias);
         });
 
+        mAdapter = new ListagemCategoriaAdapter(new ArrayList<>(), categoria -> {
+            Bundle bundle = new Bundle();
+            bundle.putLong(BundleKeys.ARG_CATEGORIA_ID, categoria.getId());
+            navigateToFragment(
+                    R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment,
+                    bundle
+            );
+        });
+        mBinding.rvListaCadastroCategoria.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
+        mBinding.rvListaCadastroCategoria.setAdapter(mAdapter);
         mBinding.btnCadastrarCategoria.setOnClickListener(v -> navigateToFragment(R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment));
+    }
+
+    private void initViewModel() {
+        // Inicializa ViewModel e suas dependências
+        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
+        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
+        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaRepository);
+        mViewModel = new ViewModelProvider(this, factory).get(ListagemCategoriasViewModel.class);
+    }
+
+    private void showLoadingList() {
+        // Inicializa tela com carregamento
+        mBinding.pbLoadingListCategorias.setVisibility(View.VISIBLE);
+        mBinding.rvListaCadastroCategoria.setVisibility(View.GONE);
+        mBinding.tvAvisoSemCategoria.setVisibility(View.GONE);
     }
 
     private void showProductList(List<Categoria> categoriasCadastradas) {

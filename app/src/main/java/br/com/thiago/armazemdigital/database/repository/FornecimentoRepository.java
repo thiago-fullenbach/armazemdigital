@@ -19,12 +19,12 @@ public class FornecimentoRepository {
         return fornecimentoDao.insert(fornecimento);
     }
 
-    public void updateFornecimento(Fornecimento fornecimento) {
-        fornecimentoDao.update(fornecimento);
+    public int updateFornecimento(Fornecimento fornecimento) {
+        return fornecimentoDao.update(fornecimento);
     }
 
-    public void deleteFornecimento(Fornecimento fornecimento) {
-        fornecimentoDao.delete(fornecimento);
+    public int deleteFornecimento(Fornecimento fornecimento) {
+        return fornecimentoDao.delete(fornecimento);
     }
 
     public LiveData<List<Fornecimento>> getFornecimentosLiveData() {

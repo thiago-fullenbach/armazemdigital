@@ -19,12 +19,12 @@ public class MovimentacaoRepository {
         return movimentacaoDao.insert(movimentacao);
     }
 
-    public void updateMovimentacao(Movimentacao movimentacao) {
-        movimentacaoDao.update(movimentacao);
+    public int updateMovimentacao(Movimentacao movimentacao) {
+        return movimentacaoDao.update(movimentacao);
     }
 
-    public void deleteMovimentacao(Movimentacao movimentacao) {
-        movimentacaoDao.delete(movimentacao);
+    public int deleteMovimentacao(Movimentacao movimentacao) {
+        return movimentacaoDao.delete(movimentacao);
     }
 
     public LiveData<List<Movimentacao>> getMovimentacoesLiveData() {

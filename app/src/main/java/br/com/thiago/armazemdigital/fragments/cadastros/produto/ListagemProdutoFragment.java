@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +21,7 @@ import br.com.thiago.armazemdigital.databinding.FragmentListagemProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
+import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutosViewModel;
 import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.produto.ListagemProdutosViewModelFactory;
 
@@ -51,7 +51,7 @@ public class ListagemProdutoFragment extends BaseFragment<FragmentListagemProdut
         ListagemProdutosViewModelFactory factory = new ListagemProdutosViewModelFactory(produtoCadastroRepository);
 
         mAdapter = new ListagemProdutosAdapter(new ArrayList<>());
-        mBinding.rvListaCadastroProduto.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        mBinding.rvListaCadastroProduto.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
         mBinding.rvListaCadastroProduto.setAdapter(mAdapter);
 
         mViewModel = new ViewModelProvider(this, factory).get(ListagemProdutosViewModel.class);
