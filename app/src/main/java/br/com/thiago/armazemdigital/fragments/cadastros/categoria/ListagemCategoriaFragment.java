@@ -15,11 +15,11 @@ import java.util.List;
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.cadastro.categoria.ListagemCategoriaAdapter;
-import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
-import br.com.thiago.armazemdigital.database.repository.CategoriaRepository;
+import br.com.thiago.armazemdigital.database.dao.view.CategoriaCadastroDao;
+import br.com.thiago.armazemdigital.database.repository.view.CategoriaCadastroRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
-import br.com.thiago.armazemdigital.model.Categoria;
+import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.ListagemCategoriasViewModel;
@@ -45,9 +45,9 @@ public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentList
     @Override
     protected void setupViewModel() {
         // Inicializa ViewModel e suas dependências
-        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
-        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
-        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaRepository);
+        CategoriaCadastroDao categoriaCadastroDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaCadastroDao();
+        CategoriaCadastroRepository categoriaCadastroRepository = new CategoriaCadastroRepository(categoriaCadastroDao);
+        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaCadastroRepository);
         ListagemCategoriasViewModel mViewModel = new ViewModelProvider(this, factory).get(ListagemCategoriasViewModel.class);
 
         // Adiciona observáveis
@@ -60,7 +60,7 @@ public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentList
 
     @Override
     protected void setupViews() {
-        mAdapter = new ListagemCategoriaAdapter(new ArrayList<>(), categoria -> editCadastro(R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment, categoria.getId()));
+        mAdapter = new ListagemCategoriaAdapter(new ArrayList<>(), categoria -> editCadastro(R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment, categoria.getCategoryId()));
         mBinding.rvListaCadastroCategoria.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
         mBinding.rvListaCadastroCategoria.setAdapter(mAdapter);
         mBinding.btnCadastrarCategoria.setOnClickListener(v -> navigateToFragment(R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment));
@@ -79,7 +79,7 @@ public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentList
         mBinding.tvAvisoSemCategoria.setVisibility(View.GONE);
     }
 
-    private void showProductList(List<Categoria> categoriasCadastradas) {
+    private void showProductList(List<CategoriaCadastro> categoriasCadastradas) {
         mBinding.pbLoadingListCategorias.setVisibility(View.GONE);
         mBinding.rvListaCadastroCategoria.setVisibility(ListUtil.isNullOrEmpty(categoriasCadastradas) ? View.GONE : View.VISIBLE);
         mBinding.tvAvisoSemCategoria.setVisibility(ListUtil.isNullOrEmpty(categoriasCadastradas) ? View.VISIBLE : View.GONE);

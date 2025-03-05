@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.function.Consumer;
 
+import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.BaseAdapter;
 import br.com.thiago.armazemdigital.databinding.ListItemCadastroCategoriaBinding;
-import br.com.thiago.armazemdigital.model.Categoria;
+import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
 
-public class ListagemCategoriaAdapter extends BaseAdapter<ListItemCadastroCategoriaBinding, ListagemCategoriaAdapter.CadastroCategoriaViewHolder, Categoria> {
-    private final List<Categoria> mCategorias;
-    private final Consumer<Categoria> mListener;
-    public ListagemCategoriaAdapter(List<Categoria> mCategorias, Consumer<Categoria> mListener) {
+public class ListagemCategoriaAdapter extends BaseAdapter<ListItemCadastroCategoriaBinding, ListagemCategoriaAdapter.CadastroCategoriaViewHolder, CategoriaCadastro> {
+    private final List<CategoriaCadastro> mCategorias;
+    private final Consumer<CategoriaCadastro> mListener;
+    public ListagemCategoriaAdapter(List<CategoriaCadastro> mCategorias, Consumer<CategoriaCadastro> mListener) {
         this.mCategorias = mCategorias;
         this.mListener = mListener;
     }
@@ -33,17 +34,19 @@ public class ListagemCategoriaAdapter extends BaseAdapter<ListItemCadastroCatego
     }
 
     @Override
-    protected List<Categoria> getListItem() {
+    protected List<CategoriaCadastro> getListItem() {
         return mCategorias;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof CadastroCategoriaViewHolder cadastroCategoriaViewHolder) {
-            Categoria categoria = mCategorias.get(position);
-            cadastroCategoriaViewHolder.tvNomeCategoria.setText(categoria.getName());
-            cadastroCategoriaViewHolder.tvDescCategoria.setText(categoria.getDescription());
-            holder.itemView.setOnClickListener(v -> {
+            CategoriaCadastro categoria = mCategorias.get(position);
+            cadastroCategoriaViewHolder.tvNomeCategoria.setText(categoria.getCategoryName());
+            cadastroCategoriaViewHolder.tvDescCategoria.setText(categoria.getCategoryDescription());
+            cadastroCategoriaViewHolder.tvQtdProdutos.setText(
+                    cadastroCategoriaViewHolder.itemView.getContext().getString(R.string.txt_qtd_produto, categoria.getProductCount()));
+            cadastroCategoriaViewHolder.itemView.setOnClickListener(v -> {
                 if(mListener != null) {
                     mListener.accept(categoria);
                 }
@@ -54,11 +57,13 @@ public class ListagemCategoriaAdapter extends BaseAdapter<ListItemCadastroCatego
     public static class CadastroCategoriaViewHolder extends RecyclerView.ViewHolder {
         TextView tvNomeCategoria;
         TextView tvDescCategoria;
+        TextView tvQtdProdutos;
 
         public CadastroCategoriaViewHolder(@NonNull ListItemCadastroCategoriaBinding binding) {
             super(binding.getRoot());
             tvNomeCategoria = binding.tvNomeCategoria;
             tvDescCategoria = binding.tvDescCategoria;
+            tvQtdProdutos = binding.tvQtdProdutos;
         }
     }
 }

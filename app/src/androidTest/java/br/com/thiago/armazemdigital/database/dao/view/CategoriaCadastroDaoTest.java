@@ -21,15 +21,15 @@ import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
 import br.com.thiago.armazemdigital.database.dao.ProdutoDao;
 import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.model.Produto;
-import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
+import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
 import br.com.thiago.armazemdigital.utils.AndroidTestUtils;
 
 @RunWith(AndroidJUnit4.class)
-public class ProdutoCadastroDaoTest {
+public class CategoriaCadastroDaoTest {
     private ArmazemDigitalDb db;
     private CategoriaDao categoriaDao;
+    private CategoriaCadastroDao categoriaCadastroDao;
     private ProdutoDao produtoDao;
-    private ProdutoCadastroDao produtoCadastroDao;
 
     @Before
     public void setUp() {
@@ -38,8 +38,8 @@ public class ProdutoCadastroDaoTest {
                 .allowMainThreadQueries()
                 .build();
         categoriaDao = db.categoriaDao();
+        categoriaCadastroDao = db.categoriaCadastroDao();
         produtoDao = db.produtoDao();
-        produtoCadastroDao = db.produtoCadastroDao();
     }
 
     @Test
@@ -50,16 +50,14 @@ public class ProdutoCadastroDaoTest {
         Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        List<ProdutoCadastro> produtoCadastros = produtoCadastroDao.getProdutosCadastro();
+        List<CategoriaCadastro> categoriasCadastro = categoriaCadastroDao.getCategoriasCadastro();
 
-        assertNotNull(produtoCadastros);
-        assertEquals(1, produtoCadastros.size());
-        assertEquals((long) produto.getId(), produtoCadastros.get(0).getProductId());
-        assertEquals(produto.getUrlImage(), produtoCadastros.get(0).getUrlImagem());
-        assertEquals(produto.getName(), produtoCadastros.get(0).getNameProduct());
-        assertEquals(produto.getDescription(), produtoCadastros.get(0).getDescProduct());
-        assertEquals(categoria.getName(), produtoCadastros.get(0).getNameCategory());
-        assertEquals(produto.getPrice(), produtoCadastros.get(0).getPriceProduct());
+        assertNotNull(categoriasCadastro);
+        assertEquals(1, categoriasCadastro.size());
+        assertEquals((long) categoria.getId(), categoriasCadastro.get(0).getCategoryId());
+        assertEquals(categoria.getName(), categoriasCadastro.get(0).getCategoryName());
+        assertEquals(categoria.getDescription(), categoriasCadastro.get(0).getCategoryDescription());
+        assertEquals(1, categoriasCadastro.get(0).getProductCount());
     }
 
     @After
