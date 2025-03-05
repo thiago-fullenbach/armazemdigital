@@ -11,10 +11,10 @@ import br.com.thiago.armazemdigital.model.view.ProdutoEstoque;
 
 @Dao
 public interface ProdutoEstoqueDao {
-    @Query("SELECT * FROM produtoestoque LIMIT :limit OFFSET :offset")
-    LiveData<List<ProdutoEstoque>> getProdutosEstoqueLiveData(int limit, int offset);
+    @Query("SELECT * FROM produtoestoque")
+    LiveData<List<ProdutoEstoque>> getProdutosEstoqueLiveData();
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    @Query("SELECT * FROM produtoestoque LIMIT :limit OFFSET :offset")
-    List<ProdutoEstoque> getProdutosEstoque(int limit, int offset);
+    @Query("SELECT * FROM produtoestoque")
+    List<ProdutoEstoque> getProdutosEstoque();
 }

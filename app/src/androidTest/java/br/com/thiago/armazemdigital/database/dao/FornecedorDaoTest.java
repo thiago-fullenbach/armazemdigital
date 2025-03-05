@@ -28,7 +28,7 @@ public class FornecedorDaoTest {
     private FornecedorDao fornecedorDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, ArmazemDigitalDb.class)
                 .allowMainThreadQueries()
@@ -41,7 +41,7 @@ public class FornecedorDaoTest {
         Fornecedor fornecedor = AndroidTestUtils.createFornecedorForTests();
         fornecedor.setId(fornecedorDao.insert(fornecedor));
 
-        List<Fornecedor> fornecedoresBanco = fornecedorDao.getFornecedores(10, 0);
+        List<Fornecedor> fornecedoresBanco = fornecedorDao.getFornecedores();
         Fornecedor fornecedorBanco = fornecedorDao.getFornecedor(fornecedor.getId());
 
         assertNotNull(fornecedorBanco);
@@ -109,7 +109,7 @@ public class FornecedorDaoTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.close();
     }
 }

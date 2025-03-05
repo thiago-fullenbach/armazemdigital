@@ -217,12 +217,12 @@
         android:elevation="16dp"
         app:icon="@drawable/ic_cadastro_cancelar"
         app:iconTint="@color/yellow"
-        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_cadastro_categoria"
+        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_cadastro_produto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_salvar_cadastro_categoria"
+        android:id="@+id/btn_salvar_cadastro_produto"
         style="@style/botaoNovoCadastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

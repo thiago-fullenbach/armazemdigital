@@ -27,13 +27,13 @@ public class ProdutoRepository {
         produtoDao.delete(produto);
     }
 
-    public LiveData<List<Produto>> getProdutosLiveData(int limit, int offset) {
-        return produtoDao.getProdutosLiveData(limit, offset);
+    public LiveData<List<Produto>> getProdutosLiveData() {
+        return produtoDao.getProdutosLiveData();
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    public List<Produto> getProdutos(int limit, int offset) {
-        return produtoDao.getProdutos(limit, offset);
+    public List<Produto> getProdutos() {
+        return produtoDao.getProdutos();
     }
 
     public Produto getProduto(long id) {

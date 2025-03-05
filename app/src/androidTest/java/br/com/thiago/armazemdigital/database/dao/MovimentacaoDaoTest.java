@@ -32,7 +32,7 @@ public class MovimentacaoDaoTest {
     private ProdutoDao produtoDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, ArmazemDigitalDb.class)
                 .allowMainThreadQueries()
@@ -53,7 +53,7 @@ public class MovimentacaoDaoTest {
         Movimentacao movimentacao = AndroidTestUtils.createMovimentacaoForTests(produto.getId());
         movimentacao.setId(movimentacaoDao.insert(movimentacao));
 
-        List<Movimentacao> movimentacoesBanco = movimentacaoDao.getMovimentacoes(10, 0);
+        List<Movimentacao> movimentacoesBanco = movimentacaoDao.getMovimentacoes();
         Movimentacao movimentacaoBanco = movimentacaoDao.getMovimentacao(movimentacao.getId());
 
         assertNotNull(movimentacaoBanco);
@@ -120,7 +120,7 @@ public class MovimentacaoDaoTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.close();
     }
 }

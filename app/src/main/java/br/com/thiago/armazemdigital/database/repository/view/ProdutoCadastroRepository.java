@@ -15,12 +15,12 @@ public class ProdutoCadastroRepository {
         this.produtoCadastroDao = produtoCadastroDao;
     }
 
-    public LiveData<List<ProdutoCadastro>> getProdutosCadastroLiveData(int limit, int offset) {
-        return produtoCadastroDao.getProdutosCadastroLiveData(limit, offset);
+    public LiveData<List<ProdutoCadastro>> getProdutosCadastroLiveData() {
+        return produtoCadastroDao.getProdutosCadastroLiveData();
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    public List<ProdutoCadastro> getProdutosCadastro(int limit, int offset) {
-        return produtoCadastroDao.getProdutosCadastro(limit, offset);
+    public List<ProdutoCadastro> getProdutosCadastro() {
+        return produtoCadastroDao.getProdutosCadastro();
     }
 }

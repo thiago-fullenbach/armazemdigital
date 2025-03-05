@@ -1,6 +1,7 @@
 package br.com.thiago.armazemdigital.adapters.cadastro.categoria;
 
-import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -9,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import br.com.thiago.armazemdigital.adapters.BaseAdapter;
+import br.com.thiago.armazemdigital.databinding.ListItemCadastroCategoriaBinding;
 import br.com.thiago.armazemdigital.model.Categoria;
 
-public class ListagemCategoriaAdapter extends BaseAdapter<ListagemCategoriaAdapter.CadastroCategoriaViewHolder, Categoria> {
+public class ListagemCategoriaAdapter extends BaseAdapter<ListItemCadastroCategoriaBinding, ListagemCategoriaAdapter.CadastroCategoriaViewHolder, Categoria> {
     private final List<Categoria> mCategorias;
 
     public ListagemCategoriaAdapter(List<Categoria> mCategorias) {
@@ -19,13 +21,13 @@ public class ListagemCategoriaAdapter extends BaseAdapter<ListagemCategoriaAdapt
     }
 
     @Override
-    protected int getLayoutId() {
-        return mCategorias.size();
+    protected ListItemCadastroCategoriaBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return ListItemCadastroCategoriaBinding.inflate(inflater, container, false);
     }
 
     @Override
-    protected CadastroCategoriaViewHolder getItemViewInstance(View v) {
-        return new CadastroCategoriaViewHolder(v);
+    protected CadastroCategoriaViewHolder getItemViewInstance(ListItemCadastroCategoriaBinding binding) {
+        return new CadastroCategoriaViewHolder(binding);
     }
 
     @Override
@@ -46,8 +48,10 @@ public class ListagemCategoriaAdapter extends BaseAdapter<ListagemCategoriaAdapt
         TextView tvNomeCategoria;
         TextView tvDescCategoria;
 
-        public CadastroCategoriaViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public CadastroCategoriaViewHolder(@NonNull ListItemCadastroCategoriaBinding binding) {
+            super(binding.getRoot());
+            tvNomeCategoria = binding.tvNomeCategoria;
+            tvDescCategoria = binding.tvDescCategoria;
         }
     }
 }

@@ -27,13 +27,13 @@ public class MovimentacaoRepository {
         movimentacaoDao.delete(movimentacao);
     }
 
-    public LiveData<List<Movimentacao>> getMovimentacoesLiveData(int limit, int offset) {
-        return movimentacaoDao.getMovimentacoesLiveData(limit, offset);
+    public LiveData<List<Movimentacao>> getMovimentacoesLiveData() {
+        return movimentacaoDao.getMovimentacoesLiveData();
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    public List<Movimentacao> getMovimentacoes(int limit, int offset) {
-        return movimentacaoDao.getMovimentacoes(limit, offset);
+    public List<Movimentacao> getMovimentacoes() {
+        return movimentacaoDao.getMovimentacoes();
     }
 
     public Movimentacao getMovimentacao(long id) {

@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,6 @@ import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.categoria.Listag
 public class ListagemCategoriaFragment extends BaseFragment<FragmentListagemCategoriaBinding> {
     private ListagemCategoriaAdapter mAdapter;
     private ListagemCategoriasViewModel mViewModel;
-    private boolean isLoading = false;
 
     public ListagemCategoriaFragment() {
         // Required empty public constructor
@@ -38,23 +36,6 @@ public class ListagemCategoriaFragment extends BaseFragment<FragmentListagemCate
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
-        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
-        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaRepository);
-
-        mAdapter = new ListagemCategoriaAdapter(new ArrayList<>());
-        mViewModel = new ViewModelProvider(this, factory).get(ListagemCategoriasViewModel.class);
-
-        mViewModel.isLoading.observe(this, isLoading -> {
-            mAdapter.showIsLoading(isLoading);
-            this.isLoading = isLoading;
-        });
-
-        mViewModel.itens.observe(this, categoria -> {
-            mAdapter.setListData(categoria);
-            showProductList(categoria);
-        });
     }
 
     @Override
@@ -65,27 +46,31 @@ public class ListagemCategoriaFragment extends BaseFragment<FragmentListagemCate
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mBinding.btnCadastrarCategoria.setOnClickListener(v -> navigateToFragment(R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment));
+        // Inicializa tela com carregamento
+        mBinding.pbLoadingListCategorias.setVisibility(View.VISIBLE);
+        mBinding.rvListaCadastroCategoria.setVisibility(View.GONE);
+        mBinding.tvAvisoSemCategoria.setVisibility(View.GONE);
 
-        mBinding.rvListaCadastroCategoria.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
+        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
+        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
+        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaRepository);
 
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (layoutManager == null) return;
+        mAdapter = new ListagemCategoriaAdapter(new ArrayList<>());
+        mBinding.rvListaCadastroCategoria.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        mBinding.rvListaCadastroCategoria.setAdapter(mAdapter);
 
-                int totalItemCount = layoutManager.getItemCount();
-                int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+        mViewModel = new ViewModelProvider(this, factory).get(ListagemCategoriasViewModel.class);
 
-                if (!isLoading && totalItemCount <= (lastVisibleItem + 3)) {
-                    mViewModel.loadMoreItens();
-                }
-            }
+        mViewModel.getItens().observe(getViewLifecycleOwner(), categorias -> {
+            mAdapter.setListData(categorias);
+            showProductList(categorias);
         });
+
+        mBinding.btnCadastrarCategoria.setOnClickListener(v -> navigateToFragment(R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment));
     }
 
     private void showProductList(List<Categoria> categoriasCadastradas) {
+        mBinding.pbLoadingListCategorias.setVisibility(View.GONE);
         mBinding.rvListaCadastroCategoria.setVisibility(ListUtil.isNullOrEmpty(categoriasCadastradas) ? View.GONE : View.VISIBLE);
         mBinding.tvAvisoSemCategoria.setVisibility(ListUtil.isNullOrEmpty(categoriasCadastradas) ? View.VISIBLE : View.GONE);
     }

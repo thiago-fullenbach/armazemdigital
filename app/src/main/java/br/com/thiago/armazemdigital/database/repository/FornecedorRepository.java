@@ -27,12 +27,12 @@ public class FornecedorRepository {
         fornecedorDao.delete(fornecedor);
     }
 
-    public LiveData<List<Fornecedor>> getFornecedoresLiveData(int limit, int offset) {
-        return fornecedorDao.getFornecedoresLiveData(limit, offset);
+    public LiveData<List<Fornecedor>> getFornecedoresLiveData() {
+        return fornecedorDao.getFornecedoresLiveData();
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    public List<Fornecedor> getFornecedores(int limit, int offset) {
-        return fornecedorDao.getFornecedores(limit, offset);
+    public List<Fornecedor> getFornecedores() {
+        return fornecedorDao.getFornecedores();
     }
 }

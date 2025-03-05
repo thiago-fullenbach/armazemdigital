@@ -11,12 +11,12 @@ import br.com.thiago.armazemdigital.model.Produto;
 
 @Dao
 public interface ProdutoDao extends BaseDao<Produto> {
-    @Query("SELECT * FROM produto ORDER BY id DESC LIMIT :limit OFFSET :offset")
-    LiveData<List<Produto>> getProdutosLiveData(int limit, int offset);
+    @Query("SELECT * FROM produto ORDER BY id DESC")
+    LiveData<List<Produto>> getProdutosLiveData();
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    @Query("SELECT * FROM produto ORDER BY id DESC LIMIT :limit OFFSET :offset")
-    List<Produto> getProdutos(int limit, int offset);
+    @Query("SELECT * FROM produto ORDER BY id DESC")
+    List<Produto> getProdutos();
 
     @Query("SELECT * FROM produto WHERE id = :id")
     Produto getProduto(long id);

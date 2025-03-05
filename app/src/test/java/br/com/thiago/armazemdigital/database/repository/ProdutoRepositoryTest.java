@@ -61,14 +61,14 @@ public class ProdutoRepositoryTest {
     public void getProdutos() {
         List<Produto> produtosMock = TestUtils.createProdutosForTests();
 
-        when(produtoRepository.getProdutos(produtosMock.size(), 0)).thenReturn(produtosMock);
+        when(produtoRepository.getProdutos()).thenReturn(produtosMock);
 
-        List<Produto> produtos = produtoRepository.getProdutos(produtosMock.size(), 0);
+        List<Produto> produtos = produtoRepository.getProdutos();
 
         assertNotNull(produtos);
         assertEquals(produtosMock, produtos);
 
-        verify(produtoDao).getProdutos(produtosMock.size(),0);
+        verify(produtoDao).getProdutos();
     }
 
     @Test

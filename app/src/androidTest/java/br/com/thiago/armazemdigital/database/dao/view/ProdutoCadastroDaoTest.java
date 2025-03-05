@@ -32,7 +32,7 @@ public class ProdutoCadastroDaoTest {
     private ProdutoCadastroDao produtoCadastroDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, ArmazemDigitalDb.class)
                 .allowMainThreadQueries()
@@ -50,7 +50,7 @@ public class ProdutoCadastroDaoTest {
         Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        List<ProdutoCadastro> produtoCadastros = produtoCadastroDao.getProdutosCadastro(10, 0);
+        List<ProdutoCadastro> produtoCadastros = produtoCadastroDao.getProdutosCadastro();
 
         assertNotNull(produtoCadastros);
         assertEquals(1, produtoCadastros.size());
@@ -62,7 +62,7 @@ public class ProdutoCadastroDaoTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.close();
     }
 }

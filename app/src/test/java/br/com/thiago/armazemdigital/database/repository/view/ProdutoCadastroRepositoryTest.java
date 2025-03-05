@@ -29,13 +29,13 @@ public class ProdutoCadastroRepositoryTest {
     public void getProdutosCadastro() {
         List<ProdutoCadastro> produtosCadastroMock = TestUtils.createProdutosCadastroForTests();
 
-        when(produtoCadastroRepository.getProdutosCadastro(produtosCadastroMock.size(), 0)).thenReturn(produtosCadastroMock);
+        when(produtoCadastroRepository.getProdutosCadastro()).thenReturn(produtosCadastroMock);
 
-        List<ProdutoCadastro> produtosEstoque = produtoCadastroRepository.getProdutosCadastro(produtosCadastroMock.size(), 0);
+        List<ProdutoCadastro> produtosEstoque = produtoCadastroRepository.getProdutosCadastro();
 
         assertNotNull(produtosEstoque);
         assertEquals(produtosCadastroMock, produtosEstoque);
 
-        verify(produtoCadastroDao).getProdutosCadastro(produtosCadastroMock.size(), 0);
+        verify(produtoCadastroDao).getProdutosCadastro();
     }
 }

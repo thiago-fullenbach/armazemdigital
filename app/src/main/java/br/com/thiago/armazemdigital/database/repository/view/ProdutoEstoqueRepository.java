@@ -15,12 +15,12 @@ public class ProdutoEstoqueRepository {
         this.produtoEstoqueDao = produtoEstoqueDao;
     }
 
-    public LiveData<List<ProdutoEstoque>> getProdutosEstoqueLiveData(int limit, int offset) {
-        return produtoEstoqueDao.getProdutosEstoqueLiveData(limit, offset);
+    public LiveData<List<ProdutoEstoque>> getProdutosEstoqueLiveData() {
+        return produtoEstoqueDao.getProdutosEstoqueLiveData();
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    public List<ProdutoEstoque> getProdutosEstoque(int limit, int offset) {
-        return produtoEstoqueDao.getProdutosEstoque(limit, offset);
+    public List<ProdutoEstoque> getProdutosEstoque() {
+        return produtoEstoqueDao.getProdutosEstoque();
     }
 }

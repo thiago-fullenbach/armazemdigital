@@ -34,4 +34,6 @@
     <string name="label_btn_cancelar_cadastro">Cancelar Cadastro</string>
     <string name="label_btn_salvar_cadastro">Salvar Cadastro</string>
     <string name="txt_exemplo_nome_categoria">Categoria de Exemplo</string>
+    <string name="hint_et_nome_categoria">Nome da Categoria</string>
+    <string name="hint_et_descricao_categoria">Descrição da Categoria</string>
 </resources>

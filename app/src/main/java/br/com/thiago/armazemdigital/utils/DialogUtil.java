@@ -27,6 +27,17 @@ public class DialogUtil {
         return builder.create();
     }
 
+    public static AlertDialog createErrorDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setTitle("Erro ao Salvar cadastro");
+        builder.setMessage("Verifique informações fornecidas.");
+        builder.setPositiveButton(R.string.dialog_button_ok, (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.setCancelable(false);
+
+        return builder.create();
+    }
+
     /**
      * Cria mensagem do dialog de informações do sistema
      *

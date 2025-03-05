@@ -13,11 +13,11 @@ public class ListagemProdutosViewModel extends BaseListagemViewModel<ProdutoCada
 
     public ListagemProdutosViewModel(ProdutoCadastroRepository produtoCadastroRepository) {
         this.produtoCadastroRepository = produtoCadastroRepository;
-        loadMoreItens();
+        observeItens();
     }
 
     @Override
-    protected LiveData<List<ProdutoCadastro>> getItensFromRepo(int page) {
-        return produtoCadastroRepository.getProdutosCadastroLiveData(BaseListagemViewModel.DEFAULT_ITENS_POR_PAGINA, page);
+    protected LiveData<List<ProdutoCadastro>> getItensFromRepo() {
+        return produtoCadastroRepository.getProdutosCadastroLiveData();
     }
 }

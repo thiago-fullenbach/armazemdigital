@@ -61,13 +61,13 @@ public class FornecedorRepositoryTest {
     public void getFornecedores() {
         List<Fornecedor> fornecedoresMock = TestUtils.createFornecedoresForTests();
 
-        when(fornecedorRepository.getFornecedores(fornecedoresMock.size(), 0)).thenReturn(fornecedoresMock);
+        when(fornecedorRepository.getFornecedores()).thenReturn(fornecedoresMock);
 
-        List<Fornecedor> fornecedores = fornecedorRepository.getFornecedores(fornecedoresMock.size(), 0);
+        List<Fornecedor> fornecedores = fornecedorRepository.getFornecedores();
 
         assertNotNull(fornecedores);
         assertEquals(fornecedoresMock, fornecedores);
 
-        verify(fornecedorDao).getFornecedores(fornecedoresMock.size(), 0);
+        verify(fornecedorDao).getFornecedores();
     }
 }

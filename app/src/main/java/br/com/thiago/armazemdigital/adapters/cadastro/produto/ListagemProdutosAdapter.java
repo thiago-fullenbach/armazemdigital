@@ -1,6 +1,7 @@
 package br.com.thiago.armazemdigital.adapters.cadastro.produto;
 
-import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.BaseAdapter;
+import br.com.thiago.armazemdigital.databinding.ListItemCadastroProdutoBinding;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.MoneyUtil;
 
-public class ListagemProdutosAdapter extends BaseAdapter<ListagemProdutosAdapter.CadastroProdutoViewHolder, ProdutoCadastro> {
+public class ListagemProdutosAdapter extends BaseAdapter<ListItemCadastroProdutoBinding, ListagemProdutosAdapter.CadastroProdutoViewHolder, ProdutoCadastro> {
     private final List<ProdutoCadastro> mProdutos;
 
     public ListagemProdutosAdapter(List<ProdutoCadastro> mProdutos) {
@@ -22,13 +23,13 @@ public class ListagemProdutosAdapter extends BaseAdapter<ListagemProdutosAdapter
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.list_item_cadastro_produto;
+    protected ListItemCadastroProdutoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return ListItemCadastroProdutoBinding.inflate(inflater, container, false);
     }
 
     @Override
-    protected CadastroProdutoViewHolder getItemViewInstance(View v) {
-        return new CadastroProdutoViewHolder(v);
+    protected CadastroProdutoViewHolder getItemViewInstance(ListItemCadastroProdutoBinding binding) {
+        return new CadastroProdutoViewHolder(binding);
     }
 
     @Override
@@ -55,8 +56,13 @@ public class ListagemProdutosAdapter extends BaseAdapter<ListagemProdutosAdapter
         TextView tvCategoriaProduto;
         TextView tvPrecoProduto;
 
-        public CadastroProdutoViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public CadastroProdutoViewHolder(@NonNull ListItemCadastroProdutoBinding binding) {
+            super(binding.getRoot());
+            ivImagemCadastro = binding.ivImagemCadastro;
+            tvNomeProduto = binding.tvNomeProduto;
+            tvDescProduto = binding.tvDescProduto;
+            tvCategoriaProduto = binding.tvCategoriaProd;
+            tvPrecoProduto = binding.tvPrecoProd;
         }
     }
 }

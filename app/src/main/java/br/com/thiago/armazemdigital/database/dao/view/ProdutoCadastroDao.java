@@ -11,10 +11,10 @@ import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 
 @Dao
 public interface ProdutoCadastroDao {
-    @Query("SELECT * FROM produtocadastro LIMIT :limit OFFSET :offset")
-    LiveData<List<ProdutoCadastro>> getProdutosCadastroLiveData(int limit, int offset);
+    @Query("SELECT * FROM produtocadastro")
+    LiveData<List<ProdutoCadastro>> getProdutosCadastroLiveData();
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    @Query("SELECT * FROM produtocadastro LIMIT :limit OFFSET :offset")
-    List<ProdutoCadastro> getProdutosCadastro(int limit, int offset);
+    @Query("SELECT * FROM produtocadastro")
+    List<ProdutoCadastro> getProdutosCadastro();
 }

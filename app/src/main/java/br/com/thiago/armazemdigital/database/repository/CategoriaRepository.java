@@ -15,7 +15,7 @@ public class CategoriaRepository {
         this.categoriaDao = categoriaDao;
     }
 
-    public long insetCategoria(Categoria categoria) {
+    public long insertCategoria(Categoria categoria) {
         return categoriaDao.insert(categoria);
     }
 
@@ -27,13 +27,13 @@ public class CategoriaRepository {
         categoriaDao.delete(categoria);
     }
 
-    public LiveData<List<Categoria>> getCategoriasLiveData(int limit, int offset) {
-        return categoriaDao.getCategoriasLiveData(limit, offset);
+    public LiveData<List<Categoria>> getCategoriasLiveData() {
+        return categoriaDao.getCategoriasLiveData();
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    public List<Categoria> getCategorias(int limit, int offset) {
-        return categoriaDao.getCategorias(limit, offset);
+    public List<Categoria> getCategorias() {
+        return categoriaDao.getCategorias();
     }
 
     public Categoria getCategoria(long id) {

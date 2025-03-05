@@ -13,11 +13,11 @@ public class ListagemCategoriasViewModel extends BaseListagemViewModel<Categoria
 
     public ListagemCategoriasViewModel(CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
-        loadMoreItens();
+        observeItens();
     }
 
     @Override
-    protected LiveData<List<Categoria>> getItensFromRepo(int page) {
-        return categoriaRepository.getCategoriasLiveData(BaseListagemViewModel.DEFAULT_ITENS_POR_PAGINA, page);
+    protected LiveData<List<Categoria>> getItensFromRepo() {
+        return categoriaRepository.getCategoriasLiveData();
     }
 }
