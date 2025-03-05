@@ -22,4 +22,14 @@ public class MovimentacaoFragment extends BaseFragment<FragmentMovimentacaoBindi
     protected FragmentMovimentacaoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentMovimentacaoBinding.inflate(inflater, container, false);
     }
+
+    @Override
+    protected void setupViewModel() {
+
+    }
+
+    @Override
+    protected void setupViews() {
+
+    }
 }

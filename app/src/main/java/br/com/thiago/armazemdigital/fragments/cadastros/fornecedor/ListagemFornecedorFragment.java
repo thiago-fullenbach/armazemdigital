@@ -5,9 +5,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import br.com.thiago.armazemdigital.databinding.FragmentListagemFornecedorBinding;
-import br.com.thiago.armazemdigital.fragments.BaseFragment;
+import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 
-public class ListagemFornecedorFragment extends BaseFragment<FragmentListagemFornecedorBinding> {
+public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentListagemFornecedorBinding> {
 
     public ListagemFornecedorFragment() {
         // Required empty public constructor
@@ -21,5 +21,15 @@ public class ListagemFornecedorFragment extends BaseFragment<FragmentListagemFor
     @Override
     protected FragmentListagemFornecedorBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentListagemFornecedorBinding.inflate(inflater, container, false);
+    }
+
+    @Override
+    protected void setupViewModel() {
+
+    }
+
+    @Override
+    protected void setupViews() {
+
     }
 }

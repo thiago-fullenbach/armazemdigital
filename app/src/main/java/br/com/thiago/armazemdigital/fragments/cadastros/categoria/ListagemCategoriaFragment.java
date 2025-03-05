@@ -18,17 +18,15 @@ import br.com.thiago.armazemdigital.adapters.cadastro.categoria.ListagemCategori
 import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
 import br.com.thiago.armazemdigital.database.repository.CategoriaRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemCategoriaBinding;
-import br.com.thiago.armazemdigital.fragments.BaseFragment;
+import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.utils.ListUtil;
-import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.ListagemCategoriasViewModel;
 import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.categoria.ListagemCategoriasViewModelFactory;
 
-public class ListagemCategoriaFragment extends BaseFragment<FragmentListagemCategoriaBinding> {
+public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentListagemCategoriaBinding> {
     private ListagemCategoriaAdapter mAdapter;
-    private ListagemCategoriasViewModel mViewModel;
 
     public ListagemCategoriaFragment() {
         // Required empty public constructor
@@ -45,35 +43,33 @@ public class ListagemCategoriaFragment extends BaseFragment<FragmentListagemCate
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        showLoadingList();
-        initViewModel();
+    protected void setupViewModel() {
+        // Inicializa ViewModel e suas dependências
+        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
+        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
+        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaRepository);
+        ListagemCategoriasViewModel mViewModel = new ViewModelProvider(this, factory).get(ListagemCategoriasViewModel.class);
 
+        // Adiciona observáveis
         mViewModel.getItens().observe(getViewLifecycleOwner(), categorias -> {
+            // Atualiza lista
             mAdapter.setListData(categorias);
             showProductList(categorias);
         });
+    }
 
-        mAdapter = new ListagemCategoriaAdapter(new ArrayList<>(), categoria -> {
-            Bundle bundle = new Bundle();
-            bundle.putLong(BundleKeys.ARG_CATEGORIA_ID, categoria.getId());
-            navigateToFragment(
-                    R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment,
-                    bundle
-            );
-        });
+    @Override
+    protected void setupViews() {
+        mAdapter = new ListagemCategoriaAdapter(new ArrayList<>(), categoria -> editCadastro(R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment, categoria.getId()));
         mBinding.rvListaCadastroCategoria.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
         mBinding.rvListaCadastroCategoria.setAdapter(mAdapter);
         mBinding.btnCadastrarCategoria.setOnClickListener(v -> navigateToFragment(R.id.action_listagem_categoria_fragment_to_cadastro_categoria_fragment));
     }
 
-    private void initViewModel() {
-        // Inicializa ViewModel e suas dependências
-        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
-        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
-        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaRepository);
-        mViewModel = new ViewModelProvider(this, factory).get(ListagemCategoriasViewModel.class);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        showLoadingList();
     }
 
     private void showLoadingList() {

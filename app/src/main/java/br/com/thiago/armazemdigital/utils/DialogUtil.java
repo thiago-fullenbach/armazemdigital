@@ -43,11 +43,16 @@ public class DialogUtil {
         return builder.create();
     }
 
+    /** Cria dialog de erro de salvamento de dados
+     *
+     * @param context Contexto da atividade atual
+     * @return AlertDialog informando erro durante salvamento de dados
+     */
     public static AlertDialog createSaveErrorDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         builder.setTitle(R.string.error_register_title);
-        builder.setMessage("Erro ao salvar dados de cadastro.");
+        builder.setMessage(R.string.error_save_message);
         builder.setPositiveButton(R.string.dialog_button_ok, (dialogInterface, i) -> dialogInterface.dismiss());
 
         return builder.create();

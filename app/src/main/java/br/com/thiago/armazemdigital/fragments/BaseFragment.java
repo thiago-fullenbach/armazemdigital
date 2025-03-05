@@ -17,11 +17,22 @@ public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
 
     protected abstract B inflateBinding(LayoutInflater inflater, ViewGroup container);
 
+    protected abstract void setupViewModel();
+
+    protected abstract void setupViews();
+
     @NonNull
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = inflateBinding(inflater, container);
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupViewModel();
+        setupViews();
     }
 
     protected void navigateBack() {

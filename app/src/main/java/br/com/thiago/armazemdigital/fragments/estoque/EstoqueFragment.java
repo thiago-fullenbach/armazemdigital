@@ -22,4 +22,14 @@ public class EstoqueFragment extends BaseFragment<FragmentEstoqueBinding> {
     protected FragmentEstoqueBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentEstoqueBinding.inflate(inflater, container, false);
     }
+
+    @Override
+    protected void setupViewModel() {
+
+    }
+
+    @Override
+    protected void setupViews() {
+
+    }
 }

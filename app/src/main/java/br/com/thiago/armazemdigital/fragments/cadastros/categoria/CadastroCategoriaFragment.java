@@ -38,13 +38,10 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupViewModel();
-        setupViews();
-
         Bundle bundle = getArguments();
         if(bundle != null) {
             // Caso esteja carregando um item da lista
-            long id = bundle.getLong(BundleKeys.ARG_CATEGORIA_ID);
+            long id = bundle.getLong(BundleKeys.ARG_CADASTRO_ID);
             carregarDados(id);
         }
     }
@@ -74,52 +71,27 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
         mViewModel.carregarCategoria(id);
     }
 
-    private void setupViewModel() {
+    @Override
+    protected void setupViewModel() {
+        // Instância o viewmodel
         CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
         CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
         CadastroCategoriaViewModelFactory factory = new CadastroCategoriaViewModelFactory(categoriaRepository);
         mViewModel = new ViewModelProvider(this, factory).get(CadastroCategoriaViewModel.class);
-        mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> {
-            mBinding.etNomeCategoria.setText(nome);
-            if(StringUtil.isNullOrEmpty(nome)) {
-                mBinding.etNomeCategoria.setError("O Nome da categoria é obrigatório.");
-                return;
-            }
 
-            mBinding.etNomeCategoria.setError(null);
-        });
-
-        mViewModel.getDescricao().observe(getViewLifecycleOwner(), descricao -> {
-            mBinding.etDescricaoCategoria.setText(descricao);
-            if(StringUtil.isNullOrEmpty(descricao)) {
-                mBinding.etDescricaoCategoria.setError("A descrição da categoria é obrigatória.");
-                return;
-            }
-
-            mBinding.etDescricaoCategoria.setError(null);
-        });
-
-        mViewModel.getSuccess().observe(getViewLifecycleOwner(), success -> {
-            if(success == null || !success) {
-                // Inserção mal sucedida, apresenta dialog de erro
-                AlertDialog dialog = DialogUtil.createSaveErrorDialog(requireContext());
-                dialog.show();
-                return;
-            }
-
-            // Inserção bem sucedida, retorna para fragment anterior
-            navigateBack();
-        });
+        // Adiciona observáveis
+        mViewModel.getNome().observe(getViewLifecycleOwner(), this::updateNameField);
+        mViewModel.getDescricao().observe(getViewLifecycleOwner(), this::updateDescriptionField);
+        mViewModel.getSuccess().observe(getViewLifecycleOwner(), this::onSaveFinished);
     }
 
-    private void setupViews() {
+    @Override
+    protected void setupViews() {
         mBinding.btnCancelarCadastroCategoria.setOnClickListener(v -> navigateBack());
         mBinding.btnSalvarCadastroCategoria.setOnClickListener(v -> {
             // Seta os valores dos campos no ViewModel
-            mViewModel.setNome(mBinding.etNomeCategoria.getText() != null ?
-                    mBinding.etNomeCategoria.getText().toString() : "");
-            mViewModel.setDescricao(mBinding.etDescricaoCategoria.getText() != null ?
-                    mBinding.etDescricaoCategoria.getText().toString() : "");
+            mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeCategoria.getText()));
+            mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoCategoria.getText()));
 
             // Valida dados e mostra dialog de erro, caso necessário
             if(!validarDados()) {
@@ -130,10 +102,42 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
 
             // Salva dados e retorna ao fragment anterior
             Bundle bundle = getArguments();
-            salvarDados(bundle != null ? bundle.getLong(BundleKeys.ARG_CATEGORIA_ID) : 0);
+            salvarDados(bundle != null ? bundle.getLong(BundleKeys.ARG_CADASTRO_ID) : 0);
         });
 
         mBinding.etNomeCategoria.setFilters(new InputFilter[]{ FormUtils.getInputFilterForFields() });
         mBinding.etDescricaoCategoria.setFilters(new InputFilter[]{ FormUtils.getInputFilterForFields() });
+    }
+
+    private void onSaveFinished(Boolean success) {
+        if(success == null || !success) {
+            // Operação de salvar dados mal sucedida, apresenta dialog de erro
+            AlertDialog dialog = DialogUtil.createSaveErrorDialog(requireContext());
+            dialog.show();
+            return;
+        }
+
+        // Inserção bem sucedida, retorna para fragment anterior
+        navigateBack();
+    }
+
+    private void updateNameField(String nome) {
+        mBinding.etNomeCategoria.setText(nome);
+        if(StringUtil.isNullOrEmpty(nome)) {
+            mBinding.etNomeCategoria.setError("O Nome da categoria é obrigatório.");
+            return;
+        }
+
+        mBinding.etNomeCategoria.setError(null);
+    }
+
+    private void updateDescriptionField(String descricao) {
+        mBinding.etDescricaoCategoria.setText(descricao);
+        if(StringUtil.isNullOrEmpty(descricao)) {
+            mBinding.etDescricaoCategoria.setError("A descrição da categoria é obrigatória.");
+            return;
+        }
+
+        mBinding.etDescricaoCategoria.setError(null);
     }
 }

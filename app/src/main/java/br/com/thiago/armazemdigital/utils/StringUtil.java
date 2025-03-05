@@ -1,5 +1,7 @@
 package br.com.thiago.armazemdigital.utils;
 
+import android.text.Editable;
+
 /**
  * Utilitário para manipulação de strings
  */
@@ -22,5 +24,16 @@ public class StringUtil {
      */
     public static boolean isNullOrEmpty(CharSequence charSequence) {
         return charSequence == null || isNullOrEmpty(charSequence.toString());
+    }
+
+    /** Obtém uma String de um Editable, considerando valores nulos.
+     *
+     * @param editable Editable obtido de um EditText ou similares
+     * @return toString do editable ou String vazia, se for nulo.
+     */
+    public static String getSafeStringFromEditable(Editable editable) {
+        if(editable == null)
+            return "";
+        return editable.toString();
     }
 }

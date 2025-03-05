@@ -18,15 +18,14 @@ import br.com.thiago.armazemdigital.adapters.cadastro.produto.ListagemProdutosAd
 import br.com.thiago.armazemdigital.database.dao.view.ProdutoCadastroDao;
 import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemProdutoBinding;
-import br.com.thiago.armazemdigital.fragments.BaseFragment;
+import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutosViewModel;
 import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.produto.ListagemProdutosViewModelFactory;
 
-public class ListagemProdutoFragment extends BaseFragment<FragmentListagemProdutoBinding> {
-    private ListagemProdutosViewModel mViewModel;
+public class ListagemProdutoFragment extends BaseListagemFragment<FragmentListagemProdutoBinding> {
     private ListagemProdutosAdapter mAdapter;
 
     public ListagemProdutoFragment() {
@@ -39,29 +38,37 @@ public class ListagemProdutoFragment extends BaseFragment<FragmentListagemProdut
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // Inicializa tela com carregamento
-        mBinding.pbLoadingListProdutos.setVisibility(View.VISIBLE);
-        mBinding.rvListaCadastroProduto.setVisibility(View.GONE);
-        mBinding.tvAvisoSemProduto.setVisibility(View.GONE);
-
+    protected void setupViewModel() {
         ProdutoCadastroDao produtoCadastroDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).produtoCadastroDao();
         ProdutoCadastroRepository produtoCadastroRepository = new ProdutoCadastroRepository(produtoCadastroDao);
         ListagemProdutosViewModelFactory factory = new ListagemProdutosViewModelFactory(produtoCadastroRepository);
-
-        mAdapter = new ListagemProdutosAdapter(new ArrayList<>());
-        mBinding.rvListaCadastroProduto.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
-        mBinding.rvListaCadastroProduto.setAdapter(mAdapter);
-
-        mViewModel = new ViewModelProvider(this, factory).get(ListagemProdutosViewModel.class);
+        ListagemProdutosViewModel mViewModel = new ViewModelProvider(this, factory).get(ListagemProdutosViewModel.class);
 
         mViewModel.getItens().observe(getViewLifecycleOwner(), produtos -> {
             mAdapter.setListData(produtos);
             showProductList(produtos);
         });
+    }
 
+    @Override
+    protected void setupViews() {
+        mAdapter = new ListagemProdutosAdapter(new ArrayList<>());
+        mBinding.rvListaCadastroProduto.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
+        mBinding.rvListaCadastroProduto.setAdapter(mAdapter);
         mBinding.btnCadastrarProduto.setOnClickListener(v -> navigateToFragment(R.id.action_item_to_cadastro_produto_fragment));
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        showLoadingList();
+    }
+
+    private void showLoadingList() {
+        // Inicializa tela com carregamento
+        mBinding.pbLoadingListProdutos.setVisibility(View.VISIBLE);
+        mBinding.rvListaCadastroProduto.setVisibility(View.GONE);
+        mBinding.tvAvisoSemProduto.setVisibility(View.GONE);
     }
 
     private void showProductList(List<ProdutoCadastro> produtoCadastros) {

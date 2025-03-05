@@ -24,6 +24,16 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
     }
 
     @Override
+    protected void setupViewModel() {
+
+    }
+
+    @Override
+    protected void setupViews() {
+
+    }
+
+    @Override
     protected void salvarDados(long id) {
 
     }

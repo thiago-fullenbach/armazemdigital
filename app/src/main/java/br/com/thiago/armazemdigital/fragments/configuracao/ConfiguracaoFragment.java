@@ -22,4 +22,14 @@ public class ConfiguracaoFragment extends BaseFragment<FragmentConfiguracaoBindi
     protected FragmentConfiguracaoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentConfiguracaoBinding.inflate(inflater, container, false);
     }
+
+    @Override
+    protected void setupViewModel() {
+
+    }
+
+    @Override
+    protected void setupViews() {
+
+    }
 }

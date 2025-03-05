@@ -27,9 +27,18 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
     }
 
     @Override
+    protected void setupViewModel() {
+
+    }
+
+    @Override
+    protected void setupViews() {
+        mBinding.btnCancelarCadastroProduto.setOnClickListener(v -> navigateBack());
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mBinding.btnCancelarCadastroProduto.setOnClickListener(v -> navigateBack());
     }
 
     @Override

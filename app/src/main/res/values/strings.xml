@@ -38,4 +38,5 @@
     <string name="hint_et_descricao_categoria">Descrição da Categoria</string>
     <string name="error_register_title">Erro ao Salvar cadastro</string>
     <string name="error_register_message">Verifique informações fornecidas.</string>
+    <string name="error_save_message">Erro ao salvar dados de cadastro.</string>
 </resources>
