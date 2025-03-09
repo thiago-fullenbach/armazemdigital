@@ -1,6 +1,4 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_name">Armazem Digital</string>
     <string name="action_settings">Settings</string>
     <string name="content_description_imagem_cadastro_produto">Imagem do Produto Cadastrado</string>
@@ -40,4 +38,7 @@
     <string name="error_register_message">Verifique informações fornecidas.</string>
     <string name="error_save_message">Erro ao salvar dados de cadastro.</string>
     <string name="txt_qtd_produto">Nº de Produto: %d</string>
+    <string name="txt_exemplo_nome_fornecedor">Fornecedor de Exemplo</string>
+    <string name="txt_sem_cadastro_fornecedor">Não existem fornecedores cadastrados</string>
+    <string name="label_btn_novo_cadastro_fornecedor">Cadastrar Fornecedor</string>
 </resources>

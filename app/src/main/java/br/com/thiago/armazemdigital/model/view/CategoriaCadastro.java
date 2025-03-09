@@ -1,6 +1,7 @@
 package br.com.thiago.armazemdigital.model.view;
 
 import androidx.room.DatabaseView;
+import androidx.room.Ignore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,4 +14,12 @@ public class CategoriaCadastro {
     private String categoryName;
     private String categoryDescription;
     private int productCount;
+
+    @Ignore
+    public CategoriaCadastro(long categoryId, String categoryName, String categoryDescription, int productCount) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.categoryDescription = categoryDescription;
+        this.productCount = productCount;
+    }
 }

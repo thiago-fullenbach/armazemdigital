@@ -2,12 +2,31 @@ package br.com.thiago.armazemdigital.fragments.cadastros.fornecedor;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.thiago.armazemdigital.ArmazemDigitalApp;
+import br.com.thiago.armazemdigital.R;
+import br.com.thiago.armazemdigital.adapters.cadastro.fornecedor.ListagemFornecedorAdapter;
+import br.com.thiago.armazemdigital.database.dao.view.FornecedorCadastroDao;
+import br.com.thiago.armazemdigital.database.repository.view.FornecedorCadastroRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemFornecedorBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
+import br.com.thiago.armazemdigital.model.view.FornecedorCadastro;
+import br.com.thiago.armazemdigital.utils.ListUtil;
+import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
+import br.com.thiago.armazemdigital.viewmodel.cadastros.fornecedor.ListagemFornecedorViewModel;
+import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.fornecedor.ListagemFornecedorViewModelFactory;
 
 public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentListagemFornecedorBinding> {
+    private ListagemFornecedorAdapter mAdapter;
 
     public ListagemFornecedorFragment() {
         // Required empty public constructor
@@ -24,12 +43,41 @@ public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentLis
     }
 
     @Override
-    protected void setupViewModel() {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        showLoadingList();
+    }
 
+    @Override
+    protected void setupViewModel() {
+        FornecedorCadastroDao dao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).fornecedorCadastroDao();
+        FornecedorCadastroRepository repository = new FornecedorCadastroRepository(dao);
+        ListagemFornecedorViewModelFactory factory = new ListagemFornecedorViewModelFactory(repository);
+        ListagemFornecedorViewModel mViewModel = new ViewModelProvider(this, factory).get(ListagemFornecedorViewModel.class);
+        mViewModel.getItens().observe(getViewLifecycleOwner(), fornecedoresCadastro -> {
+            mAdapter.setListData(fornecedoresCadastro);
+            showProductList(fornecedoresCadastro);
+        });
     }
 
     @Override
     protected void setupViews() {
+        mAdapter = new ListagemFornecedorAdapter(new ArrayList<>(), fornecedor -> editCadastro(R.id.action_listagem_fornecedor_fragment_to_cadastro_fornecedor_fragment, fornecedor.getSupplierId()));
+        mBinding.rvListaCadastroFornecedor.setLayoutManager(new LinearLayoutManagerWrapper(requireContext()));
+        mBinding.rvListaCadastroFornecedor.setAdapter(mAdapter);
+        mBinding.btnCadastrarFornecedor.setOnClickListener(v -> navigateToFragment(R.id.action_listagem_fornecedor_fragment_to_cadastro_fornecedor_fragment));
+    }
 
+    private void showLoadingList() {
+        // Inicializa tela com carregamento
+        mBinding.pbLoadingListFornecedor.setVisibility(View.VISIBLE);
+        mBinding.rvListaCadastroFornecedor.setVisibility(View.GONE);
+        mBinding.tvAvisoSemFornecedor.setVisibility(View.GONE);
+    }
+
+    private void showProductList(List<FornecedorCadastro> fornecedorCadastros) {
+        mBinding.pbLoadingListFornecedor.setVisibility(View.GONE);
+        mBinding.rvListaCadastroFornecedor.setVisibility(ListUtil.isNullOrEmpty(fornecedorCadastros) ? View.GONE : View.VISIBLE);
+        mBinding.tvAvisoSemFornecedor.setVisibility(ListUtil.isNullOrEmpty(fornecedorCadastros) ? View.VISIBLE : View.GONE);
     }
 }

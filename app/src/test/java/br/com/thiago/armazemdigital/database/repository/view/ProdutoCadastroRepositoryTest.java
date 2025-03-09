@@ -31,10 +31,10 @@ public class ProdutoCadastroRepositoryTest {
 
         when(produtoCadastroRepository.getProdutosCadastro()).thenReturn(produtosCadastroMock);
 
-        List<ProdutoCadastro> produtosEstoque = produtoCadastroRepository.getProdutosCadastro();
+        List<ProdutoCadastro> produtosCadastro = produtoCadastroRepository.getProdutosCadastro();
 
-        assertNotNull(produtosEstoque);
-        assertEquals(produtosCadastroMock, produtosEstoque);
+        assertNotNull(produtosCadastro);
+        assertEquals(produtosCadastroMock, produtosCadastro);
 
         verify(produtoCadastroDao).getProdutosCadastro();
     }
