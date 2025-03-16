@@ -1,14 +1,10 @@
 package br.com.thiago.armazemdigital.fragments.cadastros.categoria;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
@@ -16,10 +12,8 @@ import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
 import br.com.thiago.armazemdigital.database.repository.CategoriaRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
-import br.com.thiago.armazemdigital.utils.DialogUtil;
 import br.com.thiago.armazemdigital.utils.FormUtils;
 import br.com.thiago.armazemdigital.utils.StringUtil;
-import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.CadastroCategoriaViewModel;
 import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.categoria.CadastroCategoriaViewModelFactory;
 
@@ -36,19 +30,14 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Bundle bundle = getArguments();
-        if(bundle != null) {
-            // Caso esteja carregando um item da lista
-            long id = bundle.getLong(BundleKeys.ARG_CADASTRO_ID);
-            carregarDados(id);
-        }
+    protected FragmentCadastroCategoriaBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragmentCadastroCategoriaBinding.inflate(inflater, container, false);
     }
 
     @Override
-    protected FragmentCadastroCategoriaBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
-        return FragmentCadastroCategoriaBinding.inflate(inflater, container, false);
+    protected void atualizarCampos() {
+        mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeCategoria.getText()));
+        mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoCategoria.getText()));
     }
 
     @Override
@@ -80,64 +69,17 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
         mViewModel = new ViewModelProvider(this, factory).get(CadastroCategoriaViewModel.class);
 
         // Adiciona observáveis
-        mViewModel.getNome().observe(getViewLifecycleOwner(), this::updateNameField);
-        mViewModel.getDescricao().observe(getViewLifecycleOwner(), this::updateDescriptionField);
+        mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeCategoria, nome));
+        mViewModel.getDescricao().observe(getViewLifecycleOwner(), descricao -> validarCampoTextoObrigatorio(mBinding.etDescricaoCategoria, descricao));
         mViewModel.getSuccess().observe(getViewLifecycleOwner(), this::onSaveFinished);
     }
 
     @Override
     protected void setupViews() {
-        mBinding.btnCancelarCadastroCategoria.setOnClickListener(v -> navigateBack());
-        mBinding.btnSalvarCadastroCategoria.setOnClickListener(v -> {
-            // Seta os valores dos campos no ViewModel
-            mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeCategoria.getText()));
-            mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoCategoria.getText()));
-
-            // Valida dados e mostra dialog de erro, caso necessário
-            if(!validarDados()) {
-                AlertDialog dialog = DialogUtil.createErrorDialog(requireContext());
-                dialog.show();
-                return;
-            }
-
-            // Salva dados e retorna ao fragment anterior
-            Bundle bundle = getArguments();
-            salvarDados(bundle != null ? bundle.getLong(BundleKeys.ARG_CADASTRO_ID) : 0);
-        });
+        mBinding.btnCancelarCadastroCategoria.setOnClickListener(v -> cancelaCadastro());
+        mBinding.btnSalvarCadastroCategoria.setOnClickListener(v -> salvarCadastro());
 
         mBinding.etNomeCategoria.setFilters(new InputFilter[]{ FormUtils.getInputFilterForFields() });
         mBinding.etDescricaoCategoria.setFilters(new InputFilter[]{ FormUtils.getInputFilterForFields() });
-    }
-
-    private void onSaveFinished(Boolean success) {
-        if(success == null || !success) {
-            // Operação de salvar dados mal sucedida, apresenta dialog de erro
-            AlertDialog dialog = DialogUtil.createSaveErrorDialog(requireContext());
-            dialog.show();
-            return;
-        }
-
-        // Inserção bem sucedida, retorna para fragment anterior
-        navigateBack();
-    }
-
-    private void updateNameField(String nome) {
-        mBinding.etNomeCategoria.setText(nome);
-        if(StringUtil.isNullOrEmpty(nome)) {
-            mBinding.etNomeCategoria.setError("O Nome da categoria é obrigatório.");
-            return;
-        }
-
-        mBinding.etNomeCategoria.setError(null);
-    }
-
-    private void updateDescriptionField(String descricao) {
-        mBinding.etDescricaoCategoria.setText(descricao);
-        if(StringUtil.isNullOrEmpty(descricao)) {
-            mBinding.etDescricaoCategoria.setError("A descrição da categoria é obrigatória.");
-            return;
-        }
-
-        mBinding.etDescricaoCategoria.setError(null);
     }
 }

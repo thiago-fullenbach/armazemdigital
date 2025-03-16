@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.function.Consumer;
 
+import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.BaseAdapter;
 import br.com.thiago.armazemdigital.databinding.ListItemCadastroFornecedorBinding;
 import br.com.thiago.armazemdigital.model.view.FornecedorCadastro;
@@ -43,7 +44,9 @@ public class ListagemFornecedorAdapter extends BaseAdapter<ListItemCadastroForne
         if (holder instanceof CadastroFornecedorViewHolder cadastroFornecedorViewHolder) {
             FornecedorCadastro fornecedor = mFornecedores.get(position);
             cadastroFornecedorViewHolder.tvNomeFornecedor.setText(fornecedor.getSupplierName());
-            cadastroFornecedorViewHolder.tvQtdProdutos.setText(fornecedor.getCountProduct());
+            cadastroFornecedorViewHolder.tvQtdProdutos.setText(
+                    cadastroFornecedorViewHolder.itemView.getContext().getString(R.string.txt_qtd_produto, fornecedor.getCountProduct())
+            );
             cadastroFornecedorViewHolder.itemView.setOnClickListener(v -> {
                 if (mListener != null) {
                     mListener.accept(fornecedor);

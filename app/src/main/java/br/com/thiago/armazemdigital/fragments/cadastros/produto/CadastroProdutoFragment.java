@@ -42,6 +42,11 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
     }
 
     @Override
+    protected void atualizarCampos() {
+        // TODO: Implementar
+    }
+
+    @Override
     protected void salvarDados(long id) {
         // TODO: Implementar
     }

@@ -27,6 +27,10 @@ public class FornecedorRepository {
         return fornecedorDao.delete(fornecedor);
     }
 
+    public Fornecedor getFornecedor(long id) {
+        return fornecedorDao.getFornecedor(id);
+    }
+
     public LiveData<List<Fornecedor>> getFornecedoresLiveData() {
         return fornecedorDao.getFornecedoresLiveData();
     }

@@ -37,8 +37,19 @@
     <string name="error_register_title">Erro ao Salvar cadastro</string>
     <string name="error_register_message">Verifique informações fornecidas.</string>
     <string name="error_save_message">Erro ao salvar dados de cadastro.</string>
-    <string name="txt_qtd_produto">Nº de Produto: %d</string>
+    <string name="txt_qtd_produto">Nº de Produtos: %d</string>
     <string name="txt_exemplo_nome_fornecedor">Fornecedor de Exemplo</string>
     <string name="txt_sem_cadastro_fornecedor">Não existem fornecedores cadastrados</string>
     <string name="label_btn_novo_cadastro_fornecedor">Cadastrar Fornecedor</string>
+    <string name="field_error">O Campo \'%s\' é obrigatório.</string>
+    <string name="hint_et_nome_fornecedor">Nome do Fornecedor</string>
+    <string name="hint_et_telefone_fornecedor">Telefone do Fornecedor</string>
+    <string name="hint_et_email_fornecedor">E-mail do Fornecedor</string>
+    <string name="hint_et_cep_fornecedor">CEP do Fornecedor</string>
+    <string name="hint_et_estado_fornecedor">Estado do Fornecedor</string>
+    <string name="hint_et_cidade_fornecedor">Cidade do Fornecedor</string>
+    <string name="hint_et_bairro_fornecedor">Bairro do Fornecedor</string>
+    <string name="hint_et_logradouro_fornecedor">Logradouro do Fornecedor</string>
+    <string name="hint_et_numero_fornecedor">Número do Fornecedor</string>
+    <string name="hint_et_complemento_fornecedor">Complemento do Fornecedor</string>
 </resources>

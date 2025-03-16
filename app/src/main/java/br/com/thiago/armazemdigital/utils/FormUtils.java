@@ -8,12 +8,13 @@ import android.text.InputFilter;
 public class FormUtils {
     /** Cria um filtro genérico para utilização em TextInputEditText do App.
      *
-     * @return InputFilter que permite caracteres alfa-numéricos apenas (inclui cedilha e acentos).
+     * @return InputFilter que permite caracteres alfa-numéricos (inclui cedilha e acentos).
+     * Inclui caracteres especiais '@', '.' e ',', apenas.
      */
     public static InputFilter getInputFilterForFields() {
         return (charSequence, i, i1, spanned, i2, i3) -> {
             if(charSequence != null && charSequence.length() > 0) {
-                return charSequence.toString().matches("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9 ]+$") ? null : "";
+                return charSequence.toString().matches("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ@.,0-9 ]+$") ? null : "";
             }
 
             return null;

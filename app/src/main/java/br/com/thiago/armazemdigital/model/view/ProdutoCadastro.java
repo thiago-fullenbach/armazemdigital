@@ -1,6 +1,7 @@
 package br.com.thiago.armazemdigital.model.view;
 
 import androidx.room.DatabaseView;
+import androidx.room.Ignore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class ProdutoCadastro {
     private String nameCategory;
     private Long priceProduct;
 
+    @Ignore
     public ProdutoCadastro(long productId, String urlImagem, String nameProduct, String descProduct, String nameCategory, Long priceProduct) {
         this.productId = productId;
         this.urlImagem = urlImagem;

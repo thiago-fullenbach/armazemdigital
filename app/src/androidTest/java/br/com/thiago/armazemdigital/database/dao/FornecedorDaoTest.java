@@ -61,6 +61,7 @@ public class FornecedorDaoTest {
         String zipCode = "12345-678";
         String state = "Rio de Janeiro";
         String city = "Rio de Janeiro";
+        String neighborhood = "Centro";
         String al1 = "Avenida de Exemplo";
         String al2 = "Casa 2";
         String number = "1234";
@@ -71,6 +72,7 @@ public class FornecedorDaoTest {
         fornecedor.setZipCode(zipCode);
         fornecedor.setState(state);
         fornecedor.setCity(city);
+        fornecedor.setNeighborhood(neighborhood);
         fornecedor.setAddressLine1(al1);
         fornecedor.setAddressLine2(al2);
         fornecedor.setNumber(number);
@@ -87,6 +89,7 @@ public class FornecedorDaoTest {
         assertEquals(zipCode, fornecedor.getZipCode());
         assertEquals(state, fornecedor.getState());
         assertEquals(city, fornecedor.getCity());
+        assertEquals(neighborhood, fornecedor.getNeighborhood());
         assertEquals(al1, fornecedor.getAddressLine1());
         assertEquals(al2, fornecedor.getAddressLine2());
         assertEquals(number, fornecedor.getNumber());
