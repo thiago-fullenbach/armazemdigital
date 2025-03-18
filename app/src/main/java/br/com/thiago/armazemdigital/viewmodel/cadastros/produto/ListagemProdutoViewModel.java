@@ -8,10 +8,10 @@ import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepo
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.viewmodel.BaseListagemViewModel;
 
-public class ListagemProdutosViewModel extends BaseListagemViewModel<ProdutoCadastro> {
+public class ListagemProdutoViewModel extends BaseListagemViewModel<ProdutoCadastro> {
     private final ProdutoCadastroRepository produtoCadastroRepository;
 
-    public ListagemProdutosViewModel(ProdutoCadastroRepository produtoCadastroRepository) {
+    public ListagemProdutoViewModel(ProdutoCadastroRepository produtoCadastroRepository) {
         this.produtoCadastroRepository = produtoCadastroRepository;
         observeItens();
     }

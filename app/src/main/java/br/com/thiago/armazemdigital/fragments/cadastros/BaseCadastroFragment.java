@@ -3,18 +3,21 @@ package br.com.thiago.armazemdigital.fragments.cadastros;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 
-import com.google.android.material.textfield.TextInputEditText;
+import java.util.List;
+import java.util.function.Function;
 
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.utils.DialogUtil;
 import br.com.thiago.armazemdigital.utils.StringUtil;
 import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
+import br.com.thiago.armazemdigital.utils.wrapper.ArrayAdapterWrapper;
 
 public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFragment<B> {
     @Override
@@ -30,10 +33,10 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
 
     /** Atualiza campo obrigatório e adiciona erro caso esteja vazio.
      *
-     * @param fieldView TextInputEditText representando o campo na tela.
+     * @param fieldView Campo (tipo EditText) do formulário.
      * @param fieldValue String representando o valor do campo.
      */
-    protected void validarCampoTextoObrigatorio(TextInputEditText fieldView, String fieldValue) {
+    protected <T extends EditText> void validarCampoTextoObrigatorio(T fieldView, String fieldValue) {
         fieldView.setText(fieldValue);
         if(StringUtil.isNullOrEmpty(fieldValue)) {
             // Mostra erro no tooltip
@@ -43,6 +46,36 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
 
         // Limpa erros do campo
         fieldView.setError(null);
+    }
+
+    /** Função genérica para criação de ArrayAdapters de views do tipo Spinner ou AutoCompleteTextView.
+     * @see BaseCadastroFragment#criarAdapter(Object[], Function) 
+     *
+     * @param listObj Lista de objetos que compõe o Adapter.
+     * @param functionGetDisplayName Função que retorna o nome a ser exibido no adapter.
+     * @param <T> Tipo do objeto que compõe a lista.
+     * @return ArrayAdapterWrapper<T> do AutoCompleteTextView
+     * @noinspection unchecked
+     */
+    protected <T> ArrayAdapterWrapper<T> criarAdapter(List<T> listObj, @NonNull Function<T, String> functionGetDisplayName) {
+        return criarAdapter(listObj.toArray((T[]) new Object[0]), functionGetDisplayName);
+    }
+
+    /** Função genérica para criação de ArrayAdapters de views do tipo Spinner ou AutoCompleteTextView.
+     * @see BaseCadastroFragment#criarAdapter(List, Function) 
+     * 
+     * @param objs Array de objetos que compõe o Adapter.
+     * @param functionGetDisplayName Função que retorna o nome a ser exibido no adapter.
+     * @param <T> Tipo do objeto que compõe a lista.
+     * @return ArrayAdapterWrapper<T> do View.
+     */
+    protected <T> ArrayAdapterWrapper<T> criarAdapter(T[] objs, @NonNull Function<T, String> functionGetDisplayName) {
+        return new ArrayAdapterWrapper<>(requireContext(), android.R.layout.simple_list_item_1, objs) {
+            @Override
+            protected String getDisplayName(T object) {
+                return functionGetDisplayName.apply(object);
+            }
+        };
     }
 
     /** Salva dados e retorna ao fragment anterior.

@@ -22,8 +22,8 @@ import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
-import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutosViewModel;
-import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.produto.ListagemProdutosViewModelFactory;
+import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutoViewModel;
+import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.produto.ListagemProdutoViewModelFactory;
 
 public class ListagemProdutoFragment extends BaseListagemFragment<FragmentListagemProdutoBinding> {
     private ListagemProdutosAdapter mAdapter;
@@ -41,8 +41,8 @@ public class ListagemProdutoFragment extends BaseListagemFragment<FragmentListag
     protected void setupViewModel() {
         ProdutoCadastroDao produtoCadastroDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).produtoCadastroDao();
         ProdutoCadastroRepository produtoCadastroRepository = new ProdutoCadastroRepository(produtoCadastroDao);
-        ListagemProdutosViewModelFactory factory = new ListagemProdutosViewModelFactory(produtoCadastroRepository);
-        ListagemProdutosViewModel mViewModel = new ViewModelProvider(this, factory).get(ListagemProdutosViewModel.class);
+        ListagemProdutoViewModelFactory factory = new ListagemProdutoViewModelFactory(produtoCadastroRepository);
+        ListagemProdutoViewModel mViewModel = new ViewModelProvider(this, factory).get(ListagemProdutoViewModel.class);
 
         mViewModel.getItens().observe(getViewLifecycleOwner(), produtos -> {
             mAdapter.setListData(produtos);

@@ -127,7 +127,7 @@
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:hint="@string/hint_actv_unidade_medida_produto"
-                android:inputType="none"
+                android:inputType="text|textAutoComplete"
                 android:maxLines="1"
                 app:hintAnimationEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -138,9 +138,10 @@
                     android:id="@+id/actv_unidade_medida_produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="none"
+                    android:inputType="text|textAutoComplete"
                     android:padding="16dp"
+                    android:completionThreshold="0"
+                    android:popupBackground="@color/gray"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -153,10 +154,10 @@
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:hint="@string/hint_actv_categoria_produto"
-                android:inputType="none"
+                android:inputType="text|textAutoComplete"
                 android:maxLines="1"
                 app:hintAnimationEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ib_nova_categoria"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_unidade_medida_produto">
 
@@ -164,11 +165,25 @@
                     android:id="@+id/actv_categoria_produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="none"
+                    android:inputType="text|textAutoComplete"
                     android:padding="16dp"
+                    android:popupBackground="@color/gray"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/ib_nova_categoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/shape_button_new_image"
+                android:importantForAccessibility="no"
+                android:padding="6dp"
+                android:src="@drawable/ic_cadastro_novo"
+                app:layout_constraintBottom_toTopOf="@+id/til_fornecedor_produto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/til_categoria_produto"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_fornecedor_produto"
@@ -177,14 +192,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:hint="@string/hint_mactv_fornecedor_produto"
                 android:inputType="text|textAutoComplete"
                 android:maxLines="3"
                 app:hintAnimationEnabled="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ib_novo_fornecedor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_categoria_produto">
 
@@ -196,6 +210,20 @@
                     android:padding="16dp"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/ib_novo_fornecedor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/shape_button_new_image"
+                android:importantForAccessibility="no"
+                android:padding="6dp"
+                android:src="@drawable/ic_cadastro_novo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/til_fornecedor_produto"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_imagem_cadastro"

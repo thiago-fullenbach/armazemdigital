@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepository;
-import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutosViewModel;
+import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutoViewModel;
 
-public class ListagemProdutosViewModelFactory implements ViewModelProvider.Factory {
+public class ListagemProdutoViewModelFactory implements ViewModelProvider.Factory {
     private final ProdutoCadastroRepository produtoCadastroRepository;
 
-    public ListagemProdutosViewModelFactory(ProdutoCadastroRepository produtoCadastroRepository) {
+    public ListagemProdutoViewModelFactory(ProdutoCadastroRepository produtoCadastroRepository) {
         this.produtoCadastroRepository = produtoCadastroRepository;
     }
 
@@ -18,8 +18,8 @@ public class ListagemProdutosViewModelFactory implements ViewModelProvider.Facto
     @Override
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if(modelClass.isAssignableFrom(ListagemProdutosViewModel.class)) {
-            return (T) new ListagemProdutosViewModel(produtoCadastroRepository);
+        if(modelClass.isAssignableFrom(ListagemProdutoViewModel.class)) {
+            return (T) new ListagemProdutoViewModel(produtoCadastroRepository);
         }
 
         throw new IllegalArgumentException("ViewModel desconhecido");
