@@ -12,19 +12,17 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.cadastro.fornecedor.ListagemFornecedorAdapter;
-import br.com.thiago.armazemdigital.database.dao.view.FornecedorCadastroDao;
-import br.com.thiago.armazemdigital.database.repository.view.FornecedorCadastroRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemFornecedorBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.FornecedorCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.fornecedor.ListagemFornecedorViewModel;
-import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.fornecedor.ListagemFornecedorViewModelFactory;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentListagemFornecedorBinding> {
     private ListagemFornecedorAdapter mAdapter;
 
@@ -50,10 +48,7 @@ public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentLis
 
     @Override
     protected void setupViewModel() {
-        FornecedorCadastroDao dao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).fornecedorCadastroDao();
-        FornecedorCadastroRepository repository = new FornecedorCadastroRepository(dao);
-        ListagemFornecedorViewModelFactory factory = new ListagemFornecedorViewModelFactory(repository);
-        ListagemFornecedorViewModel mViewModel = new ViewModelProvider(this, factory).get(ListagemFornecedorViewModel.class);
+        ListagemFornecedorViewModel mViewModel = new ViewModelProvider(this).get(ListagemFornecedorViewModel.class);
         mViewModel.getItens().observe(getViewLifecycleOwner(), fornecedoresCadastro -> {
             mAdapter.setListData(fornecedoresCadastro);
             showProductList(fornecedoresCadastro);

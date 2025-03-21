@@ -13,23 +13,15 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.List;
 import java.util.Objects;
 
-import br.com.thiago.armazemdigital.ArmazemDigitalApp;
-import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
-import br.com.thiago.armazemdigital.database.dao.FornecedorDao;
-import br.com.thiago.armazemdigital.database.dao.FornecimentoDao;
-import br.com.thiago.armazemdigital.database.dao.ProdutoDao;
-import br.com.thiago.armazemdigital.database.repository.CategoriaRepository;
-import br.com.thiago.armazemdigital.database.repository.FornecedorRepository;
-import br.com.thiago.armazemdigital.database.repository.FornecimentoRepository;
-import br.com.thiago.armazemdigital.database.repository.ProdutoRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.utils.FormUtils;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.CadastroProdutoViewModel;
-import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.produto.CadastroProdutoViewModelFactory;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadastroProdutoBinding> {
     private CadastroProdutoViewModel mViewModel;
 
@@ -49,21 +41,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected void setupViewModel() {
-        ProdutoDao produtoDao = ArmazemDigitalApp.getDbInstance(requireContext()).produtoDao();
-        ProdutoRepository produtoRepository = new ProdutoRepository(produtoDao);
-
-        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireContext()).categoriaDao();
-        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
-
-        FornecedorDao fornecedorDao = ArmazemDigitalApp.getDbInstance(requireContext()).fornecedorDao();
-        FornecedorRepository fornecedorRepository = new FornecedorRepository(fornecedorDao);
-
-        FornecimentoDao fornecimentoDao = ArmazemDigitalApp.getDbInstance(requireContext()).fornecimentoDao();
-        FornecimentoRepository fornecimentoRepository = new FornecimentoRepository(fornecimentoDao);
-
-        CadastroProdutoViewModelFactory factory = new CadastroProdutoViewModelFactory(produtoRepository,
-                categoriaRepository, fornecedorRepository, fornecimentoRepository);
-        mViewModel = new ViewModelProvider(this, factory).get(CadastroProdutoViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(CadastroProdutoViewModel.class);
 
         mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeProduto, nome));
         mViewModel.getDescricao().observe(getViewLifecycleOwner(), descricao -> validarCampoTextoObrigatorio(mBinding.etDescricaoProduto, descricao));

@@ -88,6 +88,7 @@ public class TestUtils {
                 "12345-678",
                 "São Paulo",
                 "SP",
+                "Bairro Exemplo",
                 "Rua de Exemplo",
                 "Casa 3",
                 "123",
@@ -101,9 +102,9 @@ public class TestUtils {
      */
     public static List<Fornecedor> createFornecedoresForTests() {
         return List.of(
-                new Fornecedor("Fornecedor Teste 1", "(11) 2222-2222", "empresa@teste.com.br", "12345-678", "São Paulo", "SP", "Rua de Exemplo", "Casa 3", "123", new Date()),
-                new Fornecedor("Fornecedor Teste 2", "(11) 2222-2222", "empresa@teste.com.br", "12345-678", "São Paulo", "SP", "Rua de Exemplo", "Casa 3", "123", new Date()),
-                new Fornecedor("Fornecedor Teste 3", "(11) 2222-2222", "empresa@teste.com.br", "12345-678", "São Paulo", "SP", "Rua de Exemplo", "Casa 3", "123", new Date())
+                new Fornecedor("Fornecedor Teste 1", "(11) 2222-2222", "empresa@teste.com.br", "12345-678", "São Paulo", "SP", "Bairro Exemplo", "Rua de Exemplo", "Casa 3", "123", new Date()),
+                new Fornecedor("Fornecedor Teste 2", "(11) 2222-2222", "empresa@teste.com.br", "12345-678", "São Paulo", "SP", "Bairro Exemplo", "Rua de Exemplo", "Casa 3", "123", new Date()),
+                new Fornecedor("Fornecedor Teste 3", "(11) 2222-2222", "empresa@teste.com.br", "12345-678", "São Paulo", "SP", "Bairro Exemplo", "Rua de Exemplo", "Casa 3", "123", new Date())
         );
     }
 

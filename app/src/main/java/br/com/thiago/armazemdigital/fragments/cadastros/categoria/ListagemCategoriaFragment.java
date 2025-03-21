@@ -12,19 +12,17 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.cadastro.categoria.ListagemCategoriaAdapter;
-import br.com.thiago.armazemdigital.database.dao.view.CategoriaCadastroDao;
-import br.com.thiago.armazemdigital.database.repository.view.CategoriaCadastroRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
 import br.com.thiago.armazemdigital.utils.ListUtil;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.ListagemCategoriasViewModel;
-import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.categoria.ListagemCategoriasViewModelFactory;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentListagemCategoriaBinding> {
     private ListagemCategoriaAdapter mAdapter;
 
@@ -45,10 +43,7 @@ public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentList
     @Override
     protected void setupViewModel() {
         // Inicializa ViewModel e suas dependências
-        CategoriaCadastroDao categoriaCadastroDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaCadastroDao();
-        CategoriaCadastroRepository categoriaCadastroRepository = new CategoriaCadastroRepository(categoriaCadastroDao);
-        ListagemCategoriasViewModelFactory factory = new ListagemCategoriasViewModelFactory(categoriaCadastroRepository);
-        ListagemCategoriasViewModel mViewModel = new ViewModelProvider(this, factory).get(ListagemCategoriasViewModel.class);
+        ListagemCategoriasViewModel mViewModel = new ViewModelProvider(this).get(ListagemCategoriasViewModel.class);
 
         // Adiciona observáveis
         mViewModel.getItens().observe(getViewLifecycleOwner(), categorias -> {

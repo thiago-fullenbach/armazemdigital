@@ -6,15 +6,20 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+
 import br.com.thiago.armazemdigital.database.repository.CategoriaRepository;
 import br.com.thiago.armazemdigital.model.Categoria;
+import dagger.hilt.android.lifecycle.HiltViewModel;
 
+@HiltViewModel
 public class CadastroCategoriaViewModel extends ViewModel {
     private final CategoriaRepository categoriaRepository;
     private final MutableLiveData<String> nome = new MutableLiveData<>();
     private final MutableLiveData<String> descricao = new MutableLiveData<>();
     private final MutableLiveData<Boolean> success = new MutableLiveData<>();
 
+    @Inject
     public CadastroCategoriaViewModel(CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
     }

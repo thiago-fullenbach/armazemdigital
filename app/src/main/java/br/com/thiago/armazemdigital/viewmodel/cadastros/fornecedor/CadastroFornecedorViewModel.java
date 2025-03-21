@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+
 import br.com.thiago.armazemdigital.database.repository.FornecedorRepository;
 import br.com.thiago.armazemdigital.model.Fornecedor;
+import dagger.hilt.android.lifecycle.HiltViewModel;
 
+@HiltViewModel
 public class CadastroFornecedorViewModel extends ViewModel {
     private final FornecedorRepository fornecedorRepository;
     private final MutableLiveData<String> nome = new MutableLiveData<>();
@@ -23,6 +27,7 @@ public class CadastroFornecedorViewModel extends ViewModel {
     private final MutableLiveData<String> numero = new MutableLiveData<>();
     private final MutableLiveData<Boolean> success = new MutableLiveData<>();
 
+    @Inject
     public CadastroFornecedorViewModel(FornecedorRepository fornecedorRepository) {
         this.fornecedorRepository = fornecedorRepository;
     }

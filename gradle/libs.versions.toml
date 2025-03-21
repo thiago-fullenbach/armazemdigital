@@ -16,6 +16,7 @@ roomRuntime = "2.6.1"
 roomCompiler = "2.6.1"
 mockitoCore = "5.11.0"
 mockitoInline = "5.2.0"
+hilt = "2.50"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -33,8 +34,11 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 mockitoCore = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
 mockitoInline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockitoInline" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigationPlugin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 

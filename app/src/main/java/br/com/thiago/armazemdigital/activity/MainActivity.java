@@ -15,7 +15,9 @@ import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.ActivityMainBinding;
 import br.com.thiago.armazemdigital.utils.DialogUtil;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 

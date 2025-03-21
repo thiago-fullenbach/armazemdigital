@@ -7,16 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import br.com.thiago.armazemdigital.ArmazemDigitalApp;
-import br.com.thiago.armazemdigital.database.dao.FornecedorDao;
-import br.com.thiago.armazemdigital.database.repository.FornecedorRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroFornecedorBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.utils.FormUtils;
 import br.com.thiago.armazemdigital.utils.StringUtil;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.fornecedor.CadastroFornecedorViewModel;
-import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.fornecedor.CadastroFornecedorViewModelFactory;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCadastroFornecedorBinding> {
     private CadastroFornecedorViewModel mViewModel;
 
@@ -36,10 +34,7 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
 
     @Override
     protected void setupViewModel() {
-        FornecedorDao fornecedorDao = ArmazemDigitalApp.getDbInstance(requireContext()).fornecedorDao();
-        FornecedorRepository fornecedorRepository = new FornecedorRepository(fornecedorDao);
-        CadastroFornecedorViewModelFactory factory = new CadastroFornecedorViewModelFactory(fornecedorRepository);
-        mViewModel = new ViewModelProvider(this, factory).get(CadastroFornecedorViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(CadastroFornecedorViewModel.class);
 
         // Adiciona observáveis
         mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeFornecedor, nome));

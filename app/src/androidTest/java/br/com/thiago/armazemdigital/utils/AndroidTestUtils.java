@@ -46,6 +46,7 @@ public class AndroidTestUtils {
                 "02311-001",
                 "São Paulo",
                 "SP",
+                "Bairro Exemplo",
                 "Rua Exemplo",
                 "Casa 3",
                 "1234",

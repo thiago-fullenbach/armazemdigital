@@ -7,16 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import br.com.thiago.armazemdigital.ArmazemDigitalApp;
-import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
-import br.com.thiago.armazemdigital.database.repository.CategoriaRepository;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.utils.FormUtils;
 import br.com.thiago.armazemdigital.utils.StringUtil;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.CadastroCategoriaViewModel;
-import br.com.thiago.armazemdigital.viewmodel.factory.cadastros.categoria.CadastroCategoriaViewModelFactory;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCadastroCategoriaBinding> {
     private CadastroCategoriaViewModel mViewModel;
 
@@ -42,7 +40,7 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
 
     @Override
     protected void salvarDados(long id) {
-        if(id > 0) {
+        if (id > 0) {
             mViewModel.updateCategoria(id);
             return;
         }
@@ -63,10 +61,7 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
     @Override
     protected void setupViewModel() {
         // Instância o viewmodel
-        CategoriaDao categoriaDao = ArmazemDigitalApp.getDbInstance(requireActivity().getApplicationContext()).categoriaDao();
-        CategoriaRepository categoriaRepository = new CategoriaRepository(categoriaDao);
-        CadastroCategoriaViewModelFactory factory = new CadastroCategoriaViewModelFactory(categoriaRepository);
-        mViewModel = new ViewModelProvider(this, factory).get(CadastroCategoriaViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(CadastroCategoriaViewModel.class);
 
         // Adiciona observáveis
         mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeCategoria, nome));
@@ -79,7 +74,7 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
         mBinding.btnCancelarCadastroCategoria.setOnClickListener(v -> cancelaCadastro());
         mBinding.btnSalvarCadastroCategoria.setOnClickListener(v -> salvarCadastro());
 
-        mBinding.etNomeCategoria.setFilters(new InputFilter[]{ FormUtils.getInputFilterForFields() });
-        mBinding.etDescricaoCategoria.setFilters(new InputFilter[]{ FormUtils.getInputFilterForFields() });
+        mBinding.etNomeCategoria.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
+        mBinding.etDescricaoCategoria.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
     }
 }
