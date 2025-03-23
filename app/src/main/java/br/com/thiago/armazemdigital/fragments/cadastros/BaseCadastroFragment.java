@@ -40,7 +40,10 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         fieldView.setText(fieldValue);
         if(StringUtil.isNullOrEmpty(fieldValue)) {
             // Mostra erro no tooltip
-            fieldView.setError(requireContext().getString(R.string.field_error, fieldView.getHint()));
+            String hint = StringUtil.getSafeStringFromCharSequence(fieldView.getHint());
+            String msgError = StringUtil.isNullOrEmpty(hint) ? getString(R.string.field_error_generic)
+                    : getString(R.string.field_error, fieldView.getHint());
+            fieldView.setError(msgError);
             return;
         }
 

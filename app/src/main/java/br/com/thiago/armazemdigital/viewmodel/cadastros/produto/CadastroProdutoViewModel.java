@@ -41,6 +41,7 @@ public class CadastroProdutoViewModel extends ViewModel {
         this.fornecimentoRepository = fornecimentoRepository;
 
         loadAvailableCategorias();
+        loadAvailableFornecedores();
     }
 
     public LiveData<String> getNome() {
@@ -97,10 +98,6 @@ public class CadastroProdutoViewModel extends ViewModel {
 
     public void setCategoriaSelecionada(Categoria categoriaProduto) {
         categoriaSelecionada.setValue(categoriaProduto);
-    }
-
-    public void setFornecedoresSelecionados(List<Fornecedor> fornecedoresProduto) {
-        fornecedoresSelecionados.setValue(fornecedoresProduto);
     }
 
     public void loadAvailableCategorias() {

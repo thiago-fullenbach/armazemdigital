@@ -42,6 +42,7 @@
     <string name="txt_sem_cadastro_fornecedor">Não existem fornecedores cadastrados</string>
     <string name="label_btn_novo_cadastro_fornecedor">Cadastrar Fornecedor</string>
     <string name="field_error">O Campo \'%s\' é obrigatório.</string>
+    <string name="field_error_generic">Este Campo é obrigatório.</string>
     <string name="hint_et_nome_fornecedor">Nome do Fornecedor</string>
     <string name="hint_et_telefone_fornecedor">Telefone do Fornecedor</string>
     <string name="hint_et_email_fornecedor">E-mail do Fornecedor</string>
@@ -52,4 +53,6 @@
     <string name="hint_et_logradouro_fornecedor">Logradouro do Fornecedor</string>
     <string name="hint_et_numero_fornecedor">Número do Fornecedor</string>
     <string name="hint_et_complemento_fornecedor">Complemento do Fornecedor</string>
+    <string name="placeholder_mactv_value">%s, </string>
+    <string name="label_btn_gerenciar_fornecedores_produto">Gerenciar Fornecedores</string>
 </resources>

@@ -17,7 +17,7 @@ public class StringUtil {
 
     /** Verifica se um charSequence é nula ou vazia.
      * Se não for nula, transforma em String e utiliza isNullOrEmpty de Strings.
-     * { @see StringUtil#isNullOrEmpty(string) }
+     * @see StringUtil#isNullOrEmpty(String)
      *
      * @param charSequence CharSequence a ser verificada.
      * @return Booleano indicando se o charSequence é vazio ou nulo.
@@ -26,14 +26,21 @@ public class StringUtil {
         return charSequence == null || isNullOrEmpty(charSequence.toString());
     }
 
+    /** Obtém uma String de um CharSequence, considerando valores nulos.
+     *
+     * @param charSequence CharSequence obtido de um EditText ou similares.
+     * @return toString do charSequence ou String vazia, se for nulo.
+     */
+    public static String getSafeStringFromCharSequence(CharSequence charSequence) {
+        return isNullOrEmpty(charSequence) ? "" : charSequence.toString();
+    }
+
     /** Obtém uma String de um Editable, considerando valores nulos.
      *
      * @param editable Editable obtido de um EditText ou similares
      * @return toString do editable ou String vazia, se for nulo.
      */
     public static String getSafeStringFromEditable(Editable editable) {
-        if(editable == null)
-            return "";
-        return editable.toString();
+        return editable == null ? "" : editable.toString();
     }
 }

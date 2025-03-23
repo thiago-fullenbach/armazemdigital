@@ -5,6 +5,7 @@ import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,10 +47,9 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeProduto, nome));
         mViewModel.getDescricao().observe(getViewLifecycleOwner(), descricao -> validarCampoTextoObrigatorio(mBinding.etDescricaoProduto, descricao));
         mViewModel.getPreco().observe(getViewLifecycleOwner(), preco -> validarCampoTextoObrigatorio(mBinding.etPrecoProduto, preco));
-        mViewModel.getUnidadeMedidaSelecionada().observe(getViewLifecycleOwner(), tipoUnidade -> validarCampoTextoObrigatorio(mBinding.actvUnidadeMedidaProduto, tipoUnidade.getName()));
+        mViewModel.getUnidadeMedidaSelecionada().observe(getViewLifecycleOwner(), tipoUnidade -> validarCampoTextoObrigatorio(mBinding.actvUnidadeMedidaProduto, tipoUnidade == null ? "" : tipoUnidade.getName()));
         mViewModel.getCategoriasDisponiveis().observe(getViewLifecycleOwner(), categorias -> mBinding.actvCategoriaProduto.setAdapter(criarAdapter(categorias, Categoria::getName)));
-        mViewModel.getCategoriaSelecionada().observe(getViewLifecycleOwner(), categoria -> validarCampoTextoObrigatorio(mBinding.actvCategoriaProduto, categoria.getName()));
-
+        mViewModel.getCategoriaSelecionada().observe(getViewLifecycleOwner(), categoria -> validarCampoTextoObrigatorio(mBinding.actvCategoriaProduto, categoria == null ? "" : categoria.getName()));
         mViewModel.getSuccess().observe(getViewLifecycleOwner(), this::onSaveFinished);
     }
 
@@ -59,13 +59,14 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mBinding.btnSalvarCadastroProduto.setOnClickListener(v -> salvarCadastro());
 
         mBinding.actvUnidadeMedidaProduto.setAdapter(criarAdapter(List.of(TipoUnidade.values()), tipoUnidade -> Objects.requireNonNullElse(tipoUnidade, TipoUnidade.UNIDADE).getName()));
-
+        mBinding.actvUnidadeMedidaProduto.setOnClickListener(view -> ((AutoCompleteTextView) view).showDropDown());
         mBinding.actvUnidadeMedidaProduto.setOnItemClickListener((adapterView, view, position, id) -> {
             TipoUnidade unidade = (TipoUnidade) adapterView.getItemAtPosition(position);
             mViewModel.setUnidadeMedidaSelecionada(unidade);
             mBinding.actvUnidadeMedidaProduto.setText(unidade.getName());
         });
 
+        mBinding.actvCategoriaProduto.setOnClickListener(view -> ((AutoCompleteTextView) view).showDropDown());
         mBinding.actvCategoriaProduto.setOnItemClickListener((adapterView, view, position, id) -> {
             Categoria categoria = (Categoria) adapterView.getItemAtPosition(position);
             mViewModel.setCategoriaSelecionada(categoria);
@@ -77,7 +78,6 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mBinding.etPrecoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.actvUnidadeMedidaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.actvCategoriaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.mactvFornecedorProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
     }
 
     @Override
