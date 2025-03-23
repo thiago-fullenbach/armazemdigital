@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.List;
 import java.util.Objects;
 
+import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.model.Categoria;
@@ -72,6 +73,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
             mViewModel.setCategoriaSelecionada(categoria);
             mBinding.actvCategoriaProduto.setText(categoria.getName());
         });
+        mBinding.ibNovaCategoria.setOnClickListener(v -> navigateToFragment(R.id.action_cadastro_produto_fragment_to_cadastro_categoria_fragment));
 
         mBinding.etNomeProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.etDescricaoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
