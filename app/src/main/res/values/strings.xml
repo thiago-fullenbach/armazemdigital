@@ -54,6 +54,7 @@
     <string name="hint_et_numero_fornecedor">Número do Fornecedor</string>
     <string name="hint_et_complemento_fornecedor">Complemento do Fornecedor</string>
     <string name="placeholder_mactv_value">%s, </string>
-    <string name="label_btn_gerenciar_fornecedores_produto">Gerenciar Fornecedores</string>
     <string name="field_error_invalid_unit">Unidade de Medida inválida.</string>
+    <string name="label_btn_selecionar_produto_categoria">Selecionar Categoria</string>
+    <string name="label_btn_selecionar_produto_fornecedores">Selecionar Fornecedor(res)</string>
 </resources>

@@ -145,6 +145,32 @@
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Button
+                android:id="@+id/btn_selecionar_categoria_produto"
+                style="@style/botaoNovoCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/label_btn_selecionar_produto_categoria"
+                app:icon="@drawable/ic_cadastro_categoria"
+                app:iconTint="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/til_unidade_medida_produto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btn_selecionar_fornecedor_produto"
+                style="@style/botaoNovoCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/label_btn_selecionar_produto_fornecedores"
+                app:icon="@drawable/ic_cadastro_fornecedor"
+                app:iconTint="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/btn_selecionar_categoria_produto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_imagem_cadastro"
                 android:layout_width="wrap_content"
