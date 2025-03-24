@@ -1,6 +1,5 @@
 package br.com.thiago.armazemdigital.fragments.cadastros.categoria;
 
-import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -20,11 +19,6 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
 
     public CadastroCategoriaFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override

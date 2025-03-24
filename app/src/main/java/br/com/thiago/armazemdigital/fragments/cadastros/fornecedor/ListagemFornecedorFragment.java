@@ -31,11 +31,6 @@ public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentLis
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected FragmentListagemFornecedorBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentListagemFornecedorBinding.inflate(inflater, container, false);
     }

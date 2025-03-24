@@ -32,11 +32,6 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected FragmentCadastroProdutoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentCadastroProdutoBinding.inflate(inflater, container, false);
     }

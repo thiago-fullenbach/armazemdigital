@@ -31,11 +31,6 @@ public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentList
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected FragmentListagemCategoriaBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentListagemCategoriaBinding.inflate(inflater, container, false);
     }
