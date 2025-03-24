@@ -134,70 +134,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_preco_produto">
 
-                <br.com.thiago.armazemdigital.utils.view.InstantAutoCompleteView
+                <AutoCompleteTextView
                     android:id="@+id/actv_unidade_medida_produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="none"
+                    android:inputType="textAutoComplete"
+                    android:completionThreshold="1"
                     android:padding="16dp"
                     android:popupBackground="@color/gray"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_categoria_produto"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:hint="@string/hint_actv_categoria_produto"
-                android:maxLines="1"
-                app:hintAnimationEnabled="true"
-                app:layout_constraintEnd_toStartOf="@+id/ib_nova_categoria"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_unidade_medida_produto">
-
-                <br.com.thiago.armazemdigital.utils.view.InstantAutoCompleteView
-                    android:id="@+id/actv_categoria_produto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="none"
-                    android:padding="16dp"
-                    android:popupBackground="@color/gray"
-                    tools:ignore="LabelFor" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageButton
-                android:id="@+id/ib_nova_categoria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/shape_button_new_image"
-                android:importantForAccessibility="no"
-                android:padding="6dp"
-                android:src="@drawable/ic_cadastro_novo"
-                app:layout_constraintBottom_toBottomOf="@+id/til_categoria_produto"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/til_categoria_produto"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/btn_gerenciar_fornecedores_produto"
-                style="@style/botaoNovoCadastro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/label_btn_gerenciar_fornecedores_produto"
-                app:icon="@drawable/ic_cadastro_fornecedor"
-                app:iconTint="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_categoria_produto" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_imagem_cadastro"

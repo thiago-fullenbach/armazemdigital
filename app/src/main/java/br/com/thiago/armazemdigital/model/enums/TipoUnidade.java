@@ -22,4 +22,14 @@ public enum TipoUnidade {
         this.name = name;
         this.acronym = acronym;
     }
+
+    public static TipoUnidade fromName(String name) {
+        for (TipoUnidade tipoUnidade : values()) {
+            if (tipoUnidade.getName().equalsIgnoreCase(name)) {
+                return tipoUnidade;
+            }
+        }
+
+        return null;
+    }
 }

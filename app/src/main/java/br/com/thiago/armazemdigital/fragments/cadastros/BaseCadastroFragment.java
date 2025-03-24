@@ -9,8 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
@@ -24,53 +26,91 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
-        if(bundle != null) {
+        if (bundle != null) {
             // Caso esteja carregando um item da lista
             long id = bundle.getLong(BundleKeys.ARG_CADASTRO_ID);
             carregarDados(id);
         }
     }
 
-    /** Atualiza campo obrigatório e adiciona erro caso esteja vazio.
+    /**
+     * Atualiza campo obrigatório e adiciona erro caso esteja vazio.
      *
-     * @param fieldView Campo (tipo EditText) do formulário.
+     * @param fieldView  Campo (tipo EditText) do formulário.
      * @param fieldValue String representando o valor do campo.
+     * @param <T> Tipo da View, deve estender EditText.
      */
     protected <T extends EditText> void validarCampoTextoObrigatorio(T fieldView, String fieldValue) {
+        validarCampoTextoObrigatorio(fieldView, fieldValue, new ArrayList<>());
+    }
+
+    /**
+     * Atualiza campo obrigatório e adiciona erro caso esteja vazio.
+     *
+     * @param fieldView  Campo (tipo EditText) do formulário.
+     * @param fieldValue String representando o valor do campo.
+     * @param validators Lista de funções de validação do campo.
+     * @param <T> Tipo da View, deve estender EditText.
+     */
+    protected <T extends EditText> void validarCampoTextoObrigatorio(T fieldView, String fieldValue, List<Supplier<String>> validators) {
+        List<Supplier<String>> validatorFinal = new ArrayList<>(validators);
+        validatorFinal.add(() -> {
+            if(StringUtil.isNullOrEmpty(fieldValue)) {
+                String hint = StringUtil.getSafeStringFromCharSequence(fieldView.getHint());
+                return StringUtil.isNullOrEmpty(hint) ? getString(R.string.field_error_generic)
+                        : getString(R.string.field_error, fieldView.getHint());
+            }
+
+            return null;
+        });
+
+        validarCampoTexto(fieldView, fieldValue, validatorFinal);
+    }
+
+    /**
+     * Atualiza campo obrigatório e adiciona erro caso esteja vazio.
+     *
+     * @param fieldView  Campo (tipo EditText) do formulário.
+     * @param fieldValue String representando o valor do campo.
+     * @param validators Lista de funções de validação do campo.
+     * @param <T> Tipo da View, deve estender EditText.
+     */
+    protected <T extends EditText> void validarCampoTexto(T fieldView, String fieldValue, List<Supplier<String>> validators) {
         fieldView.setText(fieldValue);
-        if(StringUtil.isNullOrEmpty(fieldValue)) {
-            // Mostra erro no tooltip
-            String hint = StringUtil.getSafeStringFromCharSequence(fieldView.getHint());
-            String msgError = StringUtil.isNullOrEmpty(hint) ? getString(R.string.field_error_generic)
-                    : getString(R.string.field_error, fieldView.getHint());
-            fieldView.setError(msgError);
-            return;
+        for (Supplier<String> validator : validators) {
+            String msg = validator.get();
+            if (!StringUtil.isNullOrEmpty(msg)) {
+                fieldView.setError(msg);
+                return;
+            }
         }
 
         // Limpa erros do campo
         fieldView.setError(null);
     }
 
-    /** Função genérica para criação de ArrayAdapters de views do tipo Spinner ou AutoCompleteTextView.
-     * @see BaseCadastroFragment#criarAdapter(Object[], Function) 
+    /**
+     * Função genérica para criação de ArrayAdapters de views do tipo Spinner ou AutoCompleteTextView.
      *
-     * @param listObj Lista de objetos que compõe o Adapter.
+     * @param listObj                Lista de objetos que compõe o Adapter.
      * @param functionGetDisplayName Função que retorna o nome a ser exibido no adapter.
-     * @param <T> Tipo do objeto que compõe a lista.
+     * @param <T>                    Tipo do objeto que compõe a lista.
      * @return ArrayAdapterWrapper<T> do AutoCompleteTextView
      * @noinspection unchecked
+     * @see BaseCadastroFragment#criarAdapter(Object[], Function)
      */
     protected <T> ArrayAdapterWrapper<T> criarAdapter(List<T> listObj, @NonNull Function<T, String> functionGetDisplayName) {
         return criarAdapter(listObj.toArray((T[]) new Object[0]), functionGetDisplayName);
     }
 
-    /** Função genérica para criação de ArrayAdapters de views do tipo Spinner ou AutoCompleteTextView.
-     * @see BaseCadastroFragment#criarAdapter(List, Function) 
-     * 
-     * @param objs Array de objetos que compõe o Adapter.
+    /**
+     * Função genérica para criação de ArrayAdapters de views do tipo Spinner ou AutoCompleteTextView.
+     *
+     * @param objs                   Array de objetos que compõe o Adapter.
      * @param functionGetDisplayName Função que retorna o nome a ser exibido no adapter.
-     * @param <T> Tipo do objeto que compõe a lista.
+     * @param <T>                    Tipo do objeto que compõe a lista.
      * @return ArrayAdapterWrapper<T> do View.
+     * @see BaseCadastroFragment#criarAdapter(List, Function)
      */
     protected <T> ArrayAdapterWrapper<T> criarAdapter(T[] objs, @NonNull Function<T, String> functionGetDisplayName) {
         return new ArrayAdapterWrapper<>(requireContext(), android.R.layout.simple_list_item_1, objs) {
@@ -81,12 +121,13 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         };
     }
 
-    /** Salva dados e retorna ao fragment anterior.
+    /**
+     * Salva dados e retorna ao fragment anterior.
      *
      * @param success Booleano indicando sucesso ou não da operação de salvar dados.
      */
     protected void onSaveFinished(Boolean success) {
-        if(success == null || !success) {
+        if (success == null || !success) {
             // Operação de salvar dados mal sucedida, apresenta dialog de erro
             AlertDialog dialog = DialogUtil.createSaveErrorDialog(requireContext());
             dialog.show();
@@ -105,7 +146,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         atualizarCampos();
 
         // Valida dados e mostra dialog de erro, caso necessário
-        if(!validarDados()) {
+        if (!validarDados()) {
             AlertDialog dialog = DialogUtil.createErrorDialog(requireContext());
             dialog.show();
             return;
@@ -128,19 +169,22 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      */
     protected abstract void atualizarCampos();
 
-    /** Salva dados no banco de dados.
+    /**
+     * Salva dados no banco de dados.
      *
      * @param id Long repesentando o id do item a ser atualizado.
      */
     protected abstract void salvarDados(long id);
 
-    /** Valida dados fornecidos na tela de cadastro.
+    /**
+     * Valida dados fornecidos na tela de cadastro.
      *
      * @return Booleano indicando se os dados fornecidos são válidos.
      */
     protected abstract boolean validarDados();
 
-    /** Carrega dados do banco de dados.
+    /**
+     * Carrega dados do banco de dados.
      *
      * @param id Long representando o id do item a ser carregado.
      */

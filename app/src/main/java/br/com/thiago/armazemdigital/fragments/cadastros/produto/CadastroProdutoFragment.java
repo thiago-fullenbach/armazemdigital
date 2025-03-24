@@ -5,7 +5,6 @@ import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,9 +16,9 @@ import java.util.Objects;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
-import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.utils.FormUtils;
+import br.com.thiago.armazemdigital.utils.StringUtil;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.CadastroProdutoViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -43,9 +42,13 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeProduto, nome));
         mViewModel.getDescricao().observe(getViewLifecycleOwner(), descricao -> validarCampoTextoObrigatorio(mBinding.etDescricaoProduto, descricao));
         mViewModel.getPreco().observe(getViewLifecycleOwner(), preco -> validarCampoTextoObrigatorio(mBinding.etPrecoProduto, preco));
-        mViewModel.getUnidadeMedidaSelecionada().observe(getViewLifecycleOwner(), tipoUnidade -> validarCampoTextoObrigatorio(mBinding.actvUnidadeMedidaProduto, tipoUnidade == null ? "" : tipoUnidade.getName()));
-        mViewModel.getCategoriasDisponiveis().observe(getViewLifecycleOwner(), categorias -> mBinding.actvCategoriaProduto.setAdapter(criarAdapter(categorias, Categoria::getName)));
-        mViewModel.getCategoriaSelecionada().observe(getViewLifecycleOwner(), categoria -> validarCampoTextoObrigatorio(mBinding.actvCategoriaProduto, categoria == null ? "" : categoria.getName()));
+        mViewModel.getUnidadeMedidaSelecionada().observe(getViewLifecycleOwner(), tipoUnidade -> {
+            final TipoUnidade unidade = TipoUnidade.fromName(mBinding.actvUnidadeMedidaProduto.getText().toString());
+            validarCampoTextoObrigatorio(
+                    mBinding.actvUnidadeMedidaProduto,
+                    tipoUnidade == null ? "" : tipoUnidade.getName(),
+                    List.of(() -> unidade == null ? getString(R.string.field_error_invalid_unit) : null));
+        });
         mViewModel.getSuccess().observe(getViewLifecycleOwner(), this::onSaveFinished);
     }
 
@@ -55,26 +58,15 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mBinding.btnSalvarCadastroProduto.setOnClickListener(v -> salvarCadastro());
 
         mBinding.actvUnidadeMedidaProduto.setAdapter(criarAdapter(List.of(TipoUnidade.values()), tipoUnidade -> Objects.requireNonNullElse(tipoUnidade, TipoUnidade.UNIDADE).getName()));
-        mBinding.actvUnidadeMedidaProduto.setOnClickListener(view -> ((AutoCompleteTextView) view).showDropDown());
         mBinding.actvUnidadeMedidaProduto.setOnItemClickListener((adapterView, view, position, id) -> {
             TipoUnidade unidade = (TipoUnidade) adapterView.getItemAtPosition(position);
-            mViewModel.setUnidadeMedidaSelecionada(unidade);
             mBinding.actvUnidadeMedidaProduto.setText(unidade.getName());
         });
-
-        mBinding.actvCategoriaProduto.setOnClickListener(view -> ((AutoCompleteTextView) view).showDropDown());
-        mBinding.actvCategoriaProduto.setOnItemClickListener((adapterView, view, position, id) -> {
-            Categoria categoria = (Categoria) adapterView.getItemAtPosition(position);
-            mViewModel.setCategoriaSelecionada(categoria);
-            mBinding.actvCategoriaProduto.setText(categoria.getName());
-        });
-        mBinding.ibNovaCategoria.setOnClickListener(v -> navigateToFragment(R.id.action_cadastro_produto_fragment_to_cadastro_categoria_fragment));
 
         mBinding.etNomeProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.etDescricaoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.etPrecoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.actvUnidadeMedidaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.actvCategoriaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
     }
 
     @Override
@@ -84,7 +76,10 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected void atualizarCampos() {
-        // TODO: Implementar
+        mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeProduto.getText()));
+        mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoProduto.getText()));
+        mViewModel.setPreco(StringUtil.getSafeStringFromEditable(mBinding.etPrecoProduto.getText()));
+        mViewModel.setUnidadeMedidaSelecionada(TipoUnidade.fromName(StringUtil.getSafeStringFromEditable(mBinding.actvUnidadeMedidaProduto.getText())));
     }
 
     @Override
@@ -94,8 +89,10 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected boolean validarDados() {
-        // TODO: Implementar
-        return false;
+        return StringUtil.isNullOrEmpty(mBinding.etNomeProduto.getError()) &&
+                StringUtil.isNullOrEmpty(mBinding.etDescricaoProduto.getError()) &&
+                StringUtil.isNullOrEmpty(mBinding.etPrecoProduto.getError()) &&
+                StringUtil.isNullOrEmpty(mBinding.actvUnidadeMedidaProduto.getError());
     }
 
     @Override
