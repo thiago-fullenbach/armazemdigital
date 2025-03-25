@@ -36,8 +36,7 @@ public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
     }
 
     protected void navigateBack() {
-        NavController navController = NavHostFragment.findNavController(this);
-        navController.popBackStack();
+        getNavController().popBackStack();
     }
 
     protected void navigateToFragment(int resourceId) {
@@ -45,7 +44,10 @@ public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
     }
 
     protected void navigateToFragment(int resourceId, @Nullable Bundle bundle) {
-        NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(resourceId, bundle);
+        getNavController().navigate(resourceId, bundle);
+    }
+
+    protected NavController getNavController() {
+        return NavHostFragment.findNavController(this);
     }
 }

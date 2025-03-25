@@ -5,11 +5,145 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/nav_graph_cadastro">
     <!-- IDs de fragments devem ser iguais aos dos itens no menu_main_activity -->
-    <include app:graph="@navigation/nav_graph_cadastros" />
+    <navigation
+        android:id="@+id/nav_graph_cadastro"
+        app:startDestination="@id/item_menu_cadastro">
+        <fragment
+            android:id="@+id/item_menu_cadastro"
+            android:name="br.com.thiago.armazemdigital.fragments.cadastros.CadastroFragment"
+            android:label="fragment_cadastro"
+            tools:layout="@layout/fragment_cadastro" >
+            <action
+                android:id="@+id/action_item_menu_cadastro_to_listagem_produto_fragment"
+                app:destination="@id/listagem_produto_fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_item_menu_cadastro_to_listagem_categoria_fragment"
+                app:destination="@id/listagem_categoria_fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_item_menu_cadastro_to_listagem_fornecedor_fragment"
+                app:destination="@id/listagem_fornecedor_fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
 
-    <include app:graph="@navigation/nav_graph_estoque" />
+        <fragment
+            android:id="@+id/listagem_produto_fragment"
+            android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.ListagemProdutoFragment"
+            android:label="fragment_listagem_cadastro_produto"
+            tools:layout="@layout/fragment_listagem_produto">
 
-    <include app:graph="@navigation/nav_graph_movimentacao" />
+            <action
+                android:id="@+id/action_listagem_produto_fragment_to_nav_graph_cadastro_produto"
+                app:destination="@id/nav_graph_cadastro_produto"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+
+        <navigation
+            android:id="@+id/nav_graph_cadastro_produto"
+            app:startDestination="@+id/cadastro_produto_fragment">
+            <fragment
+                android:id="@+id/cadastro_produto_fragment"
+                android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.CadastroProdutoFragment"
+                android:label="fragment_listagem_cadastro_produto"
+                tools:layout="@layout/fragment_cadastro_produto">
+                <action
+                    android:id="@+id/action_cadastro_produto_fragment_to_select_category_fragment"
+                    app:destination="@id/select_category_fragment"
+                    app:enterAnim="@anim/nav_default_enter_anim"
+                    app:exitAnim="@anim/nav_default_exit_anim"
+                    app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                    app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            </fragment>
+
+            <fragment
+                android:id="@+id/select_category_fragment"
+                android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.selectable.SelectCategoryFragment"
+                android:label="fragment_select_category"
+                tools:layout="@layout/fragment_select_category" >
+                <action
+                    android:id="@+id/action_select_category_fragment_to_cadastro_categoria_fragment"
+                    app:destination="@id/cadastro_categoria_fragment"
+                    app:enterAnim="@anim/nav_default_enter_anim"
+                    app:exitAnim="@anim/nav_default_exit_anim"
+                    app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                    app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            </fragment>
+        </navigation>
+
+        <fragment
+            android:id="@+id/listagem_categoria_fragment"
+            android:name="br.com.thiago.armazemdigital.fragments.cadastros.categoria.ListagemCategoriaFragment"
+            android:label="fragment_listagem_categoria"
+            tools:layout="@layout/fragment_listagem_categoria" >
+            <action
+                android:id="@+id/action_listagem_categoria_fragment_to_cadastro_categoria_fragment"
+                app:destination="@id/cadastro_categoria_fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/listagem_fornecedor_fragment"
+            android:name="br.com.thiago.armazemdigital.fragments.cadastros.fornecedor.ListagemFornecedorFragment"
+            android:label="fragment_listagem_fornecedor"
+            tools:layout="@layout/fragment_listagem_fornecedor" >
+            <action
+                android:id="@+id/action_listagem_fornecedor_fragment_to_cadastro_fornecedor_fragment"
+                app:destination="@id/cadastro_fornecedor_fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/cadastro_categoria_fragment"
+            android:name="br.com.thiago.armazemdigital.fragments.cadastros.categoria.CadastroCategoriaFragment"
+            android:label="fragment_cadastro_categoria"
+            tools:layout="@layout/fragment_cadastro_categoria" />
+
+        <fragment
+            android:id="@+id/cadastro_fornecedor_fragment"
+            android:name="br.com.thiago.armazemdigital.fragments.cadastros.fornecedor.CadastroFornecedorFragment"
+            android:label="fragment_cadastro_fornecedor"
+            tools:layout="@layout/fragment_cadastro_fornecedor" />
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/nav_graph_estoque"
+        app:startDestination="@id/item_menu_estoque">
+        <fragment
+            android:id="@+id/item_menu_estoque"
+            android:name="br.com.thiago.armazemdigital.fragments.estoque.EstoqueFragment"
+            android:label="fragment_estoque"
+            tools:layout="@layout/fragment_estoque" />
+    </navigation>
+
+    <navigation
+        android:id="@+id/nav_graph_movimentacao"
+        app:startDestination="@id/item_menu_movimentacao">
+        <fragment
+            android:id="@+id/item_menu_movimentacao"
+            android:name="br.com.thiago.armazemdigital.fragments.movimentacao.MovimentacaoFragment"
+            android:label="fragment_movimentacao"
+            tools:layout="@layout/fragment_movimentacao" />
+    </navigation>
 
     <fragment
         android:id="@+id/item_menu_configuracao"

@@ -49,7 +49,7 @@ public class ListagemProdutoFragment extends BaseListagemFragment<FragmentListag
         mAdapter = new ListagemProdutosAdapter(new ArrayList<>());
         mBinding.rvListaCadastroProduto.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
         mBinding.rvListaCadastroProduto.setAdapter(mAdapter);
-        mBinding.btnCadastrarProduto.setOnClickListener(v -> navigateToFragment(R.id.action_item_to_cadastro_produto_fragment));
+        mBinding.btnCadastrarProduto.setOnClickListener(v -> navigateToFragment(R.id.action_listagem_produto_fragment_to_nav_graph_cadastro_produto));
     }
 
     @Override

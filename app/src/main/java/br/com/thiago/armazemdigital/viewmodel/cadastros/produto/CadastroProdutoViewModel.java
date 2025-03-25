@@ -17,6 +17,7 @@ public class CadastroProdutoViewModel extends ViewModel {
     private final MutableLiveData<String> descricao = new MutableLiveData<>();
     private final MutableLiveData<String> preco = new MutableLiveData<>();
     private final MutableLiveData<TipoUnidade> unidadeMedidaSelecionada = new MutableLiveData<>();
+    private final MutableLiveData<Long> categoriaSelecionadaId = new MutableLiveData<>();
     private final MutableLiveData<Boolean> success = new MutableLiveData<>();
 
     @Inject
@@ -40,6 +41,10 @@ public class CadastroProdutoViewModel extends ViewModel {
         return unidadeMedidaSelecionada;
     }
 
+    public LiveData<Long> getCategoriaSelecionadaId() {
+        return categoriaSelecionadaId;
+    }
+
     public LiveData<Boolean> getSuccess() {
         return success;
     }
@@ -58,5 +63,9 @@ public class CadastroProdutoViewModel extends ViewModel {
 
     public void setUnidadeMedidaSelecionada(TipoUnidade unidadeMedidaProduto) {
         unidadeMedidaSelecionada.setValue(unidadeMedidaProduto);
+    }
+
+    public void setCategoriaSelecionadaId(Long categoriaSelecionadaId) {
+        this.categoriaSelecionadaId.setValue(categoriaSelecionadaId);
     }
 }

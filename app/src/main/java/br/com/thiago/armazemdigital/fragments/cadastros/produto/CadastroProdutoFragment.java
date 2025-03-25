@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.hilt.navigation.HiltViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,8 +39,8 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected void setupViewModel() {
-        mViewModel = new ViewModelProvider(this).get(CadastroProdutoViewModel.class);
-
+        NavBackStackEntry entry = getNavController().getBackStackEntry(R.id.nav_graph_cadastro_produto);
+        mViewModel = new ViewModelProvider(entry, HiltViewModelFactory.create(requireContext(), entry)).get(CadastroProdutoViewModel.class);
         mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeProduto, nome));
         mViewModel.getDescricao().observe(getViewLifecycleOwner(), descricao -> validarCampoTextoObrigatorio(mBinding.etDescricaoProduto, descricao));
         mViewModel.getPreco().observe(getViewLifecycleOwner(), preco -> validarCampoTextoObrigatorio(mBinding.etPrecoProduto, preco));
@@ -67,6 +69,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mBinding.etDescricaoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.etPrecoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.actvUnidadeMedidaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
+        mBinding.btnSelecionarCategoriaProduto.setOnClickListener(v -> navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_category_fragment));
     }
 
     @Override

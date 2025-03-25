@@ -6,10 +6,10 @@ espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 constraintlayout = "2.2.1"
-navigationPlugin = "2.8.8"
-navigationFragment = "2.8.8"
-navigationUi = "2.8.8"
-navigationGenerator = "2.8.8"
+navigationPlugin = "2.8.9"
+navigationFragment = "2.8.9"
+navigationUi = "2.8.9"
+navigationGenerator = "2.8.9"
 lombok = "1.18.36"
 roomCommon = "2.6.1"
 roomRuntime = "2.6.1"
@@ -17,6 +17,7 @@ roomCompiler = "2.6.1"
 mockitoCore = "5.11.0"
 mockitoInline = "5.2.0"
 hilt = "2.50"
+hilt-nav = "1.2.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -35,6 +36,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 mockitoCore = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
 mockitoInline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockitoInline" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-nav = { group = "androidx.hilt", name = "hilt-navigation", version.ref = "hilt-nav" }
+hilt-nav-fragment = { group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "hilt-nav" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 
 [plugins]

@@ -42,6 +42,8 @@ dependencies {
     implementation libs.room.common
     implementation libs.room.runtime
     implementation libs.hilt.android
+    implementation libs.hilt.nav
+    implementation libs.hilt.nav.fragment
     testImplementation libs.junit
     testImplementation libs.mockitoCore
     testImplementation libs.mockitoInline
