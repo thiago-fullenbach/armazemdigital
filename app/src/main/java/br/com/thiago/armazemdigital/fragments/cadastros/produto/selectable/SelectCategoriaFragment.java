@@ -16,29 +16,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.thiago.armazemdigital.R;
-import br.com.thiago.armazemdigital.adapters.cadastro.produto.ListagemSelectCategoryAdapter;
-import br.com.thiago.armazemdigital.databinding.FragmentSelectCategoryBinding;
+import br.com.thiago.armazemdigital.adapters.cadastro.produto.selectable.ListagemSelectCategoryAdapter;
+import br.com.thiago.armazemdigital.databinding.FragmentSelectCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
 import br.com.thiago.armazemdigital.utils.DialogUtil;
 import br.com.thiago.armazemdigital.utils.ListUtil;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.CadastroProdutoViewModel;
-import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemSelectCategoryViewModel;
+import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.selectable.ListagemSelectCategoryViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class SelectCategoryFragment extends BaseListagemFragment<FragmentSelectCategoryBinding> {
+public class SelectCategoriaFragment extends BaseListagemFragment<FragmentSelectCategoriaBinding> {
     private ListagemSelectCategoryAdapter mAdapter;
     private CadastroProdutoViewModel mCadastroViewModel;
 
-    public SelectCategoryFragment() {
+    public SelectCategoriaFragment() {
         // Required empty public constructor
     }
 
     @Override
-    protected FragmentSelectCategoryBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
-        return FragmentSelectCategoryBinding.inflate(inflater, container, false);
+    protected FragmentSelectCategoriaBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragmentSelectCategoriaBinding.inflate(inflater, container, false);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class SelectCategoryFragment extends BaseListagemFragment<FragmentSelectC
         mBinding.rvListaCadastroCategoria.setAdapter(mAdapter);
         mBinding.btnSelecionarCategoria.setOnClickListener(v -> {
             Long categoriaSelecionadaId = mAdapter.getCategoriaSelecionadaId();
-            if(categoriaSelecionadaId == null || categoriaSelecionadaId <= 0) {
+            if (categoriaSelecionadaId == null || categoriaSelecionadaId <= 0) {
                 AlertDialog dialog = DialogUtil.createSelectProductCategoryError(requireContext());
                 dialog.show();
                 return;

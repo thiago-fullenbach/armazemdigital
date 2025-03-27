@@ -70,6 +70,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mBinding.etPrecoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.actvUnidadeMedidaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.btnSelecionarCategoriaProduto.setOnClickListener(v -> navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_category_fragment));
+        mBinding.btnSelecionarFornecedorProduto.setOnClickListener(v -> navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_fornecedor_fragment));
     }
 
     @Override

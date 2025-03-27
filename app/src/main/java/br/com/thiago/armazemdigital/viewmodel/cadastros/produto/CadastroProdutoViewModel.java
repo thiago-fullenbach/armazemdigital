@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.thiago.armazemdigital.database.repository.ProdutoRepository;
@@ -18,6 +21,7 @@ public class CadastroProdutoViewModel extends ViewModel {
     private final MutableLiveData<String> preco = new MutableLiveData<>();
     private final MutableLiveData<TipoUnidade> unidadeMedidaSelecionada = new MutableLiveData<>();
     private final MutableLiveData<Long> categoriaSelecionadaId = new MutableLiveData<>();
+    private final MutableLiveData<List<Long>> fornecedoresSelecionadosId = new MutableLiveData<>();
     private final MutableLiveData<Boolean> success = new MutableLiveData<>();
 
     @Inject
@@ -45,6 +49,10 @@ public class CadastroProdutoViewModel extends ViewModel {
         return categoriaSelecionadaId;
     }
 
+    public LiveData<List<Long>> getFornecedoresSelecionadosId() {
+        return fornecedoresSelecionadosId;
+    }
+
     public LiveData<Boolean> getSuccess() {
         return success;
     }
@@ -67,5 +75,9 @@ public class CadastroProdutoViewModel extends ViewModel {
 
     public void setCategoriaSelecionadaId(Long categoriaSelecionadaId) {
         this.categoriaSelecionadaId.setValue(categoriaSelecionadaId);
+    }
+
+    public void setFornecedoresSelecionadosId(List<Long> fornecedoresSelecionadosId) {
+        this.fornecedoresSelecionadosId.setValue(new ArrayList<>(fornecedoresSelecionadosId));
     }
 }

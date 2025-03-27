@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.viewmodel.cadastros.produto;
+package br.com.thiago.armazemdigital.viewmodel.cadastros.produto.selectable;
 
 import androidx.lifecycle.LiveData;
 

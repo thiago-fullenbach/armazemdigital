@@ -66,16 +66,37 @@
                     app:exitAnim="@anim/nav_default_exit_anim"
                     app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                     app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+                <action
+                    android:id="@+id/action_cadastro_produto_fragment_to_select_fornecedor_fragment"
+                    app:destination="@id/select_fornecedor_fragment"
+                    app:enterAnim="@anim/nav_default_enter_anim"
+                    app:exitAnim="@anim/nav_default_exit_anim"
+                    app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                    app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             </fragment>
 
             <fragment
                 android:id="@+id/select_category_fragment"
-                android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.selectable.SelectCategoryFragment"
+                android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.selectable.SelectCategoriaFragment"
                 android:label="fragment_select_category"
-                tools:layout="@layout/fragment_select_category" >
+                tools:layout="@layout/fragment_select_categoria" >
                 <action
                     android:id="@+id/action_select_category_fragment_to_cadastro_categoria_fragment"
                     app:destination="@id/cadastro_categoria_fragment"
+                    app:enterAnim="@anim/nav_default_enter_anim"
+                    app:exitAnim="@anim/nav_default_exit_anim"
+                    app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                    app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            </fragment>
+
+            <fragment
+                android:id="@+id/select_fornecedor_fragment"
+                android:name="br.com.thiago.armazemdigital.fragments.cadastros.produto.selectable.SelectFornecedorFragment"
+                android:label="select_fornecedor_fragment"
+                tools:layout="@layout/fragment_select_fornecedor" >
+                <action
+                    android:id="@+id/action_select_fornecedor_fragment_to_cadastro_fornecedor_fragment"
+                    app:destination="@id/cadastro_fornecedor_fragment"
                     app:enterAnim="@anim/nav_default_enter_anim"
                     app:exitAnim="@anim/nav_default_exit_anim"
                     app:popEnterAnim="@anim/nav_default_pop_enter_anim"

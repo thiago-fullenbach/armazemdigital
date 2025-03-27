@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.adapters.cadastro.produto;
+package br.com.thiago.armazemdigital.adapters.cadastro.produto.selectable;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -49,7 +49,6 @@ public class ListagemSelectCategoryAdapter extends BaseAdapter<ListItemSelectabl
             selectableCadastroCategoriaViewHolder.rbCategoria.setChecked(Objects.equals(categoriaSelecionadaId, categoria.getCategoryId()));
             selectableCadastroCategoriaViewHolder.tvNomeCategoria.setText(categoria.getCategoryName());
             selectableCadastroCategoriaViewHolder.tvDescCategoria.setText(categoria.getCategoryDescription());
-
             selectableCadastroCategoriaViewHolder.rbCategoria.setOnClickListener(v -> setCategoriaSelecionadaId(categoria.getCategoryId()));
             selectableCadastroCategoriaViewHolder.itemView.setOnClickListener(v -> setCategoriaSelecionadaId(categoria.getCategoryId()));
         }
@@ -64,14 +63,12 @@ public class ListagemSelectCategoryAdapter extends BaseAdapter<ListItemSelectabl
         RadioButton rbCategoria;
         TextView tvNomeCategoria;
         TextView tvDescCategoria;
-        TextView tvQtdProdutos;
 
         public SelectableCadastroCategoriaViewHolder(@NonNull ListItemSelectableCadastroCategoriaBinding binding) {
             super(binding.getRoot());
             rbCategoria = binding.rbCategoria;
             tvNomeCategoria = binding.tvNomeCategoria;
             tvDescCategoria = binding.tvDescCategoria;
-            tvQtdProdutos = binding.tvQtdProdutos;
         }
     }
 }

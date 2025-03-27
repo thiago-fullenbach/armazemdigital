@@ -56,7 +56,7 @@
     <string name="placeholder_mactv_value">%s, </string>
     <string name="field_error_invalid_unit">Unidade de Medida inválida.</string>
     <string name="label_btn_selecionar_produto_categoria">Selecionar Categoria</string>
-    <string name="label_btn_selecionar_produto_fornecedores">Selecionar Fornecedor(res)</string>
+    <string name="label_btn_selecionar_produto_fornecedores">Selecionar Fornecedor(es)</string>
     <string name="error_select_title">Erro ao selecionar cadastro</string>
     <string name="error_select_category_message">Selecione uma categoria para continuar.</string>
     <string name="label_btn_confirmar_selecao">Confirmar Seleção</string>
