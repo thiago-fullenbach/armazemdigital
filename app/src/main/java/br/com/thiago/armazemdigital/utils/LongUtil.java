@@ -1,5 +1,8 @@
 package br.com.thiago.armazemdigital.utils;
 
+/**
+ * Utilitário para manipulação de Longs
+ */
 public class LongUtil {
     /** Transforma o objeto Long em um valor long primitivo.
      *

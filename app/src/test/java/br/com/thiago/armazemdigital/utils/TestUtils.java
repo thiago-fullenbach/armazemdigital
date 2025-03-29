@@ -9,6 +9,7 @@ import br.com.thiago.armazemdigital.model.Fornecimento;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
+import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
 import br.com.thiago.armazemdigital.model.view.FornecedorCadastro;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
@@ -30,6 +31,7 @@ public class TestUtils {
                 null,
                 "Produto de teste",
                 "Produto para utilização em testes",
+                TipoUnidade.UNIDADE,
                 500L,
                 10000L,
                 new Date()
@@ -42,9 +44,9 @@ public class TestUtils {
      */
     public static List<Produto> createProdutosForTests() {
         return List.of(
-                new Produto(1L, null, "Teste 1", "Produto Teste 1", 500L, 10000L, new Date()),
-                new Produto(1L, null, "Teste 2", "Produto Teste 1", 500L, 10000L, new Date()),
-                new Produto(1L, null, "Teste 3", "Produto Teste 1", 500L, 10000L, new Date())
+                new Produto(1L, null, "Teste 1", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date()),
+                new Produto(1L, null, "Teste 2", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date()),
+                new Produto(1L, null, "Teste 3", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date())
         );
     }
 

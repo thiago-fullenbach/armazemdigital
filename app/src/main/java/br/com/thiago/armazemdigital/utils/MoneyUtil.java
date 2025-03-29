@@ -5,6 +5,8 @@ import android.icu.text.DecimalFormatSymbols;
 
 import androidx.annotation.Nullable;
 
+import org.jetbrains.annotations.Contract;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Locale;
@@ -46,19 +48,14 @@ public class MoneyUtil {
      * @param moneyLong Valor monetário a ser convertido.
      * @return String formatada com duas casas decimais. Retorna "" se o valor informado for nulo.
      */
+    @Contract("null -> null; !null -> !null")
     public static String moneyLongToString(@Nullable Long moneyLong) {
         if(moneyLong == null) {
-            return "";
+            return null;
         }
 
-        // Como os valores monetários abaixo são apenas usados internamente, utiliza sempre o '.'
-        // como separador decimal.
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
-        symbols.setDecimalSeparator('.');
-        DecimalFormat moneyFormat = new DecimalFormat("#0.00", symbols);
-
-        return moneyFormat.format(new BigDecimal(LongUtil.unbox(moneyLong))
-                .divide(new BigDecimal(MONEY_MULTIPLIER), MONEY_SCALE, RoundingMode.HALF_EVEN));
+        return new BigDecimal(LongUtil.unbox(moneyLong))
+                .divide(new BigDecimal(MONEY_MULTIPLIER), MONEY_SCALE, RoundingMode.HALF_EVEN).toString();
     }
 
     /** Transforma uma string representando o valor monetário em um valor long. O valor convertido
@@ -67,6 +64,7 @@ public class MoneyUtil {
      * @param moneyStr String representando o valor monetário.
      * @return Valor long representando o valor monetário. Retorna null se a string for nula ou vazia.
      */
+    @Nullable
     public static Long moneyStringToLong(@Nullable String moneyStr) {
         if(StringUtil.isNullOrEmpty(moneyStr)) {
             return null;
