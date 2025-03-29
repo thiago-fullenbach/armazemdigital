@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.utils.FormUtils;
@@ -24,6 +25,11 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
     @Override
     protected FragmentCadastroCategoriaBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentCadastroCategoriaBinding.inflate(inflater, container, false);
+    }
+
+    @Override
+    protected String getRegistryName() {
+        return getString(R.string.registry_name_category);
     }
 
     @Override

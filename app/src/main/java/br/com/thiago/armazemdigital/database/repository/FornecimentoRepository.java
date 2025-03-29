@@ -27,6 +27,14 @@ public class FornecimentoRepository {
         return fornecimentoDao.delete(fornecimento);
     }
 
+    public void insertFornecimentos(List<Fornecimento> fornecimentos) {
+        fornecimentoDao.insertFornecimentos(fornecimentos);
+    }
+
+    public void deleteFornecimentos(List<Fornecimento> fornecimentos) {
+        fornecimentoDao.deleteFornecimentos(fornecimentos);
+    }
+
     public LiveData<List<Fornecimento>> getFornecimentosLiveData() {
         return fornecimentoDao.getFornecimentosLiveData();
     }
@@ -37,6 +45,10 @@ public class FornecimentoRepository {
 
     public LiveData<List<Fornecimento>> getFornecimentosBySupplierLiveData(long supplierId) {
         return fornecimentoDao.getFornecimentosBySupplierLiveData(supplierId);
+    }
+
+    public List<Fornecimento> getCurrentFornecimentosForProduct(long productId) {
+        return fornecimentoDao.getCurrentFornecimentosForProduct(productId);
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)

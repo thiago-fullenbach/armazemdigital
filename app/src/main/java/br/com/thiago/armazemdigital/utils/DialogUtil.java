@@ -2,6 +2,8 @@ package br.com.thiago.armazemdigital.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import br.com.thiago.armazemdigital.R;
 
@@ -69,6 +71,26 @@ public class DialogUtil {
         builder.setTitle(R.string.error_select_title);
         builder.setMessage(R.string.error_select_category_message);
         builder.setPositiveButton(R.string.dialog_button_ok, (dialogInterface, i) -> dialogInterface.dismiss());
+
+        return builder.create();
+    }
+
+    /** Cria dialog de carregamento.
+     *
+     * @param context Contexto da atividade atual
+     * @param inflater Inflater para criação de views
+     * @param name Nome do registro sendo carregado
+     * @return AlertDialog informando carregamento
+     */
+    public static AlertDialog createLoadingDialog(Context context, LayoutInflater inflater, String name) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        View loadingView = inflater.inflate(R.layout.dialog_loading, null);
+
+        builder.setTitle(context.getString(R.string.loading_saving_data_title, name));
+        builder.setMessage(R.string.loading_saving_data_message);
+        builder.setView(loadingView);
+        builder.setCancelable(false);
 
         return builder.create();
     }

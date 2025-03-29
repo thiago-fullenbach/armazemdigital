@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.hilt.navigation.HiltViewModelFactory;
@@ -59,24 +60,32 @@ public class SelectCategoriaFragment extends BaseListagemFragment<FragmentSelect
         mAdapter = new ListagemSelectCategoryAdapter(new ArrayList<>());
         mBinding.rvListaCadastroCategoria.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
         mBinding.rvListaCadastroCategoria.setAdapter(mAdapter);
-        mBinding.btnSelecionarCategoria.setOnClickListener(v -> {
-            Long categoriaSelecionadaId = mAdapter.getCategoriaSelecionadaId();
-            if (categoriaSelecionadaId == null || categoriaSelecionadaId <= 0) {
-                AlertDialog dialog = DialogUtil.createSelectProductCategoryError(requireContext());
-                dialog.show();
-                return;
-            }
-
-            mCadastroViewModel.setCategoriaSelecionadaId(categoriaSelecionadaId);
-            navigateBack();
-        });
+        mBinding.btnSelecionarCategoria.setOnClickListener(v -> selectCategory(mAdapter.getCategoriaSelecionadaId()));
         mBinding.btnCadastrarCategoria.setOnClickListener(v -> navigateToFragment(R.id.action_select_category_fragment_to_cadastro_categoria_fragment));
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                selectCategory(mAdapter.getCategoriaSelecionadaId());
+            }
+        });
+
         showLoadingList();
+    }
+
+    private void selectCategory(Long categoryId) {
+        if (categoryId == null || categoryId <= 0) {
+            AlertDialog dialog = DialogUtil.createSelectProductCategoryError(requireContext());
+            dialog.show();
+            return;
+        }
+
+        mCadastroViewModel.setCategoriaSelecionadaId(categoryId);
+        navigateBack();
     }
 
     private void showLoadingList() {

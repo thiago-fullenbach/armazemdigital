@@ -20,6 +20,7 @@ import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.utils.FormUtils;
+import br.com.thiago.armazemdigital.utils.MoneyUtil;
 import br.com.thiago.armazemdigital.utils.StringUtil;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.CadastroProdutoViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -43,14 +44,12 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mViewModel = new ViewModelProvider(entry, HiltViewModelFactory.create(requireContext(), entry)).get(CadastroProdutoViewModel.class);
         mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeProduto, nome));
         mViewModel.getDescricao().observe(getViewLifecycleOwner(), descricao -> validarCampoTextoObrigatorio(mBinding.etDescricaoProduto, descricao));
-        mViewModel.getPreco().observe(getViewLifecycleOwner(), preco -> validarCampoTextoObrigatorio(mBinding.etPrecoProduto, preco));
-        mViewModel.getUnidadeMedidaSelecionada().observe(getViewLifecycleOwner(), tipoUnidade -> {
-            final TipoUnidade unidade = TipoUnidade.fromName(mBinding.actvUnidadeMedidaProduto.getText().toString());
-            validarCampoTextoObrigatorio(
-                    mBinding.actvUnidadeMedidaProduto,
-                    tipoUnidade == null ? "" : tipoUnidade.getName(),
-                    List.of(() -> unidade == null ? getString(R.string.field_error_invalid_unit) : null));
-        });
+        mViewModel.getPreco().observe(getViewLifecycleOwner(), preco -> validarCampoTextoObrigatorio(mBinding.etPrecoProduto, MoneyUtil.moneyLongToString(preco)));
+        mViewModel.getUnidadeMedidaSelecionada().observe(getViewLifecycleOwner(), tipoUnidade ->
+                validarCampoTextoObrigatorio(
+                        mBinding.actvUnidadeMedidaProduto,
+                        tipoUnidade == null ? "" : tipoUnidade.getName(),
+                        List.of(() -> tipoUnidade == null ? getString(R.string.field_error_invalid_unit) : null)));
         mViewModel.getSuccess().observe(getViewLifecycleOwner(), this::onSaveFinished);
     }
 
@@ -69,8 +68,16 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mBinding.etDescricaoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.etPrecoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.actvUnidadeMedidaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.btnSelecionarCategoriaProduto.setOnClickListener(v -> navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_category_fragment));
-        mBinding.btnSelecionarFornecedorProduto.setOnClickListener(v -> navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_fornecedor_fragment));
+        mBinding.btnSelecionarCategoriaProduto.setOnClickListener(v -> {
+            // Atualiza campos, evitando perda de dados na transação entre fragments
+            atualizarCampos();
+            navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_category_fragment);
+        });
+        mBinding.btnSelecionarFornecedorProduto.setOnClickListener(v -> {
+            // Atualiza campos, evitando perda de dados na transação entre fragments
+            atualizarCampos();
+            navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_fornecedor_fragment);
+        });
     }
 
     @Override
@@ -79,16 +86,26 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
     }
 
     @Override
+    protected String getRegistryName() {
+        return getString(R.string.registry_name_product);
+    }
+
+    @Override
     protected void atualizarCampos() {
         mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeProduto.getText()));
         mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoProduto.getText()));
-        mViewModel.setPreco(StringUtil.getSafeStringFromEditable(mBinding.etPrecoProduto.getText()));
+        mViewModel.setPreco(MoneyUtil.moneyStringToLong(StringUtil.getSafeStringFromEditable(mBinding.etPrecoProduto.getText())));
         mViewModel.setUnidadeMedidaSelecionada(TipoUnidade.fromName(StringUtil.getSafeStringFromEditable(mBinding.actvUnidadeMedidaProduto.getText())));
     }
 
     @Override
     protected void salvarDados(long id) {
-        // TODO: Implementar
+        if(id > 0) {
+            mViewModel.updateProduto(id);
+            return;
+        }
+
+        mViewModel.salvarProduto();
     }
 
     @Override
@@ -101,6 +118,6 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected void carregarDados(long id) {
-        // TODO: Implementar
+        mViewModel.carregarProduto(id);
     }
 }

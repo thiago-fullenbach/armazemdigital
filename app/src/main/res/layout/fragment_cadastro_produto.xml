@@ -72,7 +72,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_nome_produto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -94,7 +95,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_descricao_produto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -106,7 +108,7 @@
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:hint="@string/hint_et_preco_produto"
-                android:inputType="text|numberDecimal"
+                android:inputType="numberDecimal"
                 android:maxLines="1"
                 app:hintAnimationEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +118,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_preco_produto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

@@ -3,6 +3,9 @@ package br.com.thiago.armazemdigital.database.dao;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -11,6 +14,12 @@ import br.com.thiago.armazemdigital.model.Fornecimento;
 
 @Dao
 public interface FornecimentoDao extends BaseDao<Fornecimento> {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertFornecimentos(List<Fornecimento> fornecimentos);
+
+    @Delete
+    void deleteFornecimentos(List<Fornecimento> fornecimentos);
+
     @Query("SELECT * FROM fornecimento")
     LiveData<List<Fornecimento>> getFornecimentosLiveData();
 
@@ -19,6 +28,9 @@ public interface FornecimentoDao extends BaseDao<Fornecimento> {
 
     @Query("SELECT * FROM fornecimento WHERE supplierId = :supplierId")
     LiveData<List<Fornecimento>> getFornecimentosBySupplierLiveData(long supplierId);
+
+    @Query("SELECT * FROM fornecimento WHERE productId = :productId")
+    List<Fornecimento> getCurrentFornecimentosForProduct(long productId);
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     @Query("SELECT * FROM fornecimento")

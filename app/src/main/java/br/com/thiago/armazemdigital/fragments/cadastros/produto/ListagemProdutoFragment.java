@@ -46,7 +46,7 @@ public class ListagemProdutoFragment extends BaseListagemFragment<FragmentListag
 
     @Override
     protected void setupViews() {
-        mAdapter = new ListagemProdutosAdapter(new ArrayList<>());
+        mAdapter = new ListagemProdutosAdapter(new ArrayList<>(), produto -> editCadastro(R.id.action_listagem_produto_fragment_to_nav_graph_cadastro_produto, produto.getProductId()));
         mBinding.rvListaCadastroProduto.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
         mBinding.rvListaCadastroProduto.setAdapter(mAdapter);
         mBinding.btnCadastrarProduto.setOnClickListener(v -> navigateToFragment(R.id.action_listagem_produto_fragment_to_nav_graph_cadastro_produto));

@@ -60,4 +60,9 @@
     <string name="error_select_title">Erro ao selecionar cadastro</string>
     <string name="error_select_category_message">Selecione uma categoria para continuar.</string>
     <string name="label_btn_confirmar_selecao">Confirmar Seleção</string>
+    <string name="loading_saving_data_message">Aguarde enquanto os dados são salvos…</string>
+    <string name="loading_saving_data_title">Salvando dados do(a) %s</string>
+    <string name="registry_name_category">Categoria</string>
+    <string name="registry_name_supplier">Fornecedor</string>
+    <string name="registry_name_product">Produto</string>
 </resources>

@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,16 +33,18 @@ public class Produto {
     private String urlImage;
     private String name;
     private String description;
+    private TipoUnidade unit;
     private Long price;
     private Long qtt;
     private Date dateCreated;
 
     @Ignore
-    public Produto(@NonNull Long categoryId, String urlImage, String name, String description, Long price, Long qtt, Date dateCreated) {
+    public Produto(@NonNull Long categoryId, String urlImage, String name, String description, TipoUnidade unit, Long price, Long qtt, Date dateCreated) {
         this.categoryId = categoryId;
         this.urlImage = urlImage;
         this.name = name;
         this.description = description;
+        this.unit = unit;
         this.price = price;
         this.qtt = qtt;
         this.dateCreated = dateCreated;

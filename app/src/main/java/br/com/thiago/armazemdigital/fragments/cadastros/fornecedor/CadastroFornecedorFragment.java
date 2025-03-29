@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroFornecedorBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.utils.FormUtils;
@@ -64,6 +65,11 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
         mBinding.etLogradouroFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.etNumeroFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.etComplementoFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
+    }
+
+    @Override
+    protected String getRegistryName() {
+        return getString(R.string.registry_name_supplier);
     }
 
     @Override

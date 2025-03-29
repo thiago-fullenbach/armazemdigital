@@ -20,17 +20,28 @@ import br.com.thiago.armazemdigital.utils.DialogUtil;
 import br.com.thiago.armazemdigital.utils.StringUtil;
 import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
 import br.com.thiago.armazemdigital.utils.wrapper.ArrayAdapterWrapper;
+import br.com.thiago.armazemdigital.viewmodel.cadastros.BaseCadastroViewModel;
 
 public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFragment<B> {
+    private final BaseCadastroViewModel mViewModel = new BaseCadastroViewModel();
+    private AlertDialog mLoadingDialog;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            // Caso esteja carregando um item da lista
-            long id = bundle.getLong(BundleKeys.ARG_CADASTRO_ID);
-            carregarDados(id);
-        }
+        mViewModel.getCarregado().observe(getViewLifecycleOwner(), carregado -> {
+            if (carregado != null && carregado) return;
+
+            Bundle bundle = getArguments();
+            if (bundle != null) {
+                // Caso esteja carregando um item da lista
+                long id = bundle.getLong(BundleKeys.ARG_CADASTRO_ID);
+                carregarDados(id);
+                mViewModel.setCarregado(true);
+            }
+        });
+
+        mLoadingDialog = DialogUtil.createLoadingDialog(requireContext(), getLayoutInflater(), getRegistryName());
     }
 
     /**
@@ -38,7 +49,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      *
      * @param fieldView  Campo (tipo EditText) do formulário.
      * @param fieldValue String representando o valor do campo.
-     * @param <T> Tipo da View, deve estender EditText.
+     * @param <T>        Tipo da View, deve estender EditText.
      */
     protected <T extends EditText> void validarCampoTextoObrigatorio(T fieldView, String fieldValue) {
         validarCampoTextoObrigatorio(fieldView, fieldValue, new ArrayList<>());
@@ -50,12 +61,12 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * @param fieldView  Campo (tipo EditText) do formulário.
      * @param fieldValue String representando o valor do campo.
      * @param validators Lista de funções de validação do campo.
-     * @param <T> Tipo da View, deve estender EditText.
+     * @param <T>        Tipo da View, deve estender EditText.
      */
     protected <T extends EditText> void validarCampoTextoObrigatorio(T fieldView, String fieldValue, List<Supplier<String>> validators) {
         List<Supplier<String>> validatorFinal = new ArrayList<>(validators);
         validatorFinal.add(() -> {
-            if(StringUtil.isNullOrEmpty(fieldValue)) {
+            if (StringUtil.isNullOrEmpty(fieldValue)) {
                 String hint = StringUtil.getSafeStringFromCharSequence(fieldView.getHint());
                 return StringUtil.isNullOrEmpty(hint) ? getString(R.string.field_error_generic)
                         : getString(R.string.field_error, fieldView.getHint());
@@ -73,7 +84,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * @param fieldView  Campo (tipo EditText) do formulário.
      * @param fieldValue String representando o valor do campo.
      * @param validators Lista de funções de validação do campo.
-     * @param <T> Tipo da View, deve estender EditText.
+     * @param <T>        Tipo da View, deve estender EditText.
      */
     protected <T extends EditText> void validarCampoTexto(T fieldView, String fieldValue, List<Supplier<String>> validators) {
         fieldView.setText(fieldValue);
@@ -100,7 +111,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * @see BaseCadastroFragment#criarAdapter(Object[], Function)
      */
     protected <T> ArrayAdapterWrapper<T> criarAdapter(List<T> listObj, @NonNull Function<T, String> functionGetDisplayName) {
-        return criarAdapter(listObj.toArray((T[]) new Object[0]), functionGetDisplayName);
+        return criarAdapter((T[]) listObj.toArray(), functionGetDisplayName);
     }
 
     /**
@@ -127,6 +138,8 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * @param success Booleano indicando sucesso ou não da operação de salvar dados.
      */
     protected void onSaveFinished(Boolean success) {
+        dismissLoadingDialog();
+
         if (success == null || !success) {
             // Operação de salvar dados mal sucedida, apresenta dialog de erro
             AlertDialog dialog = DialogUtil.createSaveErrorDialog(requireContext());
@@ -142,6 +155,8 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * Atualiza campos, valida e salva dados.
      */
     protected void salvarCadastro() {
+        showLoadingDialog();
+
         // Atualiza todos os campos da tela de cadastro
         atualizarCampos();
 
@@ -163,6 +178,29 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
     protected void cancelaCadastro() {
         navigateBack();
     }
+
+    /**
+     * Mostra o dialog de carregamento da operação de salvar cadastro.
+     */
+    private void showLoadingDialog() {
+        // Verifica se fragment está carregado antes de exibir dialog
+        if (mLoadingDialog != null && isAdded() && !isStateSaved()) {
+            // Abre dialog de carregamento
+            mLoadingDialog.show();
+        }
+    }
+
+    /**
+     * Esconde o dialog de carregamento da operação de salvar cadastro.
+     */
+    private void dismissLoadingDialog() {
+        if (mLoadingDialog != null) {
+            // Fecha dialog de carregamento
+            mLoadingDialog.dismiss();
+        }
+    }
+
+    protected abstract String getRegistryName();
 
     /**
      * Atualiza campos da tela de cadastro.

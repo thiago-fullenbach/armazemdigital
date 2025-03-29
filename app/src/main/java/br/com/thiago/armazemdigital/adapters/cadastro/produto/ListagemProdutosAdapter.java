@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import br.com.thiago.armazemdigital.adapters.BaseAdapter;
 import br.com.thiago.armazemdigital.databinding.ListItemCadastroProdutoBinding;
@@ -17,9 +18,11 @@ import br.com.thiago.armazemdigital.utils.MoneyUtil;
 
 public class ListagemProdutosAdapter extends BaseAdapter<ListItemCadastroProdutoBinding, ListagemProdutosAdapter.CadastroProdutoViewHolder, ProdutoCadastro> {
     private final List<ProdutoCadastro> mProdutos;
+    private final Consumer<ProdutoCadastro> mListener;
 
-    public ListagemProdutosAdapter(List<ProdutoCadastro> mProdutos) {
+    public ListagemProdutosAdapter(List<ProdutoCadastro> mProdutos, Consumer<ProdutoCadastro> mListener) {
         this.mProdutos = mProdutos;
+        this.mListener = mListener;
     }
 
     @Override
@@ -46,6 +49,7 @@ public class ListagemProdutosAdapter extends BaseAdapter<ListItemCadastroProduto
             produtoViewHolder.tvDescProduto.setText(produto.getDescProduct());
             produtoViewHolder.tvCategoriaProduto.setText(produto.getNameCategory());
             produtoViewHolder.tvPrecoProduto.setText(MoneyUtil.getFormattedMoney(produto.getPriceProduct()));
+            produtoViewHolder.itemView.setOnClickListener(v -> mListener.accept(produto));
         }
     }
 
