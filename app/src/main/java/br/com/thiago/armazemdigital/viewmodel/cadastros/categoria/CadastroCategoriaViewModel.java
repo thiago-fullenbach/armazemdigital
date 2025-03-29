@@ -17,7 +17,7 @@ public class CadastroCategoriaViewModel extends ViewModel {
     private final CategoriaRepository categoriaRepository;
     private final MutableLiveData<String> nome = new MutableLiveData<>();
     private final MutableLiveData<String> descricao = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> success = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> success = new MutableLiveData<>(null);
 
     @Inject
     public CadastroCategoriaViewModel(CategoriaRepository categoriaRepository) {
@@ -79,5 +79,9 @@ public class CadastroCategoriaViewModel extends ViewModel {
         });
 
         loadThread.start();
+    }
+
+    public void reset() {
+        success.setValue(null);
     }
 }

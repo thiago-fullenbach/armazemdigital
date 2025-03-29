@@ -178,4 +178,8 @@ public class CadastroFornecedorViewModel extends ViewModel {
 
         loadThread.start();
     }
+
+    public void reset() {
+        success.setValue(null);
+    }
 }

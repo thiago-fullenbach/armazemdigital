@@ -69,13 +69,13 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mBinding.etPrecoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.actvUnidadeMedidaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.btnSelecionarCategoriaProduto.setOnClickListener(v -> {
-            // Atualiza campos, evitando perda de dados na transação entre fragments
-            atualizarCampos();
+            atualizarCampos();  // Atualiza campos, evitando perda de dados na transação entre fragments
+            reset();            // Reseta flag de sucesso
             navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_category_fragment);
         });
         mBinding.btnSelecionarFornecedorProduto.setOnClickListener(v -> {
-            // Atualiza campos, evitando perda de dados na transação entre fragments
-            atualizarCampos();
+            atualizarCampos();  // Atualiza campos, evitando perda de dados na transação entre fragments
+            reset();            // Reseta flag de sucesso
             navigateToFragment(R.id.action_cadastro_produto_fragment_to_select_fornecedor_fragment);
         });
     }
@@ -83,6 +83,11 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    protected void reset() {
+        mViewModel.reset();
     }
 
     @Override

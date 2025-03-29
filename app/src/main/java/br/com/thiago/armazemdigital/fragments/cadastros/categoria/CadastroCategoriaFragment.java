@@ -28,6 +28,11 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
     }
 
     @Override
+    protected void reset() {
+        mViewModel.reset();
+    }
+
+    @Override
     protected String getRegistryName() {
         return getString(R.string.registry_name_category);
     }

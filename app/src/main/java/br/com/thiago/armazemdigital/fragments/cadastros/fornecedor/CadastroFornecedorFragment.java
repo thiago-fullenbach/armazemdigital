@@ -68,6 +68,11 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
     }
 
     @Override
+    protected void reset() {
+        mViewModel.reset();
+    }
+
+    @Override
     protected String getRegistryName() {
         return getString(R.string.registry_name_supplier);
     }

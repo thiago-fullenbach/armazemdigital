@@ -36,18 +36,22 @@ public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
     }
 
     protected void navigateBack() {
+        if(!isAdded()) return;
         getNavController().popBackStack();
     }
 
     protected void navigateToFragment(int resourceId) {
+        if(!isAdded()) return;
         navigateToFragment(resourceId, null);
     }
 
     protected void navigateToFragment(int resourceId, @Nullable Bundle bundle) {
+        if(!isAdded()) return;
         getNavController().navigate(resourceId, bundle);
     }
 
     protected NavController getNavController() {
+        if(!isAdded()) return null;
         return NavHostFragment.findNavController(this);
     }
 }

@@ -156,6 +156,10 @@ public class CadastroProdutoViewModel extends ViewModel {
         loadThread.start();
     }
 
+    public void reset() {
+        success.setValue(null);
+    }
+
     private void deleteFornecimentos(long produtoId) {
         List<Fornecimento> fornecimentos = fornecimentoRepository.getCurrentFornecimentosForProduct(produtoId);
         if(fornecimentos != null) {

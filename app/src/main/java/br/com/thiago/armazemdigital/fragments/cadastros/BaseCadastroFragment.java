@@ -139,8 +139,9 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      */
     protected void onSaveFinished(Boolean success) {
         dismissLoadingDialog();
-
-        if (success == null || !success) {
+        // Se retornou nulo, não tentou realizar a operação de salvar dados ou resetou a tela de cadastro.
+        if (success == null) return;
+        if (!success) {
             // Operação de salvar dados mal sucedida, apresenta dialog de erro
             AlertDialog dialog = DialogUtil.createSaveErrorDialog(requireContext());
             dialog.show();
@@ -162,6 +163,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
 
         // Valida dados e mostra dialog de erro, caso necessário
         if (!validarDados()) {
+            dismissLoadingDialog();
             AlertDialog dialog = DialogUtil.createErrorDialog(requireContext());
             dialog.show();
             return;
@@ -200,6 +202,15 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         }
     }
 
+    /**
+     * Função para reinicializar processo de cadastro.
+     */
+    protected abstract void reset();
+
+    /** Retorna o nome do cadastro referente a tela.
+     *
+     * @return String representando o nome do cadastro.
+     */
     protected abstract String getRegistryName();
 
     /**
