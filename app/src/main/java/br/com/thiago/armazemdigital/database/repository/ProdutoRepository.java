@@ -1,5 +1,8 @@
 package br.com.thiago.armazemdigital.database.repository;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import br.com.thiago.armazemdigital.database.dao.ProdutoDao;
@@ -16,16 +19,21 @@ public class ProdutoRepository {
         return produtoDao.insert(produto);
     }
 
-    public void updateProduto(Produto produto) {
-        produtoDao.update(produto);
+    public int updateProduto(Produto produto) {
+        return produtoDao.update(produto);
     }
 
-    public void deleteProduto(Produto produto) {
-        produtoDao.delete(produto);
+    public int deleteProduto(Produto produto) {
+        return produtoDao.delete(produto);
     }
 
-    public List<Produto> getProdutos(int limit, int offset) {
-        return produtoDao.getProdutos(limit, offset);
+    public LiveData<List<Produto>> getProdutosLiveData() {
+        return produtoDao.getProdutosLiveData();
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    public List<Produto> getProdutos() {
+        return produtoDao.getProdutos();
     }
 
     public Produto getProduto(long id) {

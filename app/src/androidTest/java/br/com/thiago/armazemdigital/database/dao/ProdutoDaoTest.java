@@ -29,7 +29,7 @@ public class ProdutoDaoTest {
     private ProdutoDao produtoDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, ArmazemDigitalDb.class)
                 .allowMainThreadQueries()
@@ -46,7 +46,7 @@ public class ProdutoDaoTest {
         Produto produto = AndroidTestUtils.createProdutoForTests(categoria.getId());
         produto.setId(produtoDao.insert(produto));
 
-        List<Produto> produtosEmBanco = produtoDao.getProdutos(10, 0);
+        List<Produto> produtosEmBanco = produtoDao.getProdutos();
         Produto produtoEmBanco = produtoDao.getProduto(produto.getId());
 
         assertNotNull(produtoEmBanco);
@@ -107,7 +107,7 @@ public class ProdutoDaoTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.close();
     }
 }

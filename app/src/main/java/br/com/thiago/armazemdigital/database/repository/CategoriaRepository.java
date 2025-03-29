@@ -1,5 +1,8 @@
 package br.com.thiago.armazemdigital.database.repository;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import br.com.thiago.armazemdigital.database.dao.CategoriaDao;
@@ -12,20 +15,25 @@ public class CategoriaRepository {
         this.categoriaDao = categoriaDao;
     }
 
-    public long insetCategoria(Categoria categoria) {
+    public long insertCategoria(Categoria categoria) {
         return categoriaDao.insert(categoria);
     }
 
-    public void updateCategoria(Categoria categoria) {
-        categoriaDao.update(categoria);
+    public int updateCategoria(Categoria categoria) {
+        return categoriaDao.update(categoria);
     }
 
-    public void deleteCategoria(Categoria categoria) {
-        categoriaDao.delete(categoria);
+    public int deleteCategoria(Categoria categoria) {
+        return categoriaDao.delete(categoria);
     }
 
-    public List<Categoria> getCategorias(int limit, int offset) {
-        return categoriaDao.getCategorias(limit, offset);
+    public LiveData<List<Categoria>> getCategoriasLiveData() {
+        return categoriaDao.getCategoriasLiveData();
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    public List<Categoria> getCategorias() {
+        return categoriaDao.getCategorias();
     }
 
     public Categoria getCategoria(long id) {

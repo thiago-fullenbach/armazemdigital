@@ -8,4 +8,6 @@
     <color name="dark_gray">#282828</color>
     <color name="green">#0F0</color>
     <color name="red">#F00</color>
+    <color name="yellow_semi_transparent">#33F2D45C</color>
+    <color name="gray_semi_transparent">#332B2A2A</color>
 </resources>

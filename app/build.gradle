@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -40,6 +41,9 @@ dependencies {
     implementation libs.lombok
     implementation libs.room.common
     implementation libs.room.runtime
+    implementation libs.hilt.android
+    implementation libs.hilt.nav
+    implementation libs.hilt.nav.fragment
     testImplementation libs.junit
     testImplementation libs.mockitoCore
     testImplementation libs.mockitoInline
@@ -47,4 +51,6 @@ dependencies {
     androidTestImplementation libs.espresso.core
     annotationProcessor libs.lombok
     annotationProcessor libs.room.compiler
+    annotationProcessor libs.navigation.generator
+    annotationProcessor libs.hilt.compiler
 }

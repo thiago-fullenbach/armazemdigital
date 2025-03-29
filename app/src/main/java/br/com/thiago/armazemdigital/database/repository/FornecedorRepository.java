@@ -1,5 +1,8 @@
 package br.com.thiago.armazemdigital.database.repository;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import br.com.thiago.armazemdigital.database.dao.FornecedorDao;
@@ -16,15 +19,24 @@ public class FornecedorRepository {
         return fornecedorDao.insert(fornecedor);
     }
 
-    public void updateFornecedor(Fornecedor fornecedor) {
-        fornecedorDao.update(fornecedor);
+    public int updateFornecedor(Fornecedor fornecedor) {
+        return fornecedorDao.update(fornecedor);
     }
 
-    public void deleteFornecedor(Fornecedor fornecedor) {
-        fornecedorDao.delete(fornecedor);
+    public int deleteFornecedor(Fornecedor fornecedor) {
+        return fornecedorDao.delete(fornecedor);
     }
 
-    public List<Fornecedor> getFornecedores(int limit, int offset) {
-        return fornecedorDao.getFornecedores(limit, offset);
+    public Fornecedor getFornecedor(long id) {
+        return fornecedorDao.getFornecedor(id);
+    }
+
+    public LiveData<List<Fornecedor>> getFornecedoresLiveData() {
+        return fornecedorDao.getFornecedoresLiveData();
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    public List<Fornecedor> getFornecedores() {
+        return fornecedorDao.getFornecedores();
     }
 }

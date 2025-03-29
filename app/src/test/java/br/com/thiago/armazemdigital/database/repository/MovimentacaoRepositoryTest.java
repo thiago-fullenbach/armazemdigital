@@ -61,14 +61,14 @@ public class MovimentacaoRepositoryTest {
     public void getMovimentacoes() {
         List<Movimentacao> movimentacoesMock = TestUtils.createMovimentacoesForTests();
 
-        when(movimentacaoRepository.getMovimentacoes(movimentacoesMock.size(), 0)).thenReturn(movimentacoesMock);
+        when(movimentacaoRepository.getMovimentacoes()).thenReturn(movimentacoesMock);
 
-        List<Movimentacao> movimentacoes = movimentacaoRepository.getMovimentacoes(movimentacoesMock.size(), 0);
+        List<Movimentacao> movimentacoes = movimentacaoRepository.getMovimentacoes();
 
         assertNotNull(movimentacoes);
         assertEquals(movimentacoesMock, movimentacoes);
 
-        verify(movimentacaoDao).getMovimentacoes(movimentacoesMock.size(), 0);
+        verify(movimentacaoDao).getMovimentacoes();
     }
 
     @Test

@@ -8,6 +8,7 @@ import br.com.thiago.armazemdigital.model.Fornecimento;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
+import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 
 /**
  * Classe utilitária para criação de instâncias de classes de teste.
@@ -28,6 +29,7 @@ public class AndroidTestUtils {
                 null,
                 "Produto Teste",
                 "Produto utilizado para testes",
+                TipoUnidade.UNIDADE,
                 400L,
                 10000L,
                 new Date()
@@ -46,6 +48,7 @@ public class AndroidTestUtils {
                 "02311-001",
                 "São Paulo",
                 "SP",
+                "Bairro Exemplo",
                 "Rua Exemplo",
                 "Casa 3",
                 "1234",

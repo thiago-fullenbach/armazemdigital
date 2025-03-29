@@ -28,7 +28,7 @@ public class FornecedorDaoTest {
     private FornecedorDao fornecedorDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, ArmazemDigitalDb.class)
                 .allowMainThreadQueries()
@@ -41,7 +41,7 @@ public class FornecedorDaoTest {
         Fornecedor fornecedor = AndroidTestUtils.createFornecedorForTests();
         fornecedor.setId(fornecedorDao.insert(fornecedor));
 
-        List<Fornecedor> fornecedoresBanco = fornecedorDao.getFornecedores(10, 0);
+        List<Fornecedor> fornecedoresBanco = fornecedorDao.getFornecedores();
         Fornecedor fornecedorBanco = fornecedorDao.getFornecedor(fornecedor.getId());
 
         assertNotNull(fornecedorBanco);
@@ -61,6 +61,7 @@ public class FornecedorDaoTest {
         String zipCode = "12345-678";
         String state = "Rio de Janeiro";
         String city = "Rio de Janeiro";
+        String neighborhood = "Centro";
         String al1 = "Avenida de Exemplo";
         String al2 = "Casa 2";
         String number = "1234";
@@ -71,6 +72,7 @@ public class FornecedorDaoTest {
         fornecedor.setZipCode(zipCode);
         fornecedor.setState(state);
         fornecedor.setCity(city);
+        fornecedor.setNeighborhood(neighborhood);
         fornecedor.setAddressLine1(al1);
         fornecedor.setAddressLine2(al2);
         fornecedor.setNumber(number);
@@ -87,6 +89,7 @@ public class FornecedorDaoTest {
         assertEquals(zipCode, fornecedor.getZipCode());
         assertEquals(state, fornecedor.getState());
         assertEquals(city, fornecedor.getCity());
+        assertEquals(neighborhood, fornecedor.getNeighborhood());
         assertEquals(al1, fornecedor.getAddressLine1());
         assertEquals(al2, fornecedor.getAddressLine2());
         assertEquals(number, fornecedor.getNumber());
@@ -109,7 +112,7 @@ public class FornecedorDaoTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.close();
     }
 }

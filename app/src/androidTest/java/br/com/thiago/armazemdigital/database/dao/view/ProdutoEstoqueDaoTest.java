@@ -35,7 +35,7 @@ public class ProdutoEstoqueDaoTest {
     private ProdutoEstoqueDao produtoEstoqueDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, ArmazemDigitalDb.class)
                 .allowMainThreadQueries()
@@ -61,7 +61,7 @@ public class ProdutoEstoqueDaoTest {
         produto.setQtt(produto.getQtt() + movimentacao.getQtt());
         produtoDao.update(produto);
 
-        List<ProdutoEstoque> produtosEmEstoque = produtoEstoqueDao.getProdutosEstoque(10, 0);
+        List<ProdutoEstoque> produtosEmEstoque = produtoEstoqueDao.getProdutosEstoque();
 
         assertNotNull(produtosEmEstoque);
         assertEquals(1, produtosEmEstoque.size());
@@ -73,7 +73,7 @@ public class ProdutoEstoqueDaoTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.close();
     }
 }

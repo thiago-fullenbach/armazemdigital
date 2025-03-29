@@ -26,14 +26,14 @@ public class CategoriaRepositoryTest {
     private CategoriaRepository categoriaRepository;
 
     @Test
-    public void insetCategoria() {
+    public void insertCategoria() {
         final long idMock = 1L;
         Categoria categoriaMock = TestUtils.createCategoriaForTests();
         categoriaMock.setId(idMock);
 
-        when(categoriaRepository.insetCategoria(categoriaMock)).thenReturn(idMock);
+        when(categoriaRepository.insertCategoria(categoriaMock)).thenReturn(idMock);
 
-        long categoriaId = categoriaRepository.insetCategoria(categoriaMock);
+        long categoriaId = categoriaRepository.insertCategoria(categoriaMock);
         assertEquals(idMock, categoriaId);
 
         verify(categoriaDao).insert(categoriaMock);
@@ -61,14 +61,14 @@ public class CategoriaRepositoryTest {
     public void getCategorias() {
         List<Categoria> categoriasMock = TestUtils.createCategoriasForTests();
 
-        when(categoriaRepository.getCategorias(categoriasMock.size(), 0)).thenReturn(categoriasMock);
+        when(categoriaRepository.getCategorias()).thenReturn(categoriasMock);
 
-        List<Categoria> categorias = categoriaRepository.getCategorias(categoriasMock.size(), 0);
+        List<Categoria> categorias = categoriaRepository.getCategorias();
 
         assertNotNull(categorias);
         assertEquals(categoriasMock, categorias);
 
-        verify(categoriaDao).getCategorias(categoriasMock.size(), 0);
+        verify(categoriaDao).getCategorias();
     }
 
     @Test

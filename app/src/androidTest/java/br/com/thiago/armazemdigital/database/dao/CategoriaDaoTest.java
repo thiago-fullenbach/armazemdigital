@@ -27,7 +27,7 @@ public class CategoriaDaoTest {
     private CategoriaDao categoriaDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, ArmazemDigitalDb.class)
                 .allowMainThreadQueries()
@@ -43,7 +43,7 @@ public class CategoriaDaoTest {
         Categoria categoria = AndroidTestUtils.createCategoriaForTests();
         categoria.setId(categoriaDao.insert(categoria));
 
-        List<Categoria> categoriasBanco = categoriaDao.getCategorias(10, 0);
+        List<Categoria> categoriasBanco = categoriaDao.getCategorias();
         Categoria categoriaBanco = categoriaDao.getCategoria(categoria.getId());
 
         assertNotNull(categoriaBanco);
@@ -99,7 +99,7 @@ public class CategoriaDaoTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         db.close();
     }
 }

@@ -1,5 +1,8 @@
 package br.com.thiago.armazemdigital.database.repository;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import br.com.thiago.armazemdigital.database.dao.MovimentacaoDao;
@@ -16,16 +19,21 @@ public class MovimentacaoRepository {
         return movimentacaoDao.insert(movimentacao);
     }
 
-    public void updateMovimentacao(Movimentacao movimentacao) {
-        movimentacaoDao.update(movimentacao);
+    public int updateMovimentacao(Movimentacao movimentacao) {
+        return movimentacaoDao.update(movimentacao);
     }
 
-    public void deleteMovimentacao(Movimentacao movimentacao) {
-        movimentacaoDao.delete(movimentacao);
+    public int deleteMovimentacao(Movimentacao movimentacao) {
+        return movimentacaoDao.delete(movimentacao);
     }
 
-    public List<Movimentacao> getMovimentacoes(int limit, int offset) {
-        return movimentacaoDao.getMovimentacoes(limit, offset);
+    public LiveData<List<Movimentacao>> getMovimentacoesLiveData() {
+        return movimentacaoDao.getMovimentacoesLiveData();
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    public List<Movimentacao> getMovimentacoes() {
+        return movimentacaoDao.getMovimentacoes();
     }
 
     public Movimentacao getMovimentacao(long id) {
