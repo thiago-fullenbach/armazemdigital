@@ -26,7 +26,7 @@ public class CadastroFragment extends BaseFragment<FragmentCadastroBinding> {
 
     @Override
     protected void setupViewModel() {
-
+        // Não implementa
     }
 
     @Override

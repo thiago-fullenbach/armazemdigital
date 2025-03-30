@@ -8,9 +8,13 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 public abstract class BaseAdapter<B extends ViewBinding, V extends RecyclerView.ViewHolder, I> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final Logger mLogger = LoggerFactory.getLogger(BaseAdapter.class);
     protected B mBindingItem;
 
     @NonNull
@@ -26,7 +30,9 @@ public abstract class BaseAdapter<B extends ViewBinding, V extends RecyclerView.
     }
 
     public final void setListData(@Nullable List<I> itens) {
+        mLogger.info("@setListData chamado");
         if(itens != null) {
+            mLogger.debug("Itens: {}", itens);
             getListItem().clear();
             getListItem().addAll(itens);
             notifyItemRangeInserted(0, itens.size());

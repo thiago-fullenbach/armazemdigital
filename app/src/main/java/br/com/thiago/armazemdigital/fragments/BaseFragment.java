@@ -12,7 +12,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewbinding.ViewBinding;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
+    private final Logger mLogger = LoggerFactory.getLogger(BaseFragment.class);
     protected B mBinding;
 
     protected abstract B inflateBinding(LayoutInflater inflater, ViewGroup container);
@@ -24,6 +28,7 @@ public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
     @NonNull
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mLogger.info("@onCreateView() chamado");
         mBinding = inflateBinding(inflater, container);
         return mBinding.getRoot();
     }
@@ -31,27 +36,51 @@ public abstract class BaseFragment<B extends ViewBinding> extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mLogger.info("Iniciada tela de cadastro de {}", getClass().getSimpleName());
+        mLogger.info("@onViewCreated() chamado");
+
+        mLogger.info("Inicializando ViewModels...");
         setupViewModel();
+
+        mLogger.info("Inicializando Views");
         setupViews();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mLogger.info("@onDestroyView() chamado");
+        mLogger.info("Finalizada tela de cadastro de {}", getClass().getSimpleName());
+    }
+
     protected void navigateBack() {
-        if(!isAdded()) return;
+        mLogger.info("@navigateBack() chamado");
+        if(!isAdded()) {
+            mLogger.info("Fragment not added to activity");
+            return;
+        }
         getNavController().popBackStack();
     }
 
     protected void navigateToFragment(int resourceId) {
-        if(!isAdded()) return;
         navigateToFragment(resourceId, null);
     }
 
     protected void navigateToFragment(int resourceId, @Nullable Bundle bundle) {
-        if(!isAdded()) return;
+        mLogger.info("@navigateToFragment() chamado");
+        if(!isAdded()) {
+            mLogger.info("Fragment not added to activity");
+            return;
+        }
         getNavController().navigate(resourceId, bundle);
     }
 
     protected NavController getNavController() {
-        if(!isAdded()) return null;
+        mLogger.info("@getNavController() chamado");
+        if(!isAdded()) {
+            mLogger.info("Fragment not added to activity");
+            return null;
+        }
         return NavHostFragment.findNavController(this);
     }
 }

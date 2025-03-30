@@ -18,6 +18,8 @@ mockitoCore = "5.11.0"
 mockitoInline = "5.2.0"
 hilt = "2.50"
 hilt-nav = "1.2.0"
+slf4j = "2.0.17"
+logback = "3.0.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -39,6 +41,8 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-nav = { group = "androidx.hilt", name = "hilt-navigation", version.ref = "hilt-nav" }
 hilt-nav-fragment = { group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "hilt-nav" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
+logback = { group = "com.github.tony19", name = "logback-android", version.ref = "logback" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

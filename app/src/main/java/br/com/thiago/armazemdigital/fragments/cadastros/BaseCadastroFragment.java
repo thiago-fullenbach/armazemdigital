@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -22,20 +25,28 @@ import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
 import br.com.thiago.armazemdigital.utils.wrapper.ArrayAdapterWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.BaseCadastroViewModel;
 
+/**
+ * Fragment base para telas de cadastro.
+ * @param <B> binding relacionado a tela de cadastro.
+ */
 public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFragment<B> {
     private final BaseCadastroViewModel mViewModel = new BaseCadastroViewModel();
+    private final Logger mLogger = LoggerFactory.getLogger(BaseCadastroFragment.class);
     private AlertDialog mLoadingDialog;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mLogger.info("@onViewCreated() chamado");
         mViewModel.getCarregado().observe(getViewLifecycleOwner(), carregado -> {
+            mLogger.info("Observer carregado() chamado: {}", carregado);
             if (carregado != null && carregado) return;
 
             Bundle bundle = getArguments();
             if (bundle != null) {
                 // Caso esteja carregando um item da lista
                 long id = bundle.getLong(BundleKeys.ARG_CADASTRO_ID);
+                mLogger.debug("Carregando item de id: {}", id);
                 carregarDados(id);
                 mViewModel.setCarregado(true);
             }
@@ -64,6 +75,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * @param <T>        Tipo da View, deve estender EditText.
      */
     protected <T extends EditText> void validarCampoTextoObrigatorio(T fieldView, String fieldValue, List<Supplier<String>> validators) {
+        mLogger.info("@validarCampoTextoObrigatorio() chamado");
         List<Supplier<String>> validatorFinal = new ArrayList<>(validators);
         validatorFinal.add(() -> {
             if (StringUtils.isNullOrEmpty(fieldValue)) {
@@ -87,10 +99,15 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * @param <T>        Tipo da View, deve estender EditText.
      */
     protected <T extends EditText> void validarCampoTexto(T fieldView, String fieldValue, List<Supplier<String>> validators) {
+        mLogger.info("@validarCampoTexto() chamado");
         fieldView.setText(fieldValue);
         for (Supplier<String> validator : validators) {
             String msg = validator.get();
+            // Se houver erro, sai do loop
+            mLogger.debug("Validando campo: {}", fieldView.getHint());
+            mLogger.debug("Valor do campo: {}", fieldValue);
             if (!StringUtils.isNullOrEmpty(msg)) {
+                mLogger.warn("Erro ao validar campo: {}", msg);
                 fieldView.setError(msg);
                 return;
             }
@@ -124,6 +141,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * @see BaseCadastroFragment#criarAdapter(List, Function)
      */
     protected <T> ArrayAdapterWrapper<T> criarAdapter(T[] objs, @NonNull Function<T, String> functionGetDisplayName) {
+        mLogger.info("@criarAdapter() chamado");
         return new ArrayAdapterWrapper<>(requireContext(), android.R.layout.simple_list_item_1, objs) {
             @Override
             protected String getDisplayName(T object) {
@@ -138,10 +156,12 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * @param success Booleano indicando sucesso ou não da operação de salvar dados.
      */
     protected void onSaveFinished(Boolean success) {
+        mLogger.info("@onSaveFinished() chamado");
         dismissLoadingDialog();
         // Se retornou nulo, não tentou realizar a operação de salvar dados ou resetou a tela de cadastro.
         if (success == null) return;
         if (!success) {
+            mLogger.warn("Erro ao salvar dados");
             // Operação de salvar dados mal sucedida, apresenta dialog de erro
             AlertDialog dialog = DialogUtils.createSaveErrorDialog(requireContext());
             dialog.show();
@@ -149,6 +169,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         }
 
         // Inserção bem sucedida, retorna para fragment anterior
+        mLogger.info("Dados salvos com sucesso, retornando ao fragment anterior...");
         navigateBack();
     }
 
@@ -156,13 +177,17 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * Atualiza campos, valida e salva dados.
      */
     protected void salvarCadastro() {
+        mLogger.info("@salvarCadastro() chamado");
         showLoadingDialog();
 
         // Atualiza todos os campos da tela de cadastro
+        mLogger.info("Atualizando campos...");
         atualizarCampos();
 
         // Valida dados e mostra dialog de erro, caso necessário
+        mLogger.info("Validando dados...");
         if (!validarDados()) {
+            mLogger.warn("Dados inválidos");
             dismissLoadingDialog();
             AlertDialog dialog = DialogUtils.createErrorDialog(requireContext());
             dialog.show();
@@ -170,6 +195,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         }
 
         // Salva dados e retorna ao fragment anterior
+        mLogger.info("Dados válidos, salvando...");
         Bundle bundle = getArguments();
         salvarDados(bundle != null ? bundle.getLong(BundleKeys.ARG_CADASTRO_ID) : 0);
     }
@@ -178,6 +204,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * Cancela cadastro e retorna ao fragment anterior.
      */
     protected void cancelaCadastro() {
+        mLogger.info("@cancelaCadastro() chamado");
         navigateBack();
     }
 
@@ -185,6 +212,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * Mostra o dialog de carregamento da operação de salvar cadastro.
      */
     private void showLoadingDialog() {
+        mLogger.info("@showLoadingDialog() chamado");
         // Verifica se fragment está carregado antes de exibir dialog
         if (mLoadingDialog != null && isAdded() && !isStateSaved()) {
             // Abre dialog de carregamento
@@ -196,7 +224,9 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      * Esconde o dialog de carregamento da operação de salvar cadastro.
      */
     private void dismissLoadingDialog() {
-        if (mLoadingDialog != null) {
+        mLogger.info("@dismissLoadingDialog() chamado");
+        // Verifica se fragment está carregado antes de fechar dialog
+        if (mLoadingDialog != null && isAdded() && !isStateSaved()) {
             // Fecha dialog de carregamento
             mLoadingDialog.dismiss();
         }
