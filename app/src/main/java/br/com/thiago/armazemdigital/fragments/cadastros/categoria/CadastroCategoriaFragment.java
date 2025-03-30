@@ -10,7 +10,7 @@ import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.utils.FormUtils;
-import br.com.thiago.armazemdigital.utils.StringUtil;
+import br.com.thiago.armazemdigital.utils.StringUtils;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.CadastroCategoriaViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -39,8 +39,8 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
 
     @Override
     protected void atualizarCampos() {
-        mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeCategoria.getText()));
-        mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoCategoria.getText()));
+        mViewModel.setNome(StringUtils.getSafeStringFromEditable(mBinding.etNomeCategoria.getText()));
+        mViewModel.setDescricao(StringUtils.getSafeStringFromEditable(mBinding.etDescricaoCategoria.getText()));
     }
 
     @Override
@@ -54,8 +54,8 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
 
     @Override
     protected boolean validarDados() {
-        return StringUtil.isNullOrEmpty(mBinding.etNomeCategoria.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etDescricaoCategoria.getError());
+        return StringUtils.isNullOrEmpty(mBinding.etNomeCategoria.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etDescricaoCategoria.getError());
     }
 
     @Override

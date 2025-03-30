@@ -10,7 +10,7 @@ import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroFornecedorBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.utils.FormUtils;
-import br.com.thiago.armazemdigital.utils.StringUtil;
+import br.com.thiago.armazemdigital.utils.StringUtils;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.fornecedor.CadastroFornecedorViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -79,16 +79,16 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
 
     @Override
     protected void atualizarCampos() {
-        mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeFornecedor.getText()));
-        mViewModel.setTelefone(StringUtil.getSafeStringFromEditable(mBinding.etTelefoneFornecedor.getText()));
-        mViewModel.setEmail(StringUtil.getSafeStringFromEditable(mBinding.etEmailFornecedor.getText()));
-        mViewModel.setCep(StringUtil.getSafeStringFromEditable(mBinding.etCepFornecedor.getText()));
-        mViewModel.setEstado(StringUtil.getSafeStringFromEditable(mBinding.etEstadoFornecedor.getText()));
-        mViewModel.setCidade(StringUtil.getSafeStringFromEditable(mBinding.etCidadeFornecedor.getText()));
-        mViewModel.setBairro(StringUtil.getSafeStringFromEditable(mBinding.etBairroFornecedor.getText()));
-        mViewModel.setLogradouro(StringUtil.getSafeStringFromEditable(mBinding.etLogradouroFornecedor.getText()));
-        mViewModel.setNumero(StringUtil.getSafeStringFromEditable(mBinding.etNumeroFornecedor.getText()));
-        mViewModel.setComplemento(StringUtil.getSafeStringFromEditable(mBinding.etComplementoFornecedor.getText()));
+        mViewModel.setNome(StringUtils.getSafeStringFromEditable(mBinding.etNomeFornecedor.getText()));
+        mViewModel.setTelefone(StringUtils.getSafeStringFromEditable(mBinding.etTelefoneFornecedor.getText()));
+        mViewModel.setEmail(StringUtils.getSafeStringFromEditable(mBinding.etEmailFornecedor.getText()));
+        mViewModel.setCep(StringUtils.getSafeStringFromEditable(mBinding.etCepFornecedor.getText()));
+        mViewModel.setEstado(StringUtils.getSafeStringFromEditable(mBinding.etEstadoFornecedor.getText()));
+        mViewModel.setCidade(StringUtils.getSafeStringFromEditable(mBinding.etCidadeFornecedor.getText()));
+        mViewModel.setBairro(StringUtils.getSafeStringFromEditable(mBinding.etBairroFornecedor.getText()));
+        mViewModel.setLogradouro(StringUtils.getSafeStringFromEditable(mBinding.etLogradouroFornecedor.getText()));
+        mViewModel.setNumero(StringUtils.getSafeStringFromEditable(mBinding.etNumeroFornecedor.getText()));
+        mViewModel.setComplemento(StringUtils.getSafeStringFromEditable(mBinding.etComplementoFornecedor.getText()));
     }
 
     @Override
@@ -103,16 +103,16 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
 
     @Override
     protected boolean validarDados() {
-        return StringUtil.isNullOrEmpty(mBinding.etNomeFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etTelefoneFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etEmailFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etCepFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etEstadoFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etCidadeFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etBairroFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etLogradouroFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etNumeroFornecedor.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etComplementoFornecedor.getError());
+        return StringUtils.isNullOrEmpty(mBinding.etNomeFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etTelefoneFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etEmailFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etCepFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etEstadoFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etCidadeFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etBairroFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etLogradouroFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etNumeroFornecedor.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etComplementoFornecedor.getError());
     }
 
     @Override

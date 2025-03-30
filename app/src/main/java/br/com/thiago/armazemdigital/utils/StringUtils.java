@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Contract;
 /**
  * Utilitário para manipulação de strings
  */
-public class StringUtil {
+public class StringUtils {
     /** Verifica se uma string passada é nula ou vazia.
      *
      * @param str String a ser verificada.
@@ -22,7 +22,7 @@ public class StringUtil {
 
     /** Verifica se um charSequence é nula ou vazia.
      * Se não for nula, transforma em String e utiliza isNullOrEmpty de Strings.
-     * @see StringUtil#isNullOrEmpty(String)
+     * @see StringUtils#isNullOrEmpty(String)
      *
      * @param charSequence CharSequence a ser verificada.
      * @return Booleano indicando se o charSequence é vazio ou nulo.

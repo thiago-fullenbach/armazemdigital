@@ -14,7 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.ActivityMainBinding;
-import br.com.thiago.armazemdigital.utils.DialogUtil;
+import br.com.thiago.armazemdigital.utils.DialogUtils;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showInfoDialog() {
         String versionName = ((ArmazemDigitalApp) getApplication()).getVersionName();
-        AlertDialog dialog = DialogUtil.createInfoDialog(this, versionName);
+        AlertDialog dialog = DialogUtils.createInfoDialog(this, versionName);
         dialog.show();
     }
 

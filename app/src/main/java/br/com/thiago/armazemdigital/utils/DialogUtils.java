@@ -11,7 +11,7 @@ import br.com.thiago.armazemdigital.R;
  * Utilitário de criação de diálogos da aplicação.
  * Dialogs utilizados no app devem ser criados apenas nesse utilitário
  */
-public class DialogUtil {
+public class DialogUtils {
     /**
      * Cria dialog de informações do sistema
      *

@@ -35,7 +35,7 @@ public class MoneyUtil {
         DecimalFormat moneyFormat = new DecimalFormat("¤ #,##0.00", symbols);
 
         // Pega valor dividido por 100, pois preco é armazenado multiplicado por 100
-        return moneyFormat.format(new BigDecimal(LongUtil.unbox(money))
+        return moneyFormat.format(new BigDecimal(LongUtils.unbox(money))
                 .divide(new BigDecimal(MONEY_MULTIPLIER), MONEY_SCALE, RoundingMode.HALF_EVEN));
     }
 
@@ -54,7 +54,7 @@ public class MoneyUtil {
             return null;
         }
 
-        return new BigDecimal(LongUtil.unbox(moneyLong))
+        return new BigDecimal(LongUtils.unbox(moneyLong))
                 .divide(new BigDecimal(MONEY_MULTIPLIER), MONEY_SCALE, RoundingMode.HALF_EVEN).toString();
     }
 
@@ -66,7 +66,7 @@ public class MoneyUtil {
      */
     @Nullable
     public static Long moneyStringToLong(@Nullable String moneyStr) {
-        if(StringUtil.isNullOrEmpty(moneyStr)) {
+        if(StringUtils.isNullOrEmpty(moneyStr)) {
             return null;
         }
 

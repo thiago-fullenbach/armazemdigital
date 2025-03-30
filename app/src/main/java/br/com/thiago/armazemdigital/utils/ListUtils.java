@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Utilitário para listas de itens.
  */
-public class ListUtil {
+public class ListUtils {
     /** Verifica se a lista é nula ou vazia.
      *
      * @param list Lista a ser verificada.

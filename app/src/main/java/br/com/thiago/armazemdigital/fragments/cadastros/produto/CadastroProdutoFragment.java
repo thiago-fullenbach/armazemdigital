@@ -21,7 +21,7 @@ import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.utils.FormUtils;
 import br.com.thiago.armazemdigital.utils.MoneyUtil;
-import br.com.thiago.armazemdigital.utils.StringUtil;
+import br.com.thiago.armazemdigital.utils.StringUtils;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.CadastroProdutoViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -98,10 +98,10 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected void atualizarCampos() {
-        mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeProduto.getText()));
-        mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoProduto.getText()));
-        mViewModel.setPreco(MoneyUtil.moneyStringToLong(StringUtil.getSafeStringFromEditable(mBinding.etPrecoProduto.getText())));
-        mViewModel.setUnidadeMedidaSelecionada(TipoUnidade.fromName(StringUtil.getSafeStringFromEditable(mBinding.actvUnidadeMedidaProduto.getText())));
+        mViewModel.setNome(StringUtils.getSafeStringFromEditable(mBinding.etNomeProduto.getText()));
+        mViewModel.setDescricao(StringUtils.getSafeStringFromEditable(mBinding.etDescricaoProduto.getText()));
+        mViewModel.setPreco(MoneyUtil.moneyStringToLong(StringUtils.getSafeStringFromEditable(mBinding.etPrecoProduto.getText())));
+        mViewModel.setUnidadeMedidaSelecionada(TipoUnidade.fromName(StringUtils.getSafeStringFromEditable(mBinding.actvUnidadeMedidaProduto.getText())));
     }
 
     @Override
@@ -116,10 +116,10 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected boolean validarDados() {
-        return StringUtil.isNullOrEmpty(mBinding.etNomeProduto.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etDescricaoProduto.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etPrecoProduto.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.actvUnidadeMedidaProduto.getError());
+        return StringUtils.isNullOrEmpty(mBinding.etNomeProduto.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etDescricaoProduto.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.etPrecoProduto.getError()) &&
+                StringUtils.isNullOrEmpty(mBinding.actvUnidadeMedidaProduto.getError());
     }
 
     @Override

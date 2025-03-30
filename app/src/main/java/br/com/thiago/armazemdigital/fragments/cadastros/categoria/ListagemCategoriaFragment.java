@@ -17,7 +17,7 @@ import br.com.thiago.armazemdigital.adapters.cadastro.categoria.ListagemCategori
 import br.com.thiago.armazemdigital.databinding.FragmentListagemCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
-import br.com.thiago.armazemdigital.utils.ListUtil;
+import br.com.thiago.armazemdigital.utils.ListUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.ListagemCategoriasViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -71,7 +71,7 @@ public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentList
 
     private void showProductList(List<CategoriaCadastro> categoriasCadastradas) {
         mBinding.pbLoadingListCategorias.setVisibility(View.GONE);
-        mBinding.rvListaCadastroCategoria.setVisibility(ListUtil.isNullOrEmpty(categoriasCadastradas) ? View.GONE : View.VISIBLE);
-        mBinding.tvAvisoSemCategoria.setVisibility(ListUtil.isNullOrEmpty(categoriasCadastradas) ? View.VISIBLE : View.GONE);
+        mBinding.rvListaCadastroCategoria.setVisibility(ListUtils.isNullOrEmpty(categoriasCadastradas) ? View.GONE : View.VISIBLE);
+        mBinding.tvAvisoSemCategoria.setVisibility(ListUtils.isNullOrEmpty(categoriasCadastradas) ? View.VISIBLE : View.GONE);
     }
 }

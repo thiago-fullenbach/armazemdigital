@@ -15,7 +15,7 @@ import br.com.thiago.armazemdigital.database.repository.ProdutoRepository;
 import br.com.thiago.armazemdigital.model.Fornecimento;
 import br.com.thiago.armazemdigital.model.Produto;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
-import br.com.thiago.armazemdigital.utils.LongUtil;
+import br.com.thiago.armazemdigital.utils.LongUtils;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
@@ -90,7 +90,7 @@ public class CadastroProdutoViewModel extends ViewModel {
 
     public void salvarProduto() {
         Thread saveThread = new Thread(() -> {
-            long categoriaId = LongUtil.unbox(categoriaSelecionadaId.getValue());
+            long categoriaId = LongUtils.unbox(categoriaSelecionadaId.getValue());
             if(categoriaId <= 0) {
                 success.postValue(false);
                 return;
@@ -128,7 +128,7 @@ public class CadastroProdutoViewModel extends ViewModel {
             produto.setDescription(descricao.getValue());
             produto.setPrice(preco.getValue());
             produto.setUnit(unidadeMedidaSelecionada.getValue());
-            produto.setCategoryId(LongUtil.unbox(categoriaSelecionadaId.getValue()));
+            produto.setCategoryId(LongUtils.unbox(categoriaSelecionadaId.getValue()));
 
             // Deleta todos os fornecimentos atuais e então salva os novos.
             deleteFornecimentos(produto.getId());

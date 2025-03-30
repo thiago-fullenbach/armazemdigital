@@ -7,12 +7,12 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class ListUtilTest {
+public class ListUtilsTest {
 
     @Test
     public void isNullOrEmpty() {
-        assertTrue(ListUtil.isNullOrEmpty(null));
-        assertTrue(ListUtil.isNullOrEmpty(List.of()));
-        assertFalse(ListUtil.isNullOrEmpty(List.of("teste")));
+        assertTrue(ListUtils.isNullOrEmpty(null));
+        assertTrue(ListUtils.isNullOrEmpty(List.of()));
+        assertFalse(ListUtils.isNullOrEmpty(List.of("teste")));
     }
 }
