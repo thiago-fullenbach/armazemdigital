@@ -22,6 +22,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_nome_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -42,10 +43,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="60"
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_telefone_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -66,10 +71,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="20"
+                    android:background="@color/gray"
+                    android:inputType="phone"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_email_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -90,10 +99,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="textEmailAddress"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_cep_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -114,10 +127,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="10"
+                    android:background="@color/gray"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_estado_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -138,11 +155,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_cidade_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -163,11 +184,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_bairro_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -188,11 +213,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_logradouro_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -213,10 +242,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_numero_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -237,11 +270,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_complemento_fornecedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -262,6 +299,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 

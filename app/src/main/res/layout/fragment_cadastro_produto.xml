@@ -54,6 +54,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_nome_produto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -73,10 +74,13 @@
                     android:id="@+id/et_nome_produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"/>
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_descricao_produto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -96,10 +100,13 @@
                     android:id="@+id/et_descricao_produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"/>
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_preco_produto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -119,19 +126,20 @@
                     android:id="@+id/et_preco_produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:background="@color/gray"
+                    android:inputType="numberDecimal"
+                    android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:id="@+id/til_unidade_medida_produto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:ems="10"
                 android:hint="@string/hint_actv_unidade_medida_produto"
-                android:maxLines="1"
                 app:hintAnimationEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -141,11 +149,12 @@
                     android:id="@+id/actv_unidade_medida_produto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textAutoComplete"
-                    android:completionThreshold="1"
-                    android:padding="16dp"
+                    android:inputType="none"
+                    android:paddingEnd="48dp"
+                    android:paddingBottom="16dp"
+                    android:background="@color/gray"
                     android:popupBackground="@color/gray"
-                    tools:ignore="LabelFor" />
+                    tools:ignore="LabelFor,RtlSymmetry" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

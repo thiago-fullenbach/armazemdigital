@@ -22,6 +22,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_nome_categoria"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -42,10 +43,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="60"
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 android:id="@+id/til_descricao_categoria"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -66,6 +71,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
                     tools:ignore="VisualLintTextFieldSize" />
             </com.google.android.material.textfield.TextInputLayout>
 

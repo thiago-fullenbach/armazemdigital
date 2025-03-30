@@ -63,6 +63,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
             TipoUnidade unidade = (TipoUnidade) adapterView.getItemAtPosition(position);
             mBinding.actvUnidadeMedidaProduto.setText(unidade.getName());
         });
+        mBinding.actvUnidadeMedidaProduto.setThreshold(TipoUnidade.values().length);
 
         mBinding.etNomeProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
         mBinding.etDescricaoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
