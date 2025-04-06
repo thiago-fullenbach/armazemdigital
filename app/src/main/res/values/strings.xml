@@ -65,4 +65,6 @@
     <string name="registry_name_category">Categoria</string>
     <string name="registry_name_supplier">Fornecedor</string>
     <string name="registry_name_product">Produto</string>
+    <string name="hint_actv_nivel_log">Nível de LOG</string>
+    <string name="label_btn_extrair_log">Extrair LOG</string>
 </resources>

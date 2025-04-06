@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_configuracao"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.configuracao.ConfiguracaoFragment">
 
-    <TextView
-        android:id="@+id/tv_texto_configuracao"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_item_menu_configuracao" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_nivel_log"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/hint_actv_nivel_log"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <AutoCompleteTextView
+            android:id="@+id/actv_nivel_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:inputType="none"
+            android:paddingEnd="48dp"
+            android:paddingBottom="16dp"
+            android:popupBackground="@color/gray"
+            tools:ignore="LabelFor,RtlSymmetry" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_selecionar_categoria_produto"
+        style="@style/botaoNovoCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/label_btn_extrair_log"
+        app:icon="@drawable/ic_extrair_log"
+        app:iconTint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_nivel_log" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
