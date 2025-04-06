@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 
 import br.com.thiago.armazemdigital.databinding.FragmentConfiguracaoBinding;
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class ConfiguracaoFragment extends BaseFragment<FragmentConfiguracaoBinding> {
 
     public ConfiguracaoFragment() {

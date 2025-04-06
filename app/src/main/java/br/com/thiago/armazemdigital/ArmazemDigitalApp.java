@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.thiago.armazemdigital.preferences.helper.LogPrefsHelper;
+import br.com.thiago.armazemdigital.utils.LogUtils;
 import br.com.thiago.armazemdigital.utils.exception.ArmazemDigitalCrashHandler;
 import dagger.hilt.android.HiltAndroidApp;
 
@@ -27,6 +29,10 @@ public class ArmazemDigitalApp extends Application {
 
         // Configuração do handler de exceções não tratadas
         Thread.setDefaultUncaughtExceptionHandler(ArmazemDigitalCrashHandler.getInstance(this));
+
+        // Configura LogLevel do FileAppender conforme setado nos preferences
+        LogPrefsHelper logPrefsHelper = new LogPrefsHelper(this);
+        LogUtils.atualizarNivelLogArquivo(logPrefsHelper.getLogLevel());
 
         mLogger = LoggerFactory.getLogger(ArmazemDigitalApp.class);
         mLogger.info("ArmazemDigital Iniciado - Versão: {}", getVersionName());
