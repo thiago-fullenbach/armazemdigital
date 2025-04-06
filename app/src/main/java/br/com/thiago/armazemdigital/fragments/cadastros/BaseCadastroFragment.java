@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import br.com.thiago.armazemdigital.R;
@@ -22,11 +21,11 @@ import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.utils.DialogUtils;
 import br.com.thiago.armazemdigital.utils.StringUtils;
 import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
-import br.com.thiago.armazemdigital.utils.wrapper.ArrayAdapterWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.BaseCadastroViewModel;
 
 /**
  * Fragment base para telas de cadastro.
+ *
  * @param <B> binding relacionado a tela de cadastro.
  */
 public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFragment<B> {
@@ -118,39 +117,6 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
     }
 
     /**
-     * Função genérica para criação de ArrayAdapters de views do tipo Spinner ou AutoCompleteTextView.
-     *
-     * @param listObj                Lista de objetos que compõe o Adapter.
-     * @param functionGetDisplayName Função que retorna o nome a ser exibido no adapter.
-     * @param <T>                    Tipo do objeto que compõe a lista.
-     * @return ArrayAdapterWrapper<T> do AutoCompleteTextView
-     * @noinspection unchecked
-     * @see BaseCadastroFragment#criarAdapter(Object[], Function)
-     */
-    protected <T> ArrayAdapterWrapper<T> criarAdapter(List<T> listObj, @NonNull Function<T, String> functionGetDisplayName) {
-        return criarAdapter((T[]) listObj.toArray(), functionGetDisplayName);
-    }
-
-    /**
-     * Função genérica para criação de ArrayAdapters de views do tipo Spinner ou AutoCompleteTextView.
-     *
-     * @param objs                   Array de objetos que compõe o Adapter.
-     * @param functionGetDisplayName Função que retorna o nome a ser exibido no adapter.
-     * @param <T>                    Tipo do objeto que compõe a lista.
-     * @return ArrayAdapterWrapper<T> do View.
-     * @see BaseCadastroFragment#criarAdapter(List, Function)
-     */
-    protected <T> ArrayAdapterWrapper<T> criarAdapter(T[] objs, @NonNull Function<T, String> functionGetDisplayName) {
-        mLogger.info("@criarAdapter() chamado");
-        return new ArrayAdapterWrapper<>(requireContext(), android.R.layout.simple_list_item_1, objs) {
-            @Override
-            protected String getDisplayName(T object) {
-                return functionGetDisplayName.apply(object);
-            }
-        };
-    }
-
-    /**
      * Salva dados e retorna ao fragment anterior.
      *
      * @param success Booleano indicando sucesso ou não da operação de salvar dados.
@@ -237,7 +203,8 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      */
     protected abstract void reset();
 
-    /** Retorna o nome do cadastro referente a tela.
+    /**
+     * Retorna o nome do cadastro referente a tela.
      *
      * @return String representando o nome do cadastro.
      */

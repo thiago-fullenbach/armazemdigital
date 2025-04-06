@@ -17,7 +17,7 @@ public abstract class BaseListagemViewModel<I> extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        removeObserver();
+        getItensFromRepo().removeObserver(itemObserver);
     }
 
     public LiveData<List<I>> getItens() {
@@ -26,9 +26,5 @@ public abstract class BaseListagemViewModel<I> extends ViewModel {
 
     public final void observeItens() {
         getItensFromRepo().observeForever(itemObserver);
-    }
-
-    private void removeObserver() {
-        getItensFromRepo().removeObserver(itemObserver);
     }
 }
