@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
-import br.com.thiago.armazemdigital.utils.FormUtils;
-import br.com.thiago.armazemdigital.utils.StringUtil;
+import br.com.thiago.armazemdigital.utils.FormManagerUtils;
+import br.com.thiago.armazemdigital.utils.StringValidatorUtils;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.categoria.CadastroCategoriaViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -39,8 +39,8 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
 
     @Override
     protected void atualizarCampos() {
-        mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeCategoria.getText()));
-        mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoCategoria.getText()));
+        mViewModel.setNome(StringValidatorUtils.getSafeStringFromEditable(mBinding.etNomeCategoria.getText()));
+        mViewModel.setDescricao(StringValidatorUtils.getSafeStringFromEditable(mBinding.etDescricaoCategoria.getText()));
     }
 
     @Override
@@ -54,8 +54,8 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
 
     @Override
     protected boolean validarDados() {
-        return StringUtil.isNullOrEmpty(mBinding.etNomeCategoria.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etDescricaoCategoria.getError());
+        return StringValidatorUtils.isNullOrEmpty(mBinding.etNomeCategoria.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etDescricaoCategoria.getError());
     }
 
     @Override
@@ -79,7 +79,7 @@ public class CadastroCategoriaFragment extends BaseCadastroFragment<FragmentCada
         mBinding.btnCancelarCadastroCategoria.setOnClickListener(v -> cancelaCadastro());
         mBinding.btnSalvarCadastroCategoria.setOnClickListener(v -> salvarCadastro());
 
-        mBinding.etNomeCategoria.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etDescricaoCategoria.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
+        mBinding.etNomeCategoria.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etDescricaoCategoria.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
     }
 }

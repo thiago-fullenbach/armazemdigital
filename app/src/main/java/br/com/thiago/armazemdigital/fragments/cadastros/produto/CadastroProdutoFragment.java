@@ -19,9 +19,9 @@ import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
-import br.com.thiago.armazemdigital.utils.FormUtils;
-import br.com.thiago.armazemdigital.utils.MoneyUtil;
-import br.com.thiago.armazemdigital.utils.StringUtil;
+import br.com.thiago.armazemdigital.utils.FormManagerUtils;
+import br.com.thiago.armazemdigital.utils.MoneyFormatterUtils;
+import br.com.thiago.armazemdigital.utils.StringValidatorUtils;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.CadastroProdutoViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -44,7 +44,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mViewModel = new ViewModelProvider(entry, HiltViewModelFactory.create(requireContext(), entry)).get(CadastroProdutoViewModel.class);
         mViewModel.getNome().observe(getViewLifecycleOwner(), nome -> validarCampoTextoObrigatorio(mBinding.etNomeProduto, nome));
         mViewModel.getDescricao().observe(getViewLifecycleOwner(), descricao -> validarCampoTextoObrigatorio(mBinding.etDescricaoProduto, descricao));
-        mViewModel.getPreco().observe(getViewLifecycleOwner(), preco -> validarCampoTextoObrigatorio(mBinding.etPrecoProduto, MoneyUtil.moneyLongToString(preco)));
+        mViewModel.getPreco().observe(getViewLifecycleOwner(), preco -> validarCampoTextoObrigatorio(mBinding.etPrecoProduto, MoneyFormatterUtils.moneyLongToString(preco)));
         mViewModel.getUnidadeMedidaSelecionada().observe(getViewLifecycleOwner(), tipoUnidade ->
                 validarCampoTextoObrigatorio(
                         mBinding.actvUnidadeMedidaProduto,
@@ -65,10 +65,10 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         });
         mBinding.actvUnidadeMedidaProduto.setThreshold(TipoUnidade.values().length);
 
-        mBinding.etNomeProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etDescricaoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etPrecoProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.actvUnidadeMedidaProduto.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
+        mBinding.etNomeProduto.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etDescricaoProduto.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etPrecoProduto.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.actvUnidadeMedidaProduto.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
         mBinding.btnSelecionarCategoriaProduto.setOnClickListener(v -> {
             atualizarCampos();  // Atualiza campos, evitando perda de dados na transação entre fragments
             reset();            // Reseta flag de sucesso
@@ -98,10 +98,10 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected void atualizarCampos() {
-        mViewModel.setNome(StringUtil.getSafeStringFromEditable(mBinding.etNomeProduto.getText()));
-        mViewModel.setDescricao(StringUtil.getSafeStringFromEditable(mBinding.etDescricaoProduto.getText()));
-        mViewModel.setPreco(MoneyUtil.moneyStringToLong(StringUtil.getSafeStringFromEditable(mBinding.etPrecoProduto.getText())));
-        mViewModel.setUnidadeMedidaSelecionada(TipoUnidade.fromName(StringUtil.getSafeStringFromEditable(mBinding.actvUnidadeMedidaProduto.getText())));
+        mViewModel.setNome(StringValidatorUtils.getSafeStringFromEditable(mBinding.etNomeProduto.getText()));
+        mViewModel.setDescricao(StringValidatorUtils.getSafeStringFromEditable(mBinding.etDescricaoProduto.getText()));
+        mViewModel.setPreco(MoneyFormatterUtils.moneyStringToLong(StringValidatorUtils.getSafeStringFromEditable(mBinding.etPrecoProduto.getText())));
+        mViewModel.setUnidadeMedidaSelecionada(TipoUnidade.fromName(StringValidatorUtils.getSafeStringFromEditable(mBinding.actvUnidadeMedidaProduto.getText())));
     }
 
     @Override
@@ -116,10 +116,10 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
 
     @Override
     protected boolean validarDados() {
-        return StringUtil.isNullOrEmpty(mBinding.etNomeProduto.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etDescricaoProduto.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.etPrecoProduto.getError()) &&
-                StringUtil.isNullOrEmpty(mBinding.actvUnidadeMedidaProduto.getError());
+        return StringValidatorUtils.isNullOrEmpty(mBinding.etNomeProduto.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etDescricaoProduto.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etPrecoProduto.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.actvUnidadeMedidaProduto.getError());
     }
 
     @Override

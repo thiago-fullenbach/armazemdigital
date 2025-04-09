@@ -11,25 +11,36 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.ActivityMainBinding;
-import br.com.thiago.armazemdigital.utils.DialogUtil;
+import br.com.thiago.armazemdigital.utils.DialogCreatorUtils;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private final Logger mLogger = LoggerFactory.getLogger(MainActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLogger.info("@onCreate() chamado");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
         setupNavigation();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLogger.info("@onDestroy() chamado");
     }
 
     @Override
@@ -51,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showInfoDialog() {
+        mLogger.info("@showInfoDialog() chamado");
         String versionName = ((ArmazemDigitalApp) getApplication()).getVersionName();
-        AlertDialog dialog = DialogUtil.createInfoDialog(this, versionName);
+        AlertDialog dialog = DialogCreatorUtils.createInfoDialog(this, versionName);
         dialog.show();
     }
 

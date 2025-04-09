@@ -3,6 +3,15 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
+def getGitHash = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
 android {
     namespace 'br.com.thiago.armazemdigital'
     compileSdk 34
@@ -15,6 +24,9 @@ android {
         versionName "01.00.00-SNAPSHOT"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Obtém Hash do git acessível no código
+        buildConfigField "String", "GIT_HASH", "\"${getGitHash()}\""
     }
 
     buildTypes {
@@ -29,6 +41,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
@@ -44,6 +57,8 @@ dependencies {
     implementation libs.hilt.android
     implementation libs.hilt.nav
     implementation libs.hilt.nav.fragment
+    implementation libs.slf4j.api
+    implementation libs.logback
     testImplementation libs.junit
     testImplementation libs.mockitoCore
     testImplementation libs.mockitoInline

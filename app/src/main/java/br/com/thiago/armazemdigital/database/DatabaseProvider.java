@@ -27,7 +27,6 @@ import dagger.hilt.components.SingletonComponent;
 @InstallIn(SingletonComponent.class)
 public class DatabaseProvider {
     /** Fornece instância do banco de dados do app.
-     * @see DatabaseProvider#provideDatabase(Context)
      *
      * @param context Contexto do aplicativo para inicialização do banco de dados.
      * @return Instância do banco de dados do app.
