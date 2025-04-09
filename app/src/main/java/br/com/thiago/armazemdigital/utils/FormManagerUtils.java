@@ -5,7 +5,10 @@ import android.text.InputFilter;
 /**
  * Utilitário para formulários em geral do aplicativo.
  */
-public class FormUtils {
+public final class FormManagerUtils {
+
+    private FormManagerUtils() {}
+
     /** Cria um filtro genérico para utilização em TextInputEditText do App.
      *
      * @return InputFilter que permite caracteres alfa-numéricos (inclui cedilha e acentos).

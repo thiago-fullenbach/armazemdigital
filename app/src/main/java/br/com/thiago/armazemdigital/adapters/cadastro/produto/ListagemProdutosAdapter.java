@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 import br.com.thiago.armazemdigital.adapters.BaseAdapter;
 import br.com.thiago.armazemdigital.databinding.ListItemCadastroProdutoBinding;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
-import br.com.thiago.armazemdigital.utils.MoneyUtil;
+import br.com.thiago.armazemdigital.utils.MoneyFormatterUtils;
 
 public class ListagemProdutosAdapter extends BaseAdapter<ListItemCadastroProdutoBinding, ListagemProdutosAdapter.CadastroProdutoViewHolder, ProdutoCadastro> {
     private final List<ProdutoCadastro> mProdutos;
@@ -48,7 +48,7 @@ public class ListagemProdutosAdapter extends BaseAdapter<ListItemCadastroProduto
             produtoViewHolder.tvNomeProduto.setText(produto.getNameProduct());
             produtoViewHolder.tvDescProduto.setText(produto.getDescProduct());
             produtoViewHolder.tvCategoriaProduto.setText(produto.getNameCategory());
-            produtoViewHolder.tvPrecoProduto.setText(MoneyUtil.getFormattedMoney(produto.getPriceProduct()));
+            produtoViewHolder.tvPrecoProduto.setText(MoneyFormatterUtils.getFormattedMoney(produto.getPriceProduct()));
             produtoViewHolder.itemView.setOnClickListener(v -> mListener.accept(produto));
         }
     }

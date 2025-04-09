@@ -14,9 +14,11 @@ import java.util.Locale;
 /**
  * Utilitário para exibição de valores monetários.
  */
-public class MoneyUtil {
+public final class MoneyFormatterUtils {
     private static final int MONEY_SCALE = 2;
     private static final int MONEY_MULTIPLIER = 100;
+
+    private MoneyFormatterUtils() {}
 
     /** Formata valor Long como String para ser exibido em telas.
      * Tenha em mente que todos os valores monetários são representados como inteiros dividos por 100.
@@ -35,7 +37,7 @@ public class MoneyUtil {
         DecimalFormat moneyFormat = new DecimalFormat("¤ #,##0.00", symbols);
 
         // Pega valor dividido por 100, pois preco é armazenado multiplicado por 100
-        return moneyFormat.format(new BigDecimal(LongUtils.unbox(money))
+        return moneyFormat.format(new BigDecimal(LongValidatorUtils.unbox(money))
                 .divide(new BigDecimal(MONEY_MULTIPLIER), MONEY_SCALE, RoundingMode.HALF_EVEN));
     }
 
@@ -43,7 +45,7 @@ public class MoneyUtil {
      * separador decimal o '.' e desconsidera símbolo da moeda. O valor long é divido por cem antes
      * de ser formatado.
      *
-     * @see MoneyUtil#moneyStringToLong(String)
+     * @see MoneyFormatterUtils#moneyStringToLong(String)
      *
      * @param moneyLong Valor monetário a ser convertido.
      * @return String formatada com duas casas decimais. Retorna "" se o valor informado for nulo.
@@ -54,7 +56,7 @@ public class MoneyUtil {
             return null;
         }
 
-        return new BigDecimal(LongUtils.unbox(moneyLong))
+        return new BigDecimal(LongValidatorUtils.unbox(moneyLong))
                 .divide(new BigDecimal(MONEY_MULTIPLIER), MONEY_SCALE, RoundingMode.HALF_EVEN).toString();
     }
 
@@ -66,7 +68,7 @@ public class MoneyUtil {
      */
     @Nullable
     public static Long moneyStringToLong(@Nullable String moneyStr) {
-        if(StringUtils.isNullOrEmpty(moneyStr)) {
+        if(StringValidatorUtils.isNullOrEmpty(moneyStr)) {
             return null;
         }
 

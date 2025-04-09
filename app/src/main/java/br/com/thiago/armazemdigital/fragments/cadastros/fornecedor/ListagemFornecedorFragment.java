@@ -17,7 +17,7 @@ import br.com.thiago.armazemdigital.adapters.cadastro.fornecedor.ListagemFornece
 import br.com.thiago.armazemdigital.databinding.FragmentListagemFornecedorBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.FornecedorCadastro;
-import br.com.thiago.armazemdigital.utils.ListUtils;
+import br.com.thiago.armazemdigital.utils.ListValidatorUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.fornecedor.ListagemFornecedorViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -67,7 +67,7 @@ public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentLis
 
     private void showProductList(List<FornecedorCadastro> fornecedorCadastros) {
         mBinding.pbLoadingListFornecedor.setVisibility(View.GONE);
-        mBinding.rvListaCadastroFornecedor.setVisibility(ListUtils.isNullOrEmpty(fornecedorCadastros) ? View.GONE : View.VISIBLE);
-        mBinding.tvAvisoSemFornecedor.setVisibility(ListUtils.isNullOrEmpty(fornecedorCadastros) ? View.VISIBLE : View.GONE);
+        mBinding.rvListaCadastroFornecedor.setVisibility(ListValidatorUtils.isNullOrEmpty(fornecedorCadastros) ? View.GONE : View.VISIBLE);
+        mBinding.tvAvisoSemFornecedor.setVisibility(ListValidatorUtils.isNullOrEmpty(fornecedorCadastros) ? View.VISIBLE : View.GONE);
     }
 }

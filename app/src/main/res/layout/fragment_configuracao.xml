@@ -35,9 +35,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_selecionar_categoria_produto"
+        android:id="@+id/btn_extrair_log"
         style="@style/botaoNovoCadastro"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -45,8 +45,20 @@
         android:text="@string/label_btn_extrair_log"
         app:icon="@drawable/ic_extrair_log"
         app:iconTint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pb_loading_extrair_log"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_nivel_log" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading_extrair_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/layer_list_custom_progress_bar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_extrair_log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_extrair_log" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

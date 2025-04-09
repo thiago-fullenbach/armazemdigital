@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.ActivityMainBinding;
-import br.com.thiago.armazemdigital.utils.DialogUtils;
+import br.com.thiago.armazemdigital.utils.DialogCreatorUtils;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private void showInfoDialog() {
         mLogger.info("@showInfoDialog() chamado");
         String versionName = ((ArmazemDigitalApp) getApplication()).getVersionName();
-        AlertDialog dialog = DialogUtils.createInfoDialog(this, versionName);
+        AlertDialog dialog = DialogCreatorUtils.createInfoDialog(this, versionName);
         dialog.show();
     }
 

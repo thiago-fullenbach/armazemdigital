@@ -8,9 +8,10 @@ import java.util.Locale;
 /**
  * Utilitário para datas.
  */
-public class DateUtils {
+public final class DateFormatterUtils {
     private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final String LOG_DATE_FORMAT = "yyyy-MM-dd_HH:mm:ss";
+
+    private DateFormatterUtils() {}
 
     /** Função para formatar uma data em um formato específico.
      *
@@ -24,22 +25,12 @@ public class DateUtils {
     }
 
     /** Função para formatar uma data no formato padrão.
-     * @see DateUtils#formatDate(Date, String)
+     * @see DateFormatterUtils#formatDate(Date, String)
      *
      * @param date Data a ser formatada.
      * @return Data formatada em String.
      */
     public static String formatDate(Date date) {
         return formatDate(date, DEFAULT_DATE_FORMAT);
-    }
-
-    /** Função para formatar uma data no formato padrão para logs.
-     * @see DateUtils#formatDate(Date, String)
-     *
-     * @param date Data a ser formatada.
-     * @return Data formatada em String.
-     */
-    public static String formatLogDate(Date date) {
-        return formatDate(date, LOG_DATE_FORMAT);
     }
 }

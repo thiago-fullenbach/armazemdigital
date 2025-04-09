@@ -18,8 +18,8 @@ import java.util.function.Supplier;
 
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
-import br.com.thiago.armazemdigital.utils.DialogUtils;
-import br.com.thiago.armazemdigital.utils.StringUtils;
+import br.com.thiago.armazemdigital.utils.DialogCreatorUtils;
+import br.com.thiago.armazemdigital.utils.StringValidatorUtils;
 import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.BaseCadastroViewModel;
 
@@ -51,7 +51,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
             }
         });
 
-        mLoadingDialog = DialogUtils.createLoadingDialog(requireContext(), getLayoutInflater(), getRegistryName());
+        mLoadingDialog = DialogCreatorUtils.createLoadingDialog(requireContext(), getLayoutInflater(), getRegistryName());
     }
 
     /**
@@ -77,9 +77,9 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         mLogger.info("@validarCampoTextoObrigatorio() chamado");
         List<Supplier<String>> validatorFinal = new ArrayList<>(validators);
         validatorFinal.add(() -> {
-            if (StringUtils.isNullOrEmpty(fieldValue)) {
-                String hint = StringUtils.getSafeStringFromCharSequence(fieldView.getHint());
-                return StringUtils.isNullOrEmpty(hint) ? getString(R.string.field_error_generic)
+            if (StringValidatorUtils.isNullOrEmpty(fieldValue)) {
+                String hint = StringValidatorUtils.getSafeStringFromCharSequence(fieldView.getHint());
+                return StringValidatorUtils.isNullOrEmpty(hint) ? getString(R.string.field_error_generic)
                         : getString(R.string.field_error, fieldView.getHint());
             }
 
@@ -105,7 +105,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
             // Se houver erro, sai do loop
             mLogger.debug("Validando campo: {}", fieldView.getHint());
             mLogger.debug("Valor do campo: {}", fieldValue);
-            if (!StringUtils.isNullOrEmpty(msg)) {
+            if (!StringValidatorUtils.isNullOrEmpty(msg)) {
                 mLogger.warn("Erro ao validar campo: {}", msg);
                 fieldView.setError(msg);
                 return;
@@ -129,7 +129,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         if (!success) {
             mLogger.warn("Erro ao salvar dados");
             // Operação de salvar dados mal sucedida, apresenta dialog de erro
-            AlertDialog dialog = DialogUtils.createSaveErrorDialog(requireContext());
+            AlertDialog dialog = DialogCreatorUtils.createSaveErrorDialog(requireContext());
             dialog.show();
             return;
         }
@@ -155,7 +155,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
         if (!validarDados()) {
             mLogger.warn("Dados inválidos");
             dismissLoadingDialog();
-            AlertDialog dialog = DialogUtils.createErrorDialog(requireContext());
+            AlertDialog dialog = DialogCreatorUtils.createErrorDialog(requireContext());
             dialog.show();
             return;
         }

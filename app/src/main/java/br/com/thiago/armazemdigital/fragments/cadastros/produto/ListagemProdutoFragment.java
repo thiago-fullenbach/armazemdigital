@@ -17,7 +17,7 @@ import br.com.thiago.armazemdigital.adapters.cadastro.produto.ListagemProdutosAd
 import br.com.thiago.armazemdigital.databinding.FragmentListagemProdutoBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
-import br.com.thiago.armazemdigital.utils.ListUtils;
+import br.com.thiago.armazemdigital.utils.ListValidatorUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.ListagemProdutoViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -67,7 +67,7 @@ public class ListagemProdutoFragment extends BaseListagemFragment<FragmentListag
 
     private void showProductList(List<ProdutoCadastro> produtoCadastros) {
         mBinding.pbLoadingListProdutos.setVisibility(View.GONE);
-        mBinding.rvListaCadastroProduto.setVisibility(ListUtils.isNullOrEmpty(produtoCadastros) ? View.GONE : View.VISIBLE);
-        mBinding.tvAvisoSemProduto.setVisibility(ListUtils.isNullOrEmpty(produtoCadastros) ? View.VISIBLE : View.GONE);
+        mBinding.rvListaCadastroProduto.setVisibility(ListValidatorUtils.isNullOrEmpty(produtoCadastros) ? View.GONE : View.VISIBLE);
+        mBinding.tvAvisoSemProduto.setVisibility(ListValidatorUtils.isNullOrEmpty(produtoCadastros) ? View.VISIBLE : View.GONE);
     }
 }

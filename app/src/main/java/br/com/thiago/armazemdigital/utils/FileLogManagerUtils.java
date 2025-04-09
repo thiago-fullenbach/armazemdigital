@@ -13,12 +13,14 @@ import ch.qos.logback.core.Appender;
 /**
  * Classe de utilitários para log.
  */
-public class LogUtils {
+public final class FileLogManagerUtils {
+    private FileLogManagerUtils() {}
+
     /** Função para atualizar o nível de log do arquivo de log. Essa alteração não afeta o logcat.
      *
      * @param level String com o nível de log.
      */
-    public static void atualizarNivelLogArquivo(String level) {
+    public static void updateFileLogLevel(String level) {
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
         ch.qos.logback.classic.Logger rootLogger = loggerContext.getLogger(Logger.ROOT_LOGGER_NAME);
 

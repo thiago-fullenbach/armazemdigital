@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroFornecedorBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
-import br.com.thiago.armazemdigital.utils.FormUtils;
-import br.com.thiago.armazemdigital.utils.StringUtils;
+import br.com.thiago.armazemdigital.utils.FormManagerUtils;
+import br.com.thiago.armazemdigital.utils.StringValidatorUtils;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.fornecedor.CadastroFornecedorViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -55,16 +55,16 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
         mBinding.btnSalvarCadastroCategoria.setOnClickListener(v -> salvarCadastro());
 
         // Adiciona filtros de campos
-        mBinding.etNomeFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etTelefoneFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etEmailFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etCepFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etEstadoFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etCidadeFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etBairroFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etLogradouroFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etNumeroFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
-        mBinding.etComplementoFornecedor.setFilters(new InputFilter[]{FormUtils.getInputFilterForFields()});
+        mBinding.etNomeFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etTelefoneFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etEmailFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etCepFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etEstadoFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etCidadeFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etBairroFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etLogradouroFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etNumeroFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
+        mBinding.etComplementoFornecedor.setFilters(new InputFilter[]{FormManagerUtils.getInputFilterForFields()});
     }
 
     @Override
@@ -79,16 +79,16 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
 
     @Override
     protected void atualizarCampos() {
-        mViewModel.setNome(StringUtils.getSafeStringFromEditable(mBinding.etNomeFornecedor.getText()));
-        mViewModel.setTelefone(StringUtils.getSafeStringFromEditable(mBinding.etTelefoneFornecedor.getText()));
-        mViewModel.setEmail(StringUtils.getSafeStringFromEditable(mBinding.etEmailFornecedor.getText()));
-        mViewModel.setCep(StringUtils.getSafeStringFromEditable(mBinding.etCepFornecedor.getText()));
-        mViewModel.setEstado(StringUtils.getSafeStringFromEditable(mBinding.etEstadoFornecedor.getText()));
-        mViewModel.setCidade(StringUtils.getSafeStringFromEditable(mBinding.etCidadeFornecedor.getText()));
-        mViewModel.setBairro(StringUtils.getSafeStringFromEditable(mBinding.etBairroFornecedor.getText()));
-        mViewModel.setLogradouro(StringUtils.getSafeStringFromEditable(mBinding.etLogradouroFornecedor.getText()));
-        mViewModel.setNumero(StringUtils.getSafeStringFromEditable(mBinding.etNumeroFornecedor.getText()));
-        mViewModel.setComplemento(StringUtils.getSafeStringFromEditable(mBinding.etComplementoFornecedor.getText()));
+        mViewModel.setNome(StringValidatorUtils.getSafeStringFromEditable(mBinding.etNomeFornecedor.getText()));
+        mViewModel.setTelefone(StringValidatorUtils.getSafeStringFromEditable(mBinding.etTelefoneFornecedor.getText()));
+        mViewModel.setEmail(StringValidatorUtils.getSafeStringFromEditable(mBinding.etEmailFornecedor.getText()));
+        mViewModel.setCep(StringValidatorUtils.getSafeStringFromEditable(mBinding.etCepFornecedor.getText()));
+        mViewModel.setEstado(StringValidatorUtils.getSafeStringFromEditable(mBinding.etEstadoFornecedor.getText()));
+        mViewModel.setCidade(StringValidatorUtils.getSafeStringFromEditable(mBinding.etCidadeFornecedor.getText()));
+        mViewModel.setBairro(StringValidatorUtils.getSafeStringFromEditable(mBinding.etBairroFornecedor.getText()));
+        mViewModel.setLogradouro(StringValidatorUtils.getSafeStringFromEditable(mBinding.etLogradouroFornecedor.getText()));
+        mViewModel.setNumero(StringValidatorUtils.getSafeStringFromEditable(mBinding.etNumeroFornecedor.getText()));
+        mViewModel.setComplemento(StringValidatorUtils.getSafeStringFromEditable(mBinding.etComplementoFornecedor.getText()));
     }
 
     @Override
@@ -103,16 +103,16 @@ public class CadastroFornecedorFragment extends BaseCadastroFragment<FragmentCad
 
     @Override
     protected boolean validarDados() {
-        return StringUtils.isNullOrEmpty(mBinding.etNomeFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etTelefoneFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etEmailFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etCepFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etEstadoFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etCidadeFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etBairroFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etLogradouroFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etNumeroFornecedor.getError()) &&
-                StringUtils.isNullOrEmpty(mBinding.etComplementoFornecedor.getError());
+        return StringValidatorUtils.isNullOrEmpty(mBinding.etNomeFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etTelefoneFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etEmailFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etCepFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etEstadoFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etCidadeFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etBairroFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etLogradouroFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etNumeroFornecedor.getError()) &&
+                StringValidatorUtils.isNullOrEmpty(mBinding.etComplementoFornecedor.getError());
     }
 
     @Override

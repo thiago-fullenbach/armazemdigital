@@ -21,8 +21,8 @@ import br.com.thiago.armazemdigital.adapters.cadastro.produto.selectable.Listage
 import br.com.thiago.armazemdigital.databinding.FragmentSelectCategoriaBinding;
 import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
-import br.com.thiago.armazemdigital.utils.DialogUtils;
-import br.com.thiago.armazemdigital.utils.ListUtils;
+import br.com.thiago.armazemdigital.utils.DialogCreatorUtils;
+import br.com.thiago.armazemdigital.utils.ListValidatorUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.CadastroProdutoViewModel;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.selectable.ListagemSelectCategoryViewModel;
@@ -79,7 +79,7 @@ public class SelectCategoriaFragment extends BaseListagemFragment<FragmentSelect
 
     private void selectCategory(Long categoryId) {
         if (categoryId == null || categoryId <= 0) {
-            AlertDialog dialog = DialogUtils.createSelectProductCategoryError(requireContext());
+            AlertDialog dialog = DialogCreatorUtils.createSelectProductCategoryError(requireContext());
             dialog.show();
             return;
         }
@@ -97,7 +97,7 @@ public class SelectCategoriaFragment extends BaseListagemFragment<FragmentSelect
 
     private void showProductList(List<CategoriaCadastro> categoriasCadastradas) {
         mBinding.pbLoadingListCategorias.setVisibility(View.GONE);
-        mBinding.rvListaCadastroCategoria.setVisibility(ListUtils.isNullOrEmpty(categoriasCadastradas) ? View.GONE : View.VISIBLE);
-        mBinding.tvAvisoSemCategoria.setVisibility(ListUtils.isNullOrEmpty(categoriasCadastradas) ? View.VISIBLE : View.GONE);
+        mBinding.rvListaCadastroCategoria.setVisibility(ListValidatorUtils.isNullOrEmpty(categoriasCadastradas) ? View.GONE : View.VISIBLE);
+        mBinding.tvAvisoSemCategoria.setVisibility(ListValidatorUtils.isNullOrEmpty(categoriasCadastradas) ? View.VISIBLE : View.GONE);
     }
 }

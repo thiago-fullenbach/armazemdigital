@@ -67,4 +67,7 @@
     <string name="registry_name_product">Produto</string>
     <string name="hint_actv_nivel_log">Nível de LOG</string>
     <string name="label_btn_extrair_log">Extrair LOG</string>
+    <string name="error_already_generating_file">Aguarde enquanto o arquivo está sendo gerado.</string>
+    <string name="msg_file_generation_success">Arquivo compactado com sucesso!</string>
+    <string name="error_generating_zip_file">Erro ao compactar arquivos</string>
 </resources>

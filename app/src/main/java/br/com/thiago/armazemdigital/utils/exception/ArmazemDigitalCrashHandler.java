@@ -17,7 +17,7 @@ import java.util.Date;
 
 import br.com.thiago.armazemdigital.ArmazemDigitalApp;
 import br.com.thiago.armazemdigital.BuildConfig;
-import br.com.thiago.armazemdigital.utils.DateUtils;
+import br.com.thiago.armazemdigital.utils.DateFormatterUtils;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 
 public class ArmazemDigitalCrashHandler implements Thread.UncaughtExceptionHandler {
@@ -63,7 +63,7 @@ public class ArmazemDigitalCrashHandler implements Thread.UncaughtExceptionHandl
         crashDir.mkdirs();
 
         Date now = new Date();
-        String timestamp = DateUtils.formatDate(now);
+        String timestamp = DateFormatterUtils.formatDate(now);
         File crashFile = new File(crashDir, "crash.log");
 
         try (FileWriter writer = new FileWriter(crashFile, false)) {
