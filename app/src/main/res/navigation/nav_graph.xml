@@ -161,9 +161,37 @@
         app:startDestination="@id/item_menu_movimentacao">
         <fragment
             android:id="@+id/item_menu_movimentacao"
-            android:name="br.com.thiago.armazemdigital.fragments.movimentacao.MovimentacaoFragment"
+            android:name="br.com.thiago.armazemdigital.fragments.movimentacao.ListagemMovimentacaoFragment"
             android:label="fragment_movimentacao"
-            tools:layout="@layout/fragment_movimentacao" />
+            tools:layout="@layout/fragment_listagem_movimentacao" >
+            <action
+                android:id="@+id/action_item_menu_movimentacao_to_cadastro_movimentacao_fragment"
+                app:destination="@id/cadastro_movimentacao_fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/cadastro_movimentacao_fragment"
+            android:name="br.com.thiago.armazemdigital.fragments.movimentacao.CadastroMovimentacaoFragment"
+            android:label="fragment_cadastro_movimentacao"
+            tools:layout="@layout/fragment_cadastro_movimentacao" >
+            <action
+                android:id="@+id/action_cadastro_movimentacao_fragment_to_select_produto_fragment"
+                app:destination="@id/select_produto_fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/select_produto_fragment"
+            android:name="br.com.thiago.armazemdigital.fragments.movimentacao.selectable.SelectProdutoFragment"
+            android:label="fragment_select_produto"
+            tools:layout="@layout/fragment_select_produto" />
     </navigation>
 
     <fragment

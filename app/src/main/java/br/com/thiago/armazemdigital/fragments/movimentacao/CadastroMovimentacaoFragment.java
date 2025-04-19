@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import br.com.thiago.armazemdigital.databinding.FragmentMovimentacaoBinding;
+import br.com.thiago.armazemdigital.databinding.FragmentCadastroMovimentacaoBinding;
 import br.com.thiago.armazemdigital.fragments.BaseFragment;
 
-public class MovimentacaoFragment extends BaseFragment<FragmentMovimentacaoBinding> {
+public class CadastroMovimentacaoFragment extends BaseFragment<FragmentCadastroMovimentacaoBinding> {
 
-    public MovimentacaoFragment() {
+    public CadastroMovimentacaoFragment() {
         // Required empty public constructor
     }
 
@@ -19,8 +19,8 @@ public class MovimentacaoFragment extends BaseFragment<FragmentMovimentacaoBindi
     }
 
     @Override
-    protected FragmentMovimentacaoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
-        return FragmentMovimentacaoBinding.inflate(inflater, container, false);
+    protected FragmentCadastroMovimentacaoBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragmentCadastroMovimentacaoBinding.inflate(inflater, container, false);
     }
 
     @Override
