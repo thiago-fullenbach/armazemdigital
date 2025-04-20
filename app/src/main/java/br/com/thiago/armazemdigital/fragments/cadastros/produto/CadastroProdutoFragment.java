@@ -17,7 +17,7 @@ import java.util.Objects;
 
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
+import br.com.thiago.armazemdigital.fragments.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.utils.FormManagerUtils;
 import br.com.thiago.armazemdigital.utils.MoneyFormatterUtils;

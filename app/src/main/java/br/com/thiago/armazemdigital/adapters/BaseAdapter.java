@@ -19,13 +19,13 @@ public abstract class BaseAdapter<B extends ViewBinding, V extends RecyclerView.
 
     @NonNull
     @Override
-    public final RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mBindingItem = inflateBinding(LayoutInflater.from(parent.getContext()), parent);
         return getItemViewInstance(mBindingItem);
     }
 
     @Override
-    public final int getItemCount() {
+    public int getItemCount() {
         return getListItem().size();
     }
 

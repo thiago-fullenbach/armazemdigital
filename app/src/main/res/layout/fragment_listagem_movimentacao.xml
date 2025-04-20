@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".fragments.movimentacao.ListagemMovimentacaoFragment">
 
+    <ProgressBar
+        android:id="@+id/pb_loading_list_movement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cancelar_movimentacoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/layer_list_custom_progress_bar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_lista_movimentacao"
         android:layout_width="match_parent"

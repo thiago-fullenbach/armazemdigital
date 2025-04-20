@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,16 +36,18 @@ public class Movimentacao {
     private TipoMovimentacao typeMovement;
     private String reason;
     private String observation;
+    private StatusMovimentacao statusMovimentacao;
     private Date dateMovement;
 
     @Ignore
-    public Movimentacao(@NonNull Long productId, String username, Long qtt, TipoMovimentacao typeMovement, String reason, String observation, Date dateMovement) {
+    public Movimentacao(@NonNull Long productId, String username, Long qtt, TipoMovimentacao typeMovement, String reason, String observation, StatusMovimentacao statusMovimentacao, Date dateMovement) {
         this.productId = productId;
         this.username = username;
         this.qtt = qtt;
         this.typeMovement = typeMovement;
         this.reason = reason;
         this.observation = observation;
+        this.statusMovimentacao = statusMovimentacao;
         this.dateMovement = dateMovement;
     }
 }

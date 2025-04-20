@@ -15,7 +15,7 @@ import java.util.List;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.cadastro.fornecedor.ListagemFornecedorAdapter;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemFornecedorBinding;
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
+import br.com.thiago.armazemdigital.fragments.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.FornecedorCadastro;
 import br.com.thiago.armazemdigital.utils.ListValidatorUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
@@ -46,7 +46,7 @@ public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentLis
         ListagemFornecedorViewModel mViewModel = new ViewModelProvider(this).get(ListagemFornecedorViewModel.class);
         mViewModel.getItens().observe(getViewLifecycleOwner(), fornecedoresCadastro -> {
             mAdapter.setListData(fornecedoresCadastro);
-            showProductList(fornecedoresCadastro);
+            showSupplierList(fornecedoresCadastro);
         });
     }
 
@@ -65,7 +65,7 @@ public class ListagemFornecedorFragment extends BaseListagemFragment<FragmentLis
         mBinding.tvAvisoSemFornecedor.setVisibility(View.GONE);
     }
 
-    private void showProductList(List<FornecedorCadastro> fornecedorCadastros) {
+    private void showSupplierList(List<FornecedorCadastro> fornecedorCadastros) {
         mBinding.pbLoadingListFornecedor.setVisibility(View.GONE);
         mBinding.rvListaCadastroFornecedor.setVisibility(ListValidatorUtils.isNullOrEmpty(fornecedorCadastros) ? View.GONE : View.VISIBLE);
         mBinding.tvAvisoSemFornecedor.setVisibility(ListValidatorUtils.isNullOrEmpty(fornecedorCadastros) ? View.VISIBLE : View.GONE);

@@ -163,12 +163,21 @@
             android:id="@+id/item_menu_movimentacao"
             android:name="br.com.thiago.armazemdigital.fragments.movimentacao.ListagemMovimentacaoFragment"
             android:label="fragment_movimentacao"
-            tools:layout="@layout/fragment_listagem_movimentacao" >
+            tools:layout="@layout/fragment_listagem_movimentacao">
             <action
                 android:id="@+id/action_item_menu_movimentacao_to_cadastro_movimentacao_fragment"
                 app:destination="@id/cadastro_movimentacao_fragment"
                 app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_item_menu_movimentacao_to_nav_graph_estoque"
+                app:destination="@id/nav_graph_estoque"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popUpToInclusive="true"
+                app:popUpTo="@id/item_menu_movimentacao"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>

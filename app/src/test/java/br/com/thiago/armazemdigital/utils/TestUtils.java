@@ -8,6 +8,7 @@ import br.com.thiago.armazemdigital.model.Fornecedor;
 import br.com.thiago.armazemdigital.model.Fornecimento;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
+import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
@@ -62,6 +63,7 @@ public class TestUtils {
                 TipoMovimentacao.ENTRADA,
                 "Teste",
                 "Teste",
+                StatusMovimentacao.PENDENTE,
                 new Date()
         );
     }
@@ -72,9 +74,9 @@ public class TestUtils {
      */
     public static List<Movimentacao> createMovimentacoesForTests() {
         return List.of(
-                new Movimentacao(1L, "Usuario 1", 10000L, TipoMovimentacao.ENTRADA, "Motivo 1", "Obs 1", new Date()),
-                new Movimentacao(2L, "Usuario 2", 10000L, TipoMovimentacao.SAIDA, "Motivo 2", "Obs 2", new Date()),
-                new Movimentacao(3L, "Usuario 3", 10000L, TipoMovimentacao.AJUSTE, "Motivo 3", "Obs 3", new Date())
+                new Movimentacao(1L, "Usuario 1", 10000L, TipoMovimentacao.ENTRADA, "Motivo 1", "Obs 1", StatusMovimentacao.PENDENTE, new Date()),
+                new Movimentacao(2L, "Usuario 2", 10000L, TipoMovimentacao.SAIDA, "Motivo 2", "Obs 2", StatusMovimentacao.PENDENTE, new Date()),
+                new Movimentacao(3L, "Usuario 3", 10000L, TipoMovimentacao.AJUSTE, "Motivo 3", "Obs 3", StatusMovimentacao.PENDENTE, new Date())
         );
     }
 

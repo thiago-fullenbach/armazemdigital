@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroFornecedorBinding;
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
+import br.com.thiago.armazemdigital.fragments.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.utils.FormManagerUtils;
 import br.com.thiago.armazemdigital.utils.StringValidatorUtils;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.fornecedor.CadastroFornecedorViewModel;

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <Button
+        android:id="@+id/btn_cadastrar_novo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/shape_button_dashed"
@@ -11,7 +12,7 @@
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/yellow"
-        android:padding="8dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

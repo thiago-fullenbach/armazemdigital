@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.fragments.cadastros;
+package br.com.thiago.armazemdigital.fragments;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -17,11 +17,10 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import br.com.thiago.armazemdigital.R;
-import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.utils.DialogCreatorUtils;
 import br.com.thiago.armazemdigital.utils.StringValidatorUtils;
 import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
-import br.com.thiago.armazemdigital.viewmodel.cadastros.BaseCadastroViewModel;
+import br.com.thiago.armazemdigital.viewmodel.BaseCadastroViewModel;
 
 /**
  * Fragment base para telas de cadastro.
