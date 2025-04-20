@@ -1,9 +1,12 @@
 package br.com.thiago.armazemdigital.fragments.movimentacao;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
@@ -18,11 +21,16 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class ListagemMovimentacaoFragment extends BaseFragment<FragmentListagemMovimentacaoBinding> {
-    private ListagemMovimentacaoViewModel mViewModel;
     private ListagemMovimentacaoAdapter mAdapter;
 
     public ListagemMovimentacaoFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        showLoadingList();
     }
 
     @Override
@@ -32,7 +40,7 @@ public class ListagemMovimentacaoFragment extends BaseFragment<FragmentListagemM
 
     @Override
     protected void setupViewModel() {
-        mViewModel = new ViewModelProvider(this).get(ListagemMovimentacaoViewModel.class);
+        ListagemMovimentacaoViewModel mViewModel = new ViewModelProvider(this).get(ListagemMovimentacaoViewModel.class);
         mViewModel.getItens().observe(this, movimentacoes -> {
             mAdapter.setListData(movimentacoes);
             showMovementList();
