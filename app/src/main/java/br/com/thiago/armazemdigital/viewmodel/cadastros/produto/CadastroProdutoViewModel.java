@@ -103,7 +103,6 @@ public class CadastroProdutoViewModel extends ViewModel {
                     descricao.getValue(),
                     unidadeMedidaSelecionada.getValue(),
                     preco.getValue(),
-                    0L,
                     new Date()
             );
 

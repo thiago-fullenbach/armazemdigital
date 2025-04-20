@@ -34,7 +34,6 @@ public class TestUtils {
                 "Produto para utilização em testes",
                 TipoUnidade.UNIDADE,
                 500L,
-                10000L,
                 new Date()
         );
     }
@@ -45,9 +44,9 @@ public class TestUtils {
      */
     public static List<Produto> createProdutosForTests() {
         return List.of(
-                new Produto(1L, null, "Teste 1", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date()),
-                new Produto(1L, null, "Teste 2", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date()),
-                new Produto(1L, null, "Teste 3", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date())
+                new Produto(1L, null, "Teste 1", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, new Date()),
+                new Produto(1L, null, "Teste 2", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, new Date()),
+                new Produto(1L, null, "Teste 3", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, new Date())
         );
     }
 

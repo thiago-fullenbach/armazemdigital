@@ -32,7 +32,6 @@ public class AndroidTestUtils {
                 "Produto utilizado para testes",
                 TipoUnidade.UNIDADE,
                 400L,
-                10000L,
                 new Date()
         );
     }

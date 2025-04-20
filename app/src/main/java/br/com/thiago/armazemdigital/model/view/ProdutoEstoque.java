@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@DatabaseView(value = "SELECT produto.urlImage as urlImageProduct, produto.name as nameProduct, produto.description as descProduct, movimentacao.dateMovement, produto.qtt FROM produto INNER JOIN movimentacao ON produto.id = movimentacao.productId ORDER BY dateMovement DESC", viewName = "produtoestoque")
+@DatabaseView(value = "SELECT produto.urlImage as urlImageProduct, produto.name as nameProduct, produto.description as descProduct, movimentacao.dateMovement, SUM(movimentacao.qtt) AS qtt FROM produto INNER JOIN movimentacao ON produto.id = movimentacao.productId GROUP BY produto.id ORDER BY dateMovement DESC", viewName = "produtoestoque")
 public class ProdutoEstoque {
     private String urlImageProduct;
     private String nameProduct;
