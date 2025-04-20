@@ -10,6 +10,7 @@ import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.database.repository.CategoriaRepository;
 import br.com.thiago.armazemdigital.database.repository.FornecedorRepository;
 import br.com.thiago.armazemdigital.database.repository.FornecimentoRepository;
+import br.com.thiago.armazemdigital.database.repository.MovimentacaoRepository;
 import br.com.thiago.armazemdigital.database.repository.ProdutoRepository;
 import br.com.thiago.armazemdigital.database.repository.view.CategoriaCadastroRepository;
 import br.com.thiago.armazemdigital.database.repository.view.FornecedorCadastroRepository;
@@ -116,6 +117,17 @@ public class DatabaseProvider {
     @Provides
     public static CategoriaCadastroRepository provideCategoriaCadastroRepository(ArmazemDigitalDb db) {
         return new CategoriaCadastroRepository(db.categoriaCadastroDao());
+    }
+
+    /** Fornece instância do repositório de movimentações.
+     * @see DatabaseProvider#provideDatabase(Context)
+     *
+     * @param db Instância do banco de dados do app.
+     * @return Instância do repositório de movimentações.
+     */
+    @Provides
+    public static MovimentacaoRepository provideMovimentacaoRepository(ArmazemDigitalDb db) {
+        return new MovimentacaoRepository(db.movimentacaoDao());
     }
 
     /** Fornece instância do repositório de cadastro de movimentações.

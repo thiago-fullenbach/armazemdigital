@@ -15,7 +15,7 @@ public interface MovimentacaoCadastroDao {
     @Query("SELECT * FROM movimentacaoCadastro")
     LiveData<List<MovimentacaoCadastro>> getMovimentacoesCadastroLiveData();
 
-    @Query("SELECT * FROM movimentacaoCadastro WHERE statusMovimentacao = :status")
+    @Query("SELECT * FROM movimentacaoCadastro WHERE status = :status")
     LiveData<List<MovimentacaoCadastro>> getMovimentacoesCadastroWithStatusLiveData(StatusMovimentacao status);
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
