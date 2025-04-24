@@ -21,6 +21,7 @@ import br.com.thiago.armazemdigital.database.ArmazemDigitalDb;
 import br.com.thiago.armazemdigital.model.Categoria;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
+import br.com.thiago.armazemdigital.model.enums.MotivoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 import br.com.thiago.armazemdigital.utils.AndroidTestUtils;
 
@@ -75,7 +76,7 @@ public class MovimentacaoDaoTest {
 
         String nomeUsuario = "Outro usuário";
         long qtd = 50000L;
-        String razao = "Outra razão";
+        MotivoMovimentacao motivo = MotivoMovimentacao.COMPRA;
         String observacao = "Outra observação";
         TipoMovimentacao tipoMovimentacao = TipoMovimentacao.SAIDA;
 
@@ -83,16 +84,16 @@ public class MovimentacaoDaoTest {
 
         movimentacao = movimentacaoDao.getMovimentacao(movimentacao.getId());
 
-        movimentacao.setUsername(nomeUsuario);
+        movimentacao.setOperatorName(nomeUsuario);
         movimentacao.setQtt(qtd);
-        movimentacao.setReason(razao);
+        movimentacao.setMotive(motivo);
         movimentacao.setObservation(observacao);
         movimentacao.setTypeMovement(tipoMovimentacao);
 
         assertNotNull(movimentacao);
-        assertEquals(nomeUsuario, movimentacao.getUsername());
+        assertEquals(nomeUsuario, movimentacao.getOperatorName());
         assertEquals((Long) qtd, movimentacao.getQtt());
-        assertEquals(razao, movimentacao.getReason());
+        assertEquals(motivo, movimentacao.getMotive());
         assertEquals(observacao, movimentacao.getObservation());
         assertEquals(tipoMovimentacao, movimentacao.getTypeMovement());
     }

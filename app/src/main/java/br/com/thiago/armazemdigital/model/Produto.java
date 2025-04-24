@@ -29,6 +29,7 @@ public class Produto {
     @PrimaryKey(autoGenerate = true)
     private Long id;
     @NonNull
+    @lombok.NonNull
     private Long categoryId;
     private String urlImage;
     private String name;

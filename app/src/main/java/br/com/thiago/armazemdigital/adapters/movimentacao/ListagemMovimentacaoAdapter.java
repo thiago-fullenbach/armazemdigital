@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import br.com.thiago.armazemdigital.adapters.BaseEndButtonAdapter;
 import br.com.thiago.armazemdigital.databinding.ListItemMovimentacaoBinding;
@@ -18,10 +19,12 @@ import br.com.thiago.armazemdigital.utils.WeightFormatterUtils;
 
 public class ListagemMovimentacaoAdapter extends BaseEndButtonAdapter<ListItemMovimentacaoBinding, MovimentacaoCadastro> {
     private final List<MovimentacaoCadastro> mMovimentacoes;
+    private final Consumer<MovimentacaoCadastro> mListener;
 
-    public ListagemMovimentacaoAdapter(List<MovimentacaoCadastro> mMovimentacoes, View.OnClickListener onEndButtonClick) {
+    public ListagemMovimentacaoAdapter(List<MovimentacaoCadastro> mMovimentacoes, Consumer<MovimentacaoCadastro> mListener, View.OnClickListener onEndButtonClick) {
         super(onEndButtonClick);
         this.mMovimentacoes = mMovimentacoes;
+        this.mListener = mListener;
     }
 
     @Override
@@ -32,6 +35,7 @@ public class ListagemMovimentacaoAdapter extends BaseEndButtonAdapter<ListItemMo
             cadastroMovimentacaoViewHolder.tvNomeProduto.setText(movimentacaoCadastro.getNameProduct());
             cadastroMovimentacaoViewHolder.tvDescProduto.setText(movimentacaoCadastro.getDescProduct());
             cadastroMovimentacaoViewHolder.tvQuantidadeMovimentacao.setText(WeightFormatterUtils.getFormattedWeight(movimentacaoCadastro.getQttMovement()));
+            cadastroMovimentacaoViewHolder.itemView.setOnClickListener(v -> mListener.accept(movimentacaoCadastro));
         }
     }
 

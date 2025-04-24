@@ -25,6 +25,8 @@
                 android:id="@+id/btn_selecionar_produto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/shape_button_dashed"
                 android:padding="16dp"
                 android:text="@string/label_btn_selecionar_movimentacao_produto"
@@ -56,6 +58,7 @@
                     android:id="@+id/et_nome_operador"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="60"
                     android:background="@color/gray"
                     android:inputType="text"
                     android:imeOptions="actionNext"/>
@@ -71,7 +74,7 @@
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:hint="@string/hint_et_quantidade_movimentada"
-                android:inputType="text"
+                android:inputType="number|numberDecimal"
                 android:maxLines="3"
                 app:hintAnimationEnabled="true"
                 app:layout_constraintEnd_toStartOf="@+id/textView"
@@ -84,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/gray"
                     android:imeOptions="actionNext"
-                    android:inputType="text" />
+                    android:inputType="number|numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -171,9 +174,10 @@
                     android:id="@+id/et_observacao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="200"
                     android:background="@color/gray"
                     android:inputType="text"
-                    android:imeOptions="actionNext"/>
+                    android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

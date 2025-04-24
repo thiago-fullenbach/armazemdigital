@@ -4,6 +4,7 @@ import androidx.room.TypeConverter;
 
 import java.util.Date;
 
+import br.com.thiago.armazemdigital.model.enums.MotivoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
@@ -47,5 +48,15 @@ public class Converters {
     @TypeConverter
     public static StatusMovimentacao toStatusMovimentacao(int status) {
         return StatusMovimentacao.values()[status];
+    }
+
+    @TypeConverter
+    public static String fromMotivoMovimentacao(MotivoMovimentacao motivo) {
+        return motivo.name();
+    }
+
+    @TypeConverter
+    public static MotivoMovimentacao toMotivoMovimentacao(String motivo) {
+        return MotivoMovimentacao.valueOf(motivo);
     }
 }

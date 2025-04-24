@@ -57,10 +57,6 @@ public class ProdutoEstoqueDaoTest {
         Movimentacao movimentacao = AndroidTestUtils.createMovimentacaoForTests(produto.getId());
         movimentacao.setId(movimentacaoDao.insert(movimentacao));
 
-        // Simula entrada
-        produto.setQtt(produto.getQtt() + movimentacao.getQtt());
-        produtoDao.update(produto);
-
         List<ProdutoEstoque> produtosEmEstoque = produtoEstoqueDao.getProdutosEstoque();
 
         assertNotNull(produtosEmEstoque);

@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.movimentacao.ListagemMovimentacaoAdapter;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemMovimentacaoBinding;
-import br.com.thiago.armazemdigital.fragments.BaseFragment;
+import br.com.thiago.armazemdigital.fragments.BaseListagemFragment;
 import br.com.thiago.armazemdigital.utils.DialogCreatorUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.movimentacao.ListagemMovimentacaoViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class ListagemMovimentacaoFragment extends BaseFragment<FragmentListagemMovimentacaoBinding> {
+public class ListagemMovimentacaoFragment extends BaseListagemFragment<FragmentListagemMovimentacaoBinding> {
     private ListagemMovimentacaoViewModel mViewModel;
     private ListagemMovimentacaoAdapter mAdapter;
     private AlertDialog mLoadingDialog;
@@ -34,7 +34,7 @@ public class ListagemMovimentacaoFragment extends BaseFragment<FragmentListagemM
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mLoadingDialog = DialogCreatorUtils.createLoadingDialog(requireContext(), getLayoutInflater(), "Movimentação");
+        mLoadingDialog = DialogCreatorUtils.createLoadingDialog(requireContext(), getLayoutInflater(), getString(R.string.registry_name_movement));
         showLoadingList();
     }
 
@@ -46,28 +46,35 @@ public class ListagemMovimentacaoFragment extends BaseFragment<FragmentListagemM
     @Override
     protected void setupViewModel() {
         mViewModel = new ViewModelProvider(this).get(ListagemMovimentacaoViewModel.class);
-        mViewModel.getItens().observe(this, movimentacoes -> {
+        mViewModel.getItens().observe(getViewLifecycleOwner(), movimentacoes -> {
             mAdapter.setListData(movimentacoes);
             showMovementList();
         });
-        mViewModel.getSuccess().observe(this, success -> {
+
+        mViewModel.getSuccess().observe(getViewLifecycleOwner(), success -> {
             mLoadingDialog.dismiss();
-            if(success == null) return;
-            if(!success) {
+            if (success == null) return;
+            if (!success) {
                 AlertDialog dialogError = DialogCreatorUtils.createSaveErrorNoMovement(requireContext());
                 dialogError.show();
-                mViewModel.reset();
                 return;
             }
 
-            mViewModel.reset();
             navigateToFragment(R.id.action_item_menu_movimentacao_to_nav_graph_estoque);
         });
+
+        getNavController().addOnDestinationChangedListener((navController, navDestination, bundle) -> mViewModel.reset());
     }
 
     @Override
     protected void setupViews() {
-        mAdapter = new ListagemMovimentacaoAdapter(new ArrayList<>(), v -> navigateToFragment(R.id.action_item_menu_movimentacao_to_cadastro_movimentacao_fragment));
+        mAdapter = new ListagemMovimentacaoAdapter(
+                new ArrayList<>(),
+                movimentacaoCadastro -> editCadastro(R.id.action_item_menu_movimentacao_to_cadastro_movimentacao_fragment, movimentacaoCadastro.getMovementId()),
+                v -> {
+                    mViewModel.reset();
+                    navigateToFragment(R.id.action_item_menu_movimentacao_to_cadastro_movimentacao_fragment);
+                });
         mBinding.rvListaMovimentacao.setLayoutManager(new LinearLayoutManagerWrapper(requireActivity()));
         mBinding.rvListaMovimentacao.setAdapter(mAdapter);
         mBinding.btnSalvarMovimentacoes.setOnClickListener(v -> {

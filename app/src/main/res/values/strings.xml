@@ -82,4 +82,5 @@
     <string name="hint_et_observacao">Observação</string>
     <string name="txt_exemplo_sigla_unidade_medida">un.</string>
     <string name="error_save_no_movement_message">Sem movimentações para registro.</string>
+    <string name="registry_name_movement">Movimentação</string>
 </resources>

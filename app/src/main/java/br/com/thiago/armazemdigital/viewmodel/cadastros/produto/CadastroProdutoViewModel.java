@@ -122,6 +122,11 @@ public class CadastroProdutoViewModel extends ViewModel {
     public void updateProduto(long id) {
         Thread updateThread = new Thread(() -> {
             Produto produto = produtoRepository.getProduto(id);
+            long categoriaId = LongValidatorUtils.unbox(categoriaSelecionadaId.getValue());
+            if(categoriaId <= 0) {
+                success.postValue(false);
+                return;
+            }
 
             produto.setName(nome.getValue());
             produto.setDescription(descricao.getValue());

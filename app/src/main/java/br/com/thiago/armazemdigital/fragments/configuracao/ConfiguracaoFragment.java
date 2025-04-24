@@ -58,9 +58,9 @@ public class ConfiguracaoFragment extends BaseFragment<FragmentConfiguracaoBindi
     @Override
     protected void setupViewModel() {
         mViewModel = new ViewModelProvider(requireActivity()).get(ConfiguracaoViewModel.class);
-        mViewModel.getLevel().observe(this, level -> mBinding.actvNivelLog.setText(level.toString()));
-        mViewModel.getLoading().observe(this, loading -> mBinding.pbLoadingExtrairLog.setVisibility(loading ? View.VISIBLE : View.GONE));
-        mViewModel.getResult().observe(this, result -> {
+        mViewModel.getLevel().observe(getViewLifecycleOwner(), level -> mBinding.actvNivelLog.setText(level.toString()));
+        mViewModel.getLoading().observe(getViewLifecycleOwner(), loading -> mBinding.pbLoadingExtrairLog.setVisibility(loading ? View.VISIBLE : View.GONE));
+        mViewModel.getResult().observe(getViewLifecycleOwner(), result -> {
             mViewModel.setLoading(false);
             if (result == null) return;
             if (!result.success()) {
