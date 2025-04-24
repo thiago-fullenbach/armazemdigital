@@ -7,6 +7,7 @@ import br.com.thiago.armazemdigital.model.Fornecedor;
 import br.com.thiago.armazemdigital.model.Fornecimento;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
+import br.com.thiago.armazemdigital.model.enums.MotivoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
@@ -94,7 +95,7 @@ public class AndroidTestUtils {
                 "Thiago",
                 10000L,
                 TipoMovimentacao.ENTRADA,
-                "Teste",
+                MotivoMovimentacao.COMPRA,
                 "Realizado para testes",
                 StatusMovimentacao.PENDENTE,
                 new Date()
