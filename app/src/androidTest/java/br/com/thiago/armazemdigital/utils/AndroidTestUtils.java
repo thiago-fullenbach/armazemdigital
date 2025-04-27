@@ -97,7 +97,7 @@ public class AndroidTestUtils {
                 TipoMovimentacao.ENTRADA,
                 MotivoMovimentacao.COMPRA,
                 "Realizado para testes",
-                StatusMovimentacao.PENDENTE,
+                StatusMovimentacao.CONCLUIDO,
                 new Date()
         );
     }
