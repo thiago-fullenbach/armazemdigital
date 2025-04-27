@@ -9,17 +9,21 @@ import java.util.Date;
 import javax.inject.Inject;
 
 import br.com.thiago.armazemdigital.database.repository.MovimentacaoRepository;
+import br.com.thiago.armazemdigital.database.repository.view.ProdutoCadastroRepository;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.enums.MotivoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
+import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.LongValidatorUtils;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 public class CadastroMovimentacaoViewModel extends ViewModel {
     private final MovimentacaoRepository mMovimentacaoRepository;
+    private final ProdutoCadastroRepository mProdutoCadastroRepository;
     private final MutableLiveData<Long> mSelectedProductId = new MutableLiveData<>();
+    private final MutableLiveData<ProdutoCadastro> mSelectedProduct = new MutableLiveData<>();
     private final MutableLiveData<String> mNameOperator = new MutableLiveData<>();
     private final MutableLiveData<Long> mQtt = new MutableLiveData<>();
     private final MutableLiveData<TipoMovimentacao> mType = new MutableLiveData<>();
@@ -28,12 +32,17 @@ public class CadastroMovimentacaoViewModel extends ViewModel {
     private final MutableLiveData<Boolean> mSuccess = new MutableLiveData<>();
 
     @Inject
-    public CadastroMovimentacaoViewModel(MovimentacaoRepository mMovimentacaoRepository) {
+    public CadastroMovimentacaoViewModel(MovimentacaoRepository mMovimentacaoRepository, ProdutoCadastroRepository mProdutoCadastroRepository) {
         this.mMovimentacaoRepository = mMovimentacaoRepository;
+        this.mProdutoCadastroRepository = mProdutoCadastroRepository;
     }
 
     public LiveData<Long> getSelectedProductId() {
         return mSelectedProductId;
+    }
+
+    public LiveData<ProdutoCadastro> getSelectedProduct() {
+        return mSelectedProduct;
     }
 
     public LiveData<String> getNameOperator() {
@@ -86,6 +95,15 @@ public class CadastroMovimentacaoViewModel extends ViewModel {
 
     public void reset() {
         mSuccess.setValue(null);
+    }
+
+    public void carregarProduto() {
+        Thread loadThread = new Thread(() -> {
+            ProdutoCadastro produtoCadastro = mProdutoCadastroRepository.getProdutoCadastro(LongValidatorUtils.unbox(mSelectedProductId.getValue()));
+            mSelectedProduct.postValue(produtoCadastro);
+        });
+
+        loadThread.start();
     }
 
     public void salvarMovimentacao() {

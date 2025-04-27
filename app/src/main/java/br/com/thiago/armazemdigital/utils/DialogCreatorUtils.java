@@ -63,21 +63,6 @@ public final class DialogCreatorUtils {
         return builder.create();
     }
 
-    /** Cria dialog de erro ao selecionar categoria
-     *
-     * @param context Contexto da atividade atual
-     * @return AlertDialog informando erro ao selecionar categoria
-     */
-    public static AlertDialog createSelectProductCategoryError(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-        builder.setTitle(R.string.error_select_title);
-        builder.setMessage(R.string.error_select_category_message);
-        builder.setPositiveButton(R.string.dialog_button_ok, (dialogInterface, i) -> dialogInterface.dismiss());
-
-        return builder.create();
-    }
-
     /** Cria dialog de carregamento.
      *
      * @param context Contexto da atividade atual

@@ -11,6 +11,9 @@ import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 
 @Dao
 public interface ProdutoCadastroDao {
+    @Query("SELECT * FROM produtocadastro WHERE productId = :id")
+    ProdutoCadastro getProdutoCadastro(long id);
+
     @Query("SELECT * FROM produtocadastro")
     LiveData<List<ProdutoCadastro>> getProdutosCadastroLiveData();
 

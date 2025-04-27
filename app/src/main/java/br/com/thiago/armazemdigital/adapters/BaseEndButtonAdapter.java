@@ -30,6 +30,7 @@ public abstract class BaseEndButtonAdapter<B extends ViewBinding, I> extends Bas
     @NonNull
     @Override
     public final RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
         if(viewType == VIEW_TYPE_BUTTON_NEW_CADASTRO_ITEM)
             return new ButtonNewCadastroViewHolder(ListItemButtonNewCadastroBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
         return getItemViewInstance(inflateBinding(LayoutInflater.from(parent.getContext()), parent));

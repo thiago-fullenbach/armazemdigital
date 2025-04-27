@@ -3,6 +3,7 @@ package br.com.thiago.armazemdigital.fragments.movimentacao;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.hilt.navigation.HiltViewModelFactory;
@@ -14,7 +15,9 @@ import br.com.thiago.armazemdigital.databinding.FragmentCadastroMovimentacaoBind
 import br.com.thiago.armazemdigital.fragments.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.model.enums.MotivoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
+import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.FormManagerUtils;
+import br.com.thiago.armazemdigital.utils.MoneyFormatterUtils;
 import br.com.thiago.armazemdigital.utils.StringValidatorUtils;
 import br.com.thiago.armazemdigital.utils.WeightFormatterUtils;
 import br.com.thiago.armazemdigital.viewmodel.movimentacao.CadastroMovimentacaoViewModel;
@@ -46,8 +49,13 @@ public class CadastroMovimentacaoFragment extends BaseCadastroFragment<FragmentC
 
     @Override
     protected void setupViewModel() {
-        NavBackStackEntry entry = getNavController().getBackStackEntry(R.id.nav_graph_movimentacao);
+        NavBackStackEntry entry = getNavController().getBackStackEntry(R.id.nav_graph_cadastro_movimentacao);
         mViewModel = new ViewModelProvider(entry, HiltViewModelFactory.create(requireContext(), entry)).get(CadastroMovimentacaoViewModel.class);
+        mViewModel.getSelectedProductId().observe(getViewLifecycleOwner(), id -> {
+            iniciarCarregarProduto();
+            mViewModel.carregarProduto();
+        });
+        mViewModel.getSelectedProduct().observe(getViewLifecycleOwner(), this::carregarCardProduto);
         mViewModel.getNameOperator().observe(getViewLifecycleOwner(), name -> validarCampoTextoObrigatorio(mBinding.etNomeOperador, name));
         mViewModel.getQtt().observe(getViewLifecycleOwner(), qtt -> validarCampoTextoObrigatorio(mBinding.etQuantidadeMovimentada, WeightFormatterUtils.weightLongToString(qtt)));
         mViewModel.getType().observe(getViewLifecycleOwner(), type -> {
@@ -63,6 +71,18 @@ public class CadastroMovimentacaoFragment extends BaseCadastroFragment<FragmentC
     protected void setupViews() {
         mBinding.btnCancelarCadastroMovimentacao.setOnClickListener(v -> navigateBack());
         mBinding.btnSalvarCadastroMovimentacao.setOnClickListener(v -> salvarCadastro());
+
+        mBinding.btnSelecionarProduto.setOnClickListener(v -> {
+            atualizarCampos();
+            reset();
+            navigateToFragment(R.id.action_cadastro_movimentacao_fragment_to_select_produto_fragment);
+        });
+
+        mBinding.btnProdutoSelecionado.getRoot().setOnClickListener(v -> {
+            atualizarCampos();
+            reset();
+            navigateToFragment(R.id.action_cadastro_movimentacao_fragment_to_select_produto_fragment);
+        });
 
         mBinding.actvTipoMovimentacao.setAdapter(criarAdapter(TipoMovimentacao.values(), TipoMovimentacao::getDisplayDesc));
         mBinding.actvTipoMovimentacao.setOnItemClickListener((adapterView, view, position, id) -> {
@@ -133,5 +153,29 @@ public class CadastroMovimentacaoFragment extends BaseCadastroFragment<FragmentC
     @Override
     protected void carregarDados(long id) {
         mViewModel.carregarMovimentacao(id);
+    }
+
+    private void iniciarCarregarProduto() {
+        mBinding.pbLoadingProduct.setVisibility(View.VISIBLE);
+        mBinding.btnProdutoSelecionado.getRoot().setVisibility(View.GONE);
+        mBinding.btnSelecionarProduto.setVisibility(View.GONE);
+    }
+
+    private void carregarCardProduto(ProdutoCadastro produtoCadastro) {
+        mBinding.pbLoadingProduct.setVisibility(View.GONE);
+
+        if(produtoCadastro == null) {
+            mBinding.btnProdutoSelecionado.getRoot().setVisibility(View.GONE);
+            mBinding.btnSelecionarProduto.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        // TODO: Carregar imagem do produto
+        mBinding.btnProdutoSelecionado.tvNomeProduto.setText(produtoCadastro.getNameProduct());
+        mBinding.btnProdutoSelecionado.tvDescProduto.setText(produtoCadastro.getDescProduct());
+        mBinding.btnProdutoSelecionado.tvCategoriaProd.setText(produtoCadastro.getNameCategory());
+        mBinding.btnProdutoSelecionado.tvPrecoProd.setText(MoneyFormatterUtils.getFormattedMoney(produtoCadastro.getPriceProduct()));
+        mBinding.btnProdutoSelecionado.getRoot().setVisibility(View.VISIBLE);
+        mBinding.btnSelecionarProduto.setVisibility(View.GONE);
     }
 }

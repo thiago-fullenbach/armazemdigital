@@ -15,6 +15,10 @@ public class ProdutoCadastroRepository {
         this.produtoCadastroDao = produtoCadastroDao;
     }
 
+    public ProdutoCadastro getProdutoCadastro(long id) {
+        return produtoCadastroDao.getProdutoCadastro(id);
+    }
+
     public LiveData<List<ProdutoCadastro>> getProdutosCadastroLiveData() {
         return produtoCadastroDao.getProdutosCadastroLiveData();
     }

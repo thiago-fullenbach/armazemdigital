@@ -37,7 +37,7 @@ public class ListagemSelectFornecedorAdapter extends BaseAdapter<ListItemSelecta
     }
 
     @Override
-    protected List<FornecedorCadastro> getListItem() {
+    protected List<FornecedorCadastro> getItemList() {
         return mFornecedores;
     }
 
