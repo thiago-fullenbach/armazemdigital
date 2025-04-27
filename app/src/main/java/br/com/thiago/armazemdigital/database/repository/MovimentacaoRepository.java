@@ -7,6 +7,7 @@ import java.util.List;
 
 import br.com.thiago.armazemdigital.database.dao.MovimentacaoDao;
 import br.com.thiago.armazemdigital.model.Movimentacao;
+import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
 
 public class MovimentacaoRepository {
     private final MovimentacaoDao movimentacaoDao;
@@ -25,6 +26,10 @@ public class MovimentacaoRepository {
 
     public int deleteMovimentacao(Movimentacao movimentacao) {
         return movimentacaoDao.delete(movimentacao);
+    }
+
+    public int updateStatus(StatusMovimentacao oldStatus, StatusMovimentacao newStatus) {
+        return movimentacaoDao.updateStatus(oldStatus, newStatus);
     }
 
     public LiveData<List<Movimentacao>> getMovimentacoesLiveData() {

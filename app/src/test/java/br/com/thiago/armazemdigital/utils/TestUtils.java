@@ -8,6 +8,8 @@ import br.com.thiago.armazemdigital.model.Fornecedor;
 import br.com.thiago.armazemdigital.model.Fornecimento;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.Produto;
+import br.com.thiago.armazemdigital.model.enums.MotivoMovimentacao;
+import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
@@ -33,7 +35,6 @@ public class TestUtils {
                 "Produto para utilização em testes",
                 TipoUnidade.UNIDADE,
                 500L,
-                10000L,
                 new Date()
         );
     }
@@ -44,9 +45,9 @@ public class TestUtils {
      */
     public static List<Produto> createProdutosForTests() {
         return List.of(
-                new Produto(1L, null, "Teste 1", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date()),
-                new Produto(1L, null, "Teste 2", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date()),
-                new Produto(1L, null, "Teste 3", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, 10000L, new Date())
+                new Produto(1L, null, "Teste 1", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, new Date()),
+                new Produto(1L, null, "Teste 2", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, new Date()),
+                new Produto(1L, null, "Teste 3", "Produto Teste 1", TipoUnidade.UNIDADE, 500L, new Date())
         );
     }
 
@@ -60,8 +61,9 @@ public class TestUtils {
                 "Teste User",
                 10000L,
                 TipoMovimentacao.ENTRADA,
+                MotivoMovimentacao.COMPRA,
                 "Teste",
-                "Teste",
+                StatusMovimentacao.PENDENTE,
                 new Date()
         );
     }
@@ -72,9 +74,9 @@ public class TestUtils {
      */
     public static List<Movimentacao> createMovimentacoesForTests() {
         return List.of(
-                new Movimentacao(1L, "Usuario 1", 10000L, TipoMovimentacao.ENTRADA, "Motivo 1", "Obs 1", new Date()),
-                new Movimentacao(2L, "Usuario 2", 10000L, TipoMovimentacao.SAIDA, "Motivo 2", "Obs 2", new Date()),
-                new Movimentacao(3L, "Usuario 3", 10000L, TipoMovimentacao.AJUSTE, "Motivo 3", "Obs 3", new Date())
+                new Movimentacao(1L, "Usuario 1", 10000L, TipoMovimentacao.ENTRADA, MotivoMovimentacao.COMPRA, "Obs 1", StatusMovimentacao.PENDENTE, new Date()),
+                new Movimentacao(2L, "Usuario 2", 10000L, TipoMovimentacao.SAIDA, MotivoMovimentacao.VENDA, "Obs 2", StatusMovimentacao.PENDENTE, new Date()),
+                new Movimentacao(3L, "Usuario 3", 10000L, TipoMovimentacao.AJUSTE, MotivoMovimentacao.AJUSTE_INVENTARIO, "Obs 3", StatusMovimentacao.PENDENTE, new Date())
         );
     }
 

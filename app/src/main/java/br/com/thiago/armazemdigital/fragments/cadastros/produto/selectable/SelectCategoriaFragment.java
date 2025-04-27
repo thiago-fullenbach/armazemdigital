@@ -1,12 +1,10 @@
 package br.com.thiago.armazemdigital.fragments.cadastros.produto.selectable;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.hilt.navigation.HiltViewModelFactory;
@@ -19,9 +17,8 @@ import java.util.List;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.cadastro.produto.selectable.ListagemSelectCategoryAdapter;
 import br.com.thiago.armazemdigital.databinding.FragmentSelectCategoriaBinding;
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
+import br.com.thiago.armazemdigital.fragments.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
-import br.com.thiago.armazemdigital.utils.DialogCreatorUtils;
 import br.com.thiago.armazemdigital.utils.ListValidatorUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
 import br.com.thiago.armazemdigital.viewmodel.cadastros.produto.CadastroProdutoViewModel;
@@ -46,12 +43,12 @@ public class SelectCategoriaFragment extends BaseListagemFragment<FragmentSelect
     protected void setupViewModel() {
         NavBackStackEntry entry = getNavController().getBackStackEntry(R.id.nav_graph_cadastro_produto);
         mCadastroViewModel = new ViewModelProvider(entry, HiltViewModelFactory.create(requireContext(), entry)).get(CadastroProdutoViewModel.class);
-        ListagemSelectCategoryViewModel mListagemViewModel = new ViewModelProvider(this).get(ListagemSelectCategoryViewModel.class);
+        ListagemSelectCategoryViewModel listagemViewModel = new ViewModelProvider(this).get(ListagemSelectCategoryViewModel.class);
 
         mCadastroViewModel.getCategoriaSelecionadaId().observe(getViewLifecycleOwner(), categoriaSelecionadaId -> mAdapter.setCategoriaSelecionadaId(categoriaSelecionadaId));
-        mListagemViewModel.getItens().observe(getViewLifecycleOwner(), categorias -> {
+        listagemViewModel.getItens().observe(getViewLifecycleOwner(), categorias -> {
             mAdapter.setListData(categorias);
-            showProductList(categorias);
+            showCategoryList(categorias);
         });
     }
 
@@ -67,23 +64,10 @@ public class SelectCategoriaFragment extends BaseListagemFragment<FragmentSelect
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                selectCategory(mAdapter.getCategoriaSelecionadaId());
-            }
-        });
-
         showLoadingList();
     }
 
     private void selectCategory(Long categoryId) {
-        if (categoryId == null || categoryId <= 0) {
-            AlertDialog dialog = DialogCreatorUtils.createSelectProductCategoryError(requireContext());
-            dialog.show();
-            return;
-        }
-
         mCadastroViewModel.setCategoriaSelecionadaId(categoryId);
         navigateBack();
     }
@@ -95,7 +79,7 @@ public class SelectCategoriaFragment extends BaseListagemFragment<FragmentSelect
         mBinding.tvAvisoSemCategoria.setVisibility(View.GONE);
     }
 
-    private void showProductList(List<CategoriaCadastro> categoriasCadastradas) {
+    private void showCategoryList(List<CategoriaCadastro> categoriasCadastradas) {
         mBinding.pbLoadingListCategorias.setVisibility(View.GONE);
         mBinding.rvListaCadastroCategoria.setVisibility(ListValidatorUtils.isNullOrEmpty(categoriasCadastradas) ? View.GONE : View.VISIBLE);
         mBinding.tvAvisoSemCategoria.setVisibility(ListValidatorUtils.isNullOrEmpty(categoriasCadastradas) ? View.VISIBLE : View.GONE);

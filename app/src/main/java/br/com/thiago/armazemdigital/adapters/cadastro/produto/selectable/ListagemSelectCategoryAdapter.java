@@ -37,7 +37,7 @@ public class ListagemSelectCategoryAdapter extends BaseAdapter<ListItemSelectabl
     }
 
     @Override
-    protected List<CategoriaCadastro> getListItem() {
+    protected List<CategoriaCadastro> getItemList() {
         return mCategorias;
     }
 

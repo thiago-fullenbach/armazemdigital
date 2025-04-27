@@ -57,10 +57,6 @@ public class ProdutoEstoqueDaoTest {
         Movimentacao movimentacao = AndroidTestUtils.createMovimentacaoForTests(produto.getId());
         movimentacao.setId(movimentacaoDao.insert(movimentacao));
 
-        // Simula entrada
-        produto.setQtt(produto.getQtt() + movimentacao.getQtt());
-        produtoDao.update(produto);
-
         List<ProdutoEstoque> produtosEmEstoque = produtoEstoqueDao.getProdutosEstoque();
 
         assertNotNull(produtosEmEstoque);
@@ -68,7 +64,7 @@ public class ProdutoEstoqueDaoTest {
         assertEquals(produto.getUrlImage(), produtosEmEstoque.get(0).getUrlImageProduct());
         assertEquals(produto.getName(), produtosEmEstoque.get(0).getNameProduct());
         assertEquals(produto.getDescription(), produtosEmEstoque.get(0).getDescProduct());
-        assertEquals((Long) 20000L, produtosEmEstoque.get(0).getQtt());
+        assertEquals((Long) 10000L, produtosEmEstoque.get(0).getQtt());
         assertEquals(movimentacao.getDateMovement(), produtosEmEstoque.get(0).getDateMovement());
     }
 

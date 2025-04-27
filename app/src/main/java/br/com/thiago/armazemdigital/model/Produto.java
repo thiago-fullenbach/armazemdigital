@@ -29,24 +29,23 @@ public class Produto {
     @PrimaryKey(autoGenerate = true)
     private Long id;
     @NonNull
+    @lombok.NonNull
     private Long categoryId;
     private String urlImage;
     private String name;
     private String description;
     private TipoUnidade unit;
     private Long price;
-    private Long qtt;
     private Date dateCreated;
 
     @Ignore
-    public Produto(@NonNull Long categoryId, String urlImage, String name, String description, TipoUnidade unit, Long price, Long qtt, Date dateCreated) {
+    public Produto(@NonNull Long categoryId, String urlImage, String name, String description, TipoUnidade unit, Long price, Date dateCreated) {
         this.categoryId = categoryId;
         this.urlImage = urlImage;
         this.name = name;
         this.description = description;
         this.unit = unit;
         this.price = price;
-        this.qtt = qtt;
         this.dateCreated = dateCreated;
     }
 }

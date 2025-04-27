@@ -36,7 +36,7 @@ public class ListagemProdutosAdapter extends BaseAdapter<ListItemCadastroProduto
     }
 
     @Override
-    protected List<ProdutoCadastro> getListItem() {
+    protected List<ProdutoCadastro> getItemList() {
         return mProdutos;
     }
 

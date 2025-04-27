@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.viewmodel.cadastros;
+package br.com.thiago.armazemdigital.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

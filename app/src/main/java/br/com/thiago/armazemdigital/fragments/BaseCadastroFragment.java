@@ -1,8 +1,9 @@
-package br.com.thiago.armazemdigital.fragments.cadastros;
+package br.com.thiago.armazemdigital.fragments;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -17,11 +18,10 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import br.com.thiago.armazemdigital.R;
-import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.utils.DialogCreatorUtils;
 import br.com.thiago.armazemdigital.utils.StringValidatorUtils;
 import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
-import br.com.thiago.armazemdigital.viewmodel.cadastros.BaseCadastroViewModel;
+import br.com.thiago.armazemdigital.viewmodel.BaseCadastroViewModel;
 
 /**
  * Fragment base para telas de cadastro.
@@ -99,7 +99,7 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
      */
     protected <T extends EditText> void validarCampoTexto(T fieldView, String fieldValue, List<Supplier<String>> validators) {
         mLogger.info("@validarCampoTexto() chamado");
-        fieldView.setText(fieldValue);
+        setFieldValue(fieldView, fieldValue);
         for (Supplier<String> validator : validators) {
             String msg = validator.get();
             // Se houver erro, sai do loop
@@ -196,6 +196,24 @@ public abstract class BaseCadastroFragment<B extends ViewBinding> extends BaseFr
             // Fecha dialog de carregamento
             mLoadingDialog.dismiss();
         }
+    }
+
+    /** Função para alterar valor de um campo de texto.
+     *
+     * @param fieldView     Campo de texto a ser alterado.
+     * @param fieldValue    String representando o novo valor do campo.
+     * @param <T>           Tipo da View, deve estender EditText.
+     */
+    private <T extends EditText> void setFieldValue(T fieldView, String fieldValue) {
+        mLogger.debug("@setFieldValue() chamado");
+        mLogger.info("Campo: {}", fieldView.getHint());
+        mLogger.info("Valor do campo: {}", fieldValue);
+        if(fieldView instanceof AutoCompleteTextView) {
+            ((AutoCompleteTextView) fieldView).setText(fieldValue, false);
+            return;
+        }
+
+        fieldView.setText(fieldValue);
     }
 
     /**

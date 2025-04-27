@@ -1,4 +1,4 @@
-package br.com.thiago.armazemdigital.fragments.cadastros;
+package br.com.thiago.armazemdigital.fragments;
 
 import android.os.Bundle;
 
@@ -7,7 +7,6 @@ import androidx.viewbinding.ViewBinding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.thiago.armazemdigital.fragments.BaseFragment;
 import br.com.thiago.armazemdigital.utils.interfaces.BundleKeys;
 
 public abstract class BaseListagemFragment<B extends ViewBinding> extends BaseFragment<B> {

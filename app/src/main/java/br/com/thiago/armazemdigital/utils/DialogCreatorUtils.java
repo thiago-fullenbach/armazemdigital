@@ -63,21 +63,6 @@ public final class DialogCreatorUtils {
         return builder.create();
     }
 
-    /** Cria dialog de erro ao selecionar categoria
-     *
-     * @param context Contexto da atividade atual
-     * @return AlertDialog informando erro ao selecionar categoria
-     */
-    public static AlertDialog createSelectProductCategoryError(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-        builder.setTitle(R.string.error_select_title);
-        builder.setMessage(R.string.error_select_category_message);
-        builder.setPositiveButton(R.string.dialog_button_ok, (dialogInterface, i) -> dialogInterface.dismiss());
-
-        return builder.create();
-    }
-
     /** Cria dialog de carregamento.
      *
      * @param context Contexto da atividade atual
@@ -94,6 +79,21 @@ public final class DialogCreatorUtils {
         builder.setMessage(R.string.loading_saving_data_message);
         builder.setView(loadingView);
         builder.setCancelable(false);
+
+        return builder.create();
+    }
+
+    /** Cria mensagem do dialog de erro ao salvar movimentação sem movimentações cadastradas.
+     *
+     * @param context Contexto da atividade atual
+     * @return AlertDialog informando erro ao salvar movimentação sem movimentação
+     */
+    public static AlertDialog createSaveErrorNoMovement(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setTitle(R.string.error_register_title);
+        builder.setMessage(R.string.error_save_no_movement_message);
+        builder.setPositiveButton(R.string.dialog_button_ok, (dialogInterface, i) -> dialogInterface.dismiss());
 
         return builder.create();
     }

@@ -8,9 +8,13 @@ import androidx.room.Query;
 import java.util.List;
 
 import br.com.thiago.armazemdigital.model.Movimentacao;
+import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
 
 @Dao
 public interface MovimentacaoDao extends BaseDao<Movimentacao> {
+    @Query("UPDATE movimentacao SET status = :newStatus WHERE status = :oldStatus")
+    int updateStatus(StatusMovimentacao oldStatus, StatusMovimentacao newStatus);
+
     @Query("SELECT * FROM movimentacao ORDER BY id DESC")
     LiveData<List<Movimentacao>> getMovimentacoesLiveData();
 

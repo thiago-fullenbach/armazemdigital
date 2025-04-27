@@ -34,7 +34,7 @@ public class ListagemCategoriaAdapter extends BaseAdapter<ListItemCadastroCatego
     }
 
     @Override
-    protected List<CategoriaCadastro> getListItem() {
+    protected List<CategoriaCadastro> getItemList() {
         return mCategorias;
     }
 

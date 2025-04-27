@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.function.Function;
 
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.utils.wrapper.ArrayAdapterWrapper;
 
 public abstract class BaseFragment<B extends ViewBinding> extends Fragment {

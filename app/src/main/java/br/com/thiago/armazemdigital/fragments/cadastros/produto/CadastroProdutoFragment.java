@@ -17,7 +17,7 @@ import java.util.Objects;
 
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.databinding.FragmentCadastroProdutoBinding;
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseCadastroFragment;
+import br.com.thiago.armazemdigital.fragments.BaseCadastroFragment;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.utils.FormManagerUtils;
 import br.com.thiago.armazemdigital.utils.MoneyFormatterUtils;
@@ -61,7 +61,7 @@ public class CadastroProdutoFragment extends BaseCadastroFragment<FragmentCadast
         mBinding.actvUnidadeMedidaProduto.setAdapter(criarAdapter(List.of(TipoUnidade.values()), tipoUnidade -> Objects.requireNonNullElse(tipoUnidade, TipoUnidade.UNIDADE).getName()));
         mBinding.actvUnidadeMedidaProduto.setOnItemClickListener((adapterView, view, position, id) -> {
             TipoUnidade unidade = (TipoUnidade) adapterView.getItemAtPosition(position);
-            mBinding.actvUnidadeMedidaProduto.setText(unidade.getName());
+            mBinding.actvUnidadeMedidaProduto.setText(unidade.getName(), false);
         });
         mBinding.actvUnidadeMedidaProduto.setThreshold(TipoUnidade.values().length);
 

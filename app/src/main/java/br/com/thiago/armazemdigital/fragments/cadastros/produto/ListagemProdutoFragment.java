@@ -15,7 +15,7 @@ import java.util.List;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.cadastro.produto.ListagemProdutosAdapter;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemProdutoBinding;
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
+import br.com.thiago.armazemdigital.fragments.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.utils.ListValidatorUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;

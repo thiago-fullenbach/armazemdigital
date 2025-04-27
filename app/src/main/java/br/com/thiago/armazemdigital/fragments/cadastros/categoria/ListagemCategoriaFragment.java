@@ -15,7 +15,7 @@ import java.util.List;
 import br.com.thiago.armazemdigital.R;
 import br.com.thiago.armazemdigital.adapters.cadastro.categoria.ListagemCategoriaAdapter;
 import br.com.thiago.armazemdigital.databinding.FragmentListagemCategoriaBinding;
-import br.com.thiago.armazemdigital.fragments.cadastros.BaseListagemFragment;
+import br.com.thiago.armazemdigital.fragments.BaseListagemFragment;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
 import br.com.thiago.armazemdigital.utils.ListValidatorUtils;
 import br.com.thiago.armazemdigital.utils.wrapper.LinearLayoutManagerWrapper;
@@ -44,7 +44,7 @@ public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentList
         mViewModel.getItens().observe(getViewLifecycleOwner(), categorias -> {
             // Atualiza lista
             mAdapter.setListData(categorias);
-            showProductList(categorias);
+            showCategoryList(categorias);
         });
     }
 
@@ -69,7 +69,7 @@ public class ListagemCategoriaFragment extends BaseListagemFragment<FragmentList
         mBinding.tvAvisoSemCategoria.setVisibility(View.GONE);
     }
 
-    private void showProductList(List<CategoriaCadastro> categoriasCadastradas) {
+    private void showCategoryList(List<CategoriaCadastro> categoriasCadastradas) {
         mBinding.pbLoadingListCategorias.setVisibility(View.GONE);
         mBinding.rvListaCadastroCategoria.setVisibility(ListValidatorUtils.isNullOrEmpty(categoriasCadastradas) ? View.GONE : View.VISIBLE);
         mBinding.tvAvisoSemCategoria.setVisibility(ListValidatorUtils.isNullOrEmpty(categoriasCadastradas) ? View.VISIBLE : View.GONE);

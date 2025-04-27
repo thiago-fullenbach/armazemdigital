@@ -67,14 +67,12 @@ public class ProdutoDaoTest {
         String nome = "Outro nome";
         String descricao = "Outra descrição";
         long preco = 600L;
-        long qtd = 20000L;
 
         produto.setId(produto.getId());
         produto.setUrlImage(urlImagem);
         produto.setName(nome);
         produto.setDescription(descricao);
         produto.setPrice(preco);
-        produto.setQtt(qtd);
         produtoDao.update(produto);
 
         produto = produtoDao.getProduto(produto.getId());
@@ -84,7 +82,6 @@ public class ProdutoDaoTest {
         assertEquals(nome, produto.getName());
         assertEquals(descricao, produto.getDescription());
         assertEquals((Long) preco, produto.getPrice());
-        assertEquals((Long) qtd, produto.getQtt());
     }
 
     @Test

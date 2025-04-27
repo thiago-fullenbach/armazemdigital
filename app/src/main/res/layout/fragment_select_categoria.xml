@@ -47,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/label_btn_confirmar_selecao"
         app:icon="@drawable/ic_select_confirm"
         app:iconTint="@color/yellow"
