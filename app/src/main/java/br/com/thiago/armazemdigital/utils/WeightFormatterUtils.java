@@ -11,12 +11,21 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Locale;
 
+/**
+ * Utilitário para formatação e manipulação de peso.
+ */
 public final class WeightFormatterUtils {
     private static final int WEIGHT_SCALE = 3;
     private static final int WEIGHT_MULTIPLIER = 1000;
 
     private WeightFormatterUtils() {}
 
+    /**
+     * Função para formatar um valor de peso em String.
+     *
+     * @param weight Valor de quantidade (Long).
+     * @return String representando a quantidade formatada (divido por 1000 antes de conversão para String).
+     */
     public static String getFormattedWeight(@Nullable Long weight) {
         if(weight == null) {
             // Retorna zero formatado, caso weight seja nulo
@@ -31,6 +40,12 @@ public final class WeightFormatterUtils {
                 .divide(new BigDecimal(WEIGHT_MULTIPLIER), WEIGHT_SCALE, RoundingMode.HALF_EVEN));
     }
 
+    /**
+     * Função para formatar um valor de peso em String.
+     *
+     * @param weightLong Valor de quantidade (Long).
+     * @return String representando a quantidade (divido por 1000 antes de conversão para String).
+     */
     @Contract("null -> null; !null -> !null")
     public static String weightLongToString(@Nullable Long weightLong) {
         if(weightLong == null) {
@@ -41,6 +56,12 @@ public final class WeightFormatterUtils {
                 .divide(new BigDecimal(WEIGHT_MULTIPLIER), WEIGHT_SCALE, RoundingMode.HALF_EVEN).toString();
     }
 
+    /**
+     * Função para converter um valor de peso em String para Long.
+     *
+     * @param weightStr Valor de quantidade (String).
+     * @return Long representando a quantidade (multiplicado por 1000).
+     */
     @Nullable
     public static Long weightStringToLong(@Nullable String weightStr) {
         if(StringValidatorUtils.isNullOrEmpty(weightStr)) {

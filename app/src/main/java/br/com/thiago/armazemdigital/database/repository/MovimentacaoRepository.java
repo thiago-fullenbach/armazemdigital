@@ -28,12 +28,16 @@ public class MovimentacaoRepository {
         return movimentacaoDao.delete(movimentacao);
     }
 
-    public int updateStatus(StatusMovimentacao oldStatus, StatusMovimentacao newStatus) {
-        return movimentacaoDao.updateStatus(oldStatus, newStatus);
+    public int updateMovimentacoes(List<Movimentacao> movimentacoes) {
+        return movimentacaoDao.update(movimentacoes);
     }
 
     public LiveData<List<Movimentacao>> getMovimentacoesLiveData() {
         return movimentacaoDao.getMovimentacoesLiveData();
+    }
+
+    public LiveData<List<Movimentacao>> getMovimentacoesWithStatusLiveData(StatusMovimentacao status) {
+        return movimentacaoDao.getMovimentacoesWithStatusLiveData(status);
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
