@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import br.com.thiago.armazemdigital.database.repository.MovimentacaoRepository;
 import br.com.thiago.armazemdigital.database.repository.view.MovimentacaoCadastroRepository;
 import br.com.thiago.armazemdigital.model.Movimentacao;
 import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
+import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 import br.com.thiago.armazemdigital.model.view.MovimentacaoCadastro;
 import br.com.thiago.armazemdigital.viewmodel.BaseListagemViewModel;
 import dagger.hilt.android.lifecycle.HiltViewModel;
@@ -59,9 +61,24 @@ public class ListagemMovimentacaoViewModel extends BaseListagemViewModel<Movimen
                 return;
             }
 
+            HashMap<Long, Long> currentQttMap = new HashMap<>();
             List<Movimentacao> movimentacoes = new ArrayList<>();
             for (MovimentacaoCadastro movimentacaoCadastro : getItens().getValue()) {
                 Movimentacao movimentacao = createMovimentacaoFromCadastro(newStatus, movimentacaoCadastro);
+
+                // Adiciona no map a quantidade atual do produto.
+                currentQttMap.computeIfAbsent(movimentacaoCadastro.getProductId(), k -> movimentacaoCadastro.getQttCurrent());
+
+                // Calcula a nova quantidade do produto e atualiza quantidade atual.
+                Long currentQtt = currentQttMap.get(movimentacaoCadastro.getProductId());
+                Long newQtt = adjustQttForTypeMovement(
+                        movimentacao.getTypeMovement(),
+                        currentQtt,
+                        movimentacao.getQtt());
+                currentQttMap.put(movimentacaoCadastro.getProductId(), movimentacao.getQtt());
+
+                // Atualiza quantidade da movimentação
+                movimentacao.setQtt(newQtt);
                 movimentacoes.add(movimentacao);
             }
 
@@ -86,5 +103,11 @@ public class ListagemMovimentacaoViewModel extends BaseListagemViewModel<Movimen
 
         movimentacao.setId(movimentacaoCadastro.getMovementId());
         return movimentacao;
+    }
+
+    private Long adjustQttForTypeMovement(TipoMovimentacao tipoMovimentacao, Long currentQtt, Long newQtt) {
+        if(tipoMovimentacao == TipoMovimentacao.ENTRADA) return newQtt;
+        if(tipoMovimentacao == TipoMovimentacao.SAIDA) return - newQtt;
+        return newQtt - currentQtt;
     }
 }
