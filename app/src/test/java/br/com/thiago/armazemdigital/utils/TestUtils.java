@@ -165,9 +165,9 @@ public class TestUtils {
      */
     public static List<ProdutoEstoque> createProdutosEstoqueForTests() {
         return List.of(
-                new ProdutoEstoque(null, "Produto Teste 1", "Produto Teste", new Date(), 500L, TipoUnidade.UNIDADE),
-                new ProdutoEstoque(null, "Produto Teste 2", "Produto Teste", new Date(), 500L, TipoUnidade.UNIDADE),
-                new ProdutoEstoque(null, "Produto Teste 3", "Produto Teste", new Date(), 500L, TipoUnidade.UNIDADE)
+                new ProdutoEstoque(null, "Produto Teste 1", "Produto Teste", 500L, TipoUnidade.UNIDADE),
+                new ProdutoEstoque(null, "Produto Teste 2", "Produto Teste", 500L, TipoUnidade.UNIDADE),
+                new ProdutoEstoque(null, "Produto Teste 3", "Produto Teste", 500L, TipoUnidade.UNIDADE)
         );
     }
 
