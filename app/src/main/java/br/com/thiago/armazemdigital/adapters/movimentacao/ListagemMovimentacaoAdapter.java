@@ -34,12 +34,14 @@ public class ListagemMovimentacaoAdapter extends BaseEndButtonAdapter<ListItemMo
         if(holder instanceof CadastroMovimentacaoViewHolder cadastroMovimentacaoViewHolder) {
             MovimentacaoCadastro movimentacaoCadastro = mMovimentacoes.get(i);
             int colorInt = ContextCompat.getColor(getContext(), ViewFormatUtils.getWeightColorResIdForTypeMovement(movimentacaoCadastro.getTypeMovement()));
-            int formatString = ViewFormatUtils.getWeightFormattedStringResIdForTypeMovement(movimentacaoCadastro.getTypeMovement());
+            int formattedStringResId = ViewFormatUtils.getWeightFormattedStringResIdForTypeMovement(movimentacaoCadastro.getTypeMovement());
             // TODO: Adicionar lógica para carregamento da imagem
             cadastroMovimentacaoViewHolder.tvNomeProduto.setText(movimentacaoCadastro.getNameProduct());
             cadastroMovimentacaoViewHolder.tvDescProduto.setText(movimentacaoCadastro.getDescProduct());
             cadastroMovimentacaoViewHolder.tvQuantidadeMovimentacao.setText(getContext().getString(
-                    formatString, WeightFormatterUtils.getFormattedWeight(movimentacaoCadastro.getQttMovement())));
+                    formattedStringResId,
+                    WeightFormatterUtils.getFormattedWeight(Math.abs(movimentacaoCadastro.getQttMovement())),
+                    movimentacaoCadastro.getUnidade().getAcronym()));
             cadastroMovimentacaoViewHolder.tvQuantidadeMovimentacao.setTextColor(colorInt);
             cadastroMovimentacaoViewHolder.itemView.setOnClickListener(v -> mListener.accept(movimentacaoCadastro));
         }

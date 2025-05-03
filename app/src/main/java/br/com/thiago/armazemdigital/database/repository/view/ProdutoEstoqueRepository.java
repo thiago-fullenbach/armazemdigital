@@ -15,6 +15,10 @@ public class ProdutoEstoqueRepository {
         this.produtoEstoqueDao = produtoEstoqueDao;
     }
 
+    public ProdutoEstoque getProdutoEstoqueById(Long id) {
+        return produtoEstoqueDao.getProdutoEstoqueById(id);
+    }
+
     public LiveData<List<ProdutoEstoque>> getProdutosEstoqueLiveData() {
         return produtoEstoqueDao.getProdutosEstoqueLiveData();
     }
