@@ -14,6 +14,7 @@ import br.com.thiago.armazemdigital.model.enums.TipoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.TipoUnidade;
 import br.com.thiago.armazemdigital.model.view.CategoriaCadastro;
 import br.com.thiago.armazemdigital.model.view.FornecedorCadastro;
+import br.com.thiago.armazemdigital.model.view.MovimentacaoCadastro;
 import br.com.thiago.armazemdigital.model.view.ProdutoCadastro;
 import br.com.thiago.armazemdigital.model.view.ProdutoEstoque;
 
@@ -23,7 +24,8 @@ import br.com.thiago.armazemdigital.model.view.ProdutoEstoque;
  * Diferente da AndroidTestUtils, não é necessário adicionar dependências.
  */
 public class TestUtils {
-    /** Cria um produto mocado para testes.
+    /**
+     * Cria um produto mocado para testes.
      *
      * @return Produto com informações preenchidas.
      */
@@ -39,7 +41,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de produtos mocados para testes.
+    /**
+     * Cria uma lista de produtos mocados para testes.
      *
      * @return Lista de produtos com informações preenchidas.
      */
@@ -51,7 +54,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma movimentação mocada para testes.
+    /**
+     * Cria uma movimentação mocada para testes.
      *
      * @return Movimentação com informações preenchidas.
      */
@@ -68,7 +72,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de movimentações mocadas para testes.
+    /**
+     * Cria uma lista de movimentações mocadas para testes.
      *
      * @return Lista de movimentações com informações preenchidas.
      */
@@ -80,7 +85,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria um fornecedor mocado para testes.
+    /**
+     * Cria um fornecedor mocado para testes.
      *
      * @return Fornecedor com informações preenchidas.
      */
@@ -100,7 +106,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de fornecedores mocados para testes.
+    /**
+     * Cria uma lista de fornecedores mocados para testes.
      *
      * @return Lista de fornecedores com informações preenchidas.
      */
@@ -112,7 +119,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma categoria mocada para testes.
+    /**
+     * Cria uma categoria mocada para testes.
      *
      * @return Categoria com informações preenchidas.
      */
@@ -124,7 +132,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de categorias mocadas para testes.
+    /**
+     * Cria uma lista de categorias mocadas para testes.
      *
      * @return Lista de categorias com informações preenchidas.
      */
@@ -136,7 +145,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria um fornecimento mocado para testes.
+    /**
+     * Cria um fornecimento mocado para testes.
      *
      * @return Fornecimento com informações preenchidas.
      */
@@ -147,7 +157,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de fornecimentos mocados para testes.
+    /**
+     * Cria uma lista de fornecimentos mocados para testes.
      *
      * @return Lista de fornecimentos com informações preenchidas.
      */
@@ -159,7 +170,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de produto em estoque mocados para testes.
+    /**
+     * Cria uma lista de produto em estoque mocados para testes.
      *
      * @return Lista de produtos em estoque com informações preenchidas.
      */
@@ -171,7 +183,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de produtos cadastrados para testes.
+    /**
+     * Cria uma lista de produtos cadastrados para testes.
      *
      * @return Lista de produtos cadastrados com informações preenchidas.
      */
@@ -183,7 +196,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de categorias cadastradas para testes.
+    /**
+     * Cria uma lista de categorias cadastradas para testes.
      *
      * @return Lista de categorias cadastradas com informações preenchidas.
      */
@@ -195,7 +209,8 @@ public class TestUtils {
         );
     }
 
-    /** Cria uma lista de fornecedores cadastrados para testes.
+    /**
+     * Cria uma lista de fornecedores cadastrados para testes.
      *
      * @return Lista de fornecedores cadastrados com informações preenchidas.
      */
@@ -204,6 +219,19 @@ public class TestUtils {
                 new FornecedorCadastro(1, "Fornecedor 1", 1),
                 new FornecedorCadastro(2, "Fornecedor 2", 1),
                 new FornecedorCadastro(3, "Fornecedor 3", 1)
+        );
+    }
+
+    /**
+     * Cria uma lista de movimentações cadastradas para testes.
+     *
+     * @return Lista de movimentações cadastradas com informações preenchidas.
+     */
+    public static List<MovimentacaoCadastro> createMovimentacoesCadastroForTests() {
+        return List.of(
+                new MovimentacaoCadastro(1L, 1L, null, "Produto Teste 1", "Produto Teste", "Teste User", TipoUnidade.UNIDADE, TipoMovimentacao.ENTRADA, MotivoMovimentacao.COMPRA, 10000L, StatusMovimentacao.PENDENTE, ""),
+                new MovimentacaoCadastro(2L, 2L, null, "Produto Teste 1", "Produto Teste", "Teste User", TipoUnidade.UNIDADE, TipoMovimentacao.ENTRADA, MotivoMovimentacao.COMPRA, 10000L, StatusMovimentacao.PENDENTE, ""),
+                new MovimentacaoCadastro(3L, 3L, null, "Produto Teste 1", "Produto Teste", "Teste User", TipoUnidade.UNIDADE, TipoMovimentacao.ENTRADA, MotivoMovimentacao.COMPRA, 10000L, StatusMovimentacao.PENDENTE, "")
         );
     }
 }
