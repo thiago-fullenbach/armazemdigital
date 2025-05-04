@@ -10,7 +10,7 @@ import java.util.List;
 public class ListValidatorUtilsTest {
 
     @Test
-    public void isNullOrEmpty() {
+    public void testIsNullOrEmpty() {
         assertTrue(ListValidatorUtils.isNullOrEmpty(null));
         assertTrue(ListValidatorUtils.isNullOrEmpty(List.of()));
         assertFalse(ListValidatorUtils.isNullOrEmpty(List.of("teste")));

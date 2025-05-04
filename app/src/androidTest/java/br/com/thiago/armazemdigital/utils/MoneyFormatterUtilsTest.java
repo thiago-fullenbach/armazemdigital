@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 public class MoneyFormatterUtilsTest {
 
     @Test
-    public void getFormattedMoney() {
+    public void testGetFormattedMoney() {
         assertEquals("$ 5.00", MoneyFormatterUtils.getFormattedMoney(500L));
         assertEquals("$ 0.00", MoneyFormatterUtils.getFormattedMoney(null));
         assertEquals("$ 0.00", MoneyFormatterUtils.getFormattedMoney(0L));
@@ -22,18 +22,17 @@ public class MoneyFormatterUtilsTest {
     }
 
     @Test
-    public void moneyLongToString() {
+    public void testMoneyLongToString() {
         assertEquals("5.00", MoneyFormatterUtils.moneyLongToString(500L));
         assertNull(MoneyFormatterUtils.moneyLongToString(null));
         assertEquals("0.00", MoneyFormatterUtils.moneyLongToString(0L));
         assertEquals("4.50", MoneyFormatterUtils.moneyLongToString(450L));
         assertEquals("121.49", MoneyFormatterUtils.moneyLongToString(12149L));
         assertEquals("12459.49", MoneyFormatterUtils.moneyLongToString(1245949L));
-
     }
 
     @Test
-    public void moneyStringToLong() {
+    public void testMoneyStringToLong() {
         assertEquals((Long) 500L, MoneyFormatterUtils.moneyStringToLong("5.00"));
         assertEquals((Long) 0L, MoneyFormatterUtils.moneyStringToLong("0.00"));
         assertNull(MoneyFormatterUtils.moneyStringToLong(null));
