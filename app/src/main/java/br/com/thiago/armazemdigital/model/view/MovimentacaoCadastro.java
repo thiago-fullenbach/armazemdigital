@@ -1,6 +1,7 @@
 package br.com.thiago.armazemdigital.model.view;
 
 import androidx.room.DatabaseView;
+import androidx.room.Ignore;
 
 import br.com.thiago.armazemdigital.model.enums.MotivoMovimentacao;
 import br.com.thiago.armazemdigital.model.enums.StatusMovimentacao;
@@ -26,4 +27,20 @@ public class MovimentacaoCadastro {
     private Long qttCurrent;
     private StatusMovimentacao status;
     private String observation;
+
+    @Ignore
+    public MovimentacaoCadastro(long movementId, long productId, String urlImagem, String nameProduct, String descProduct, String operatorName, TipoUnidade unidade, TipoMovimentacao typeMovement, MotivoMovimentacao motive, Long qttMovement, StatusMovimentacao status, String observation) {
+        this.movementId = movementId;
+        this.productId = productId;
+        this.urlImagem = urlImagem;
+        this.nameProduct = nameProduct;
+        this.descProduct = descProduct;
+        this.operatorName = operatorName;
+        this.unidade = unidade;
+        this.typeMovement = typeMovement;
+        this.motive = motive;
+        this.qttMovement = qttMovement;
+        this.status = status;
+        this.observation = observation;
+    }
 }
