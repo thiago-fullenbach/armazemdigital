@@ -1,5 +1,5 @@
 name: CI Workflow
-run-name: ${{ github.actor }} is running the ${{ github.repository }} Workflow on branch ${{ gituhb.ref }}
+run-name: ${{ github.actor }} is running the ${{ github.repository }} Workflow on branch ${{ github.ref }}
 on:
   push:
     branches: [ "main", "develop", "feature/*", "bug/*", "release/*", "hotfix/*" ]
@@ -21,7 +21,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run lint
-        uses: ./gradlew lintDebug
+        run: ./gradlew lintDebug
 
       - name: Upload html test report
         uses: actions/upload-artifact@v4
@@ -44,6 +44,7 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         run: ./gradlew build
 
@@ -65,7 +66,7 @@ jobs:
         run: ./gradlew test
 
       - name: Upload test report
-        uses: actions.upload-artifact@v2
+        uses: actions.upload-artifact@v4
         with:
           name: unit_test_report
           path: app/build/reports/test/testDebugUnitTest/
@@ -100,6 +101,7 @@ jobs:
   debug-apk:
     name: Generate Debug APK
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -108,6 +110,8 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
+          distribution: 'jetbrains'
+          cache: gradle
 
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
