@@ -1,9 +1,44 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ArmazenDigital" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources>
+    <!-- Tema base da aplicação -->
+    <style name="Base.Theme.ArmazemDigital" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Aqui são definidos os itens do tema -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorSecondary">@color/gray</item>
+        <item name="android:windowBackground">@color/gray</item>
+        <item name="android:textColor">@color/yellow</item>
     </style>
 
-    <style name="Theme.ArmazenDigital" parent="Base.Theme.ArmazenDigital" />
+    <style name="Theme.ArmazemDigital" parent="Base.Theme.ArmazemDigital" />
+
+    <style name="botaoCadastro">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layoutDirection">ltr</item>
+    </style>
+
+    <style name="botaoNovoCadastro">
+        <item name="backgroundTint">@color/yellow</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layoutDirection">ltr</item>
+        <item name="rippleColor">@color/gray_semi_transparent</item>
+    </style>
+
+    <style name="botaoCancelarCadastro">
+        <item name="backgroundTint">@color/light_gray</item>
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layoutDirection">ltr</item>
+        <item name="rippleColor">@color/yellow_semi_transparent</item>
+    </style>
+
+    <style name="textoSemCadastros">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="textoInfoCadastroItem">
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

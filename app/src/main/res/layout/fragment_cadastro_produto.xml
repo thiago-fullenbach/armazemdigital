@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.cadastros.produto.CadastroProdutoFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:fadeScrollbars="false"
+        android:verticalScrollbarPosition="right"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cancelar_cadastro_produto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_imagem_cadastro_produto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:alpha="0.2"
+                android:background="@android:color/transparent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/no_image"
+                app:layout_constraintBottom_toTopOf="@+id/gl_imagem_cadastro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/ib_nova_imagem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_button_new_image"
+                android:importantForAccessibility="no"
+                android:padding="6dp"
+                android:src="@drawable/ic_cadastro_novo"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_imagem_cadastro_produto"
+                app:layout_constraintEnd_toEndOf="@+id/iv_imagem_cadastro_produto"
+                app:layout_constraintStart_toStartOf="@+id/iv_imagem_cadastro_produto"
+                app:layout_constraintTop_toTopOf="@+id/iv_imagem_cadastro_produto"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                android:id="@+id/til_nome_produto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ems="10"
+                android:hint="@string/hint_et_nome_produto"
+                android:inputType="text"
+                android:maxLines="1"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gl_imagem_cadastro">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_nome_produto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="100"
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                android:id="@+id/til_descricao_produto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ems="10"
+                android:hint="@string/hint_et_descricao_produto"
+                android:inputType="text"
+                android:maxLines="3"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_nome_produto">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_descricao_produto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="200"
+                    android:background="@color/gray"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                android:id="@+id/til_preco_produto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ems="10"
+                android:hint="@string/hint_et_preco_produto"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_descricao_produto">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_preco_produto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray"
+                    android:inputType="numberDecimal"
+                    android:imeOptions="actionDone"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:id="@+id/til_unidade_medida_produto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/hint_actv_unidade_medida_produto"
+                app:hintAnimationEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_preco_produto">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actv_unidade_medida_produto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:paddingEnd="48dp"
+                    android:paddingBottom="16dp"
+                    android:background="@color/gray"
+                    android:popupBackground="@color/gray"
+                    tools:ignore="LabelFor,RtlSymmetry" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_selecionar_categoria_produto"
+                style="@style/botaoNovoCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/label_btn_selecionar_produto_categoria"
+                app:icon="@drawable/ic_cadastro_categoria"
+                app:iconTint="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/til_unidade_medida_produto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btn_selecionar_fornecedor_produto"
+                style="@style/botaoNovoCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/label_btn_selecionar_produto_fornecedores"
+                app:icon="@drawable/ic_cadastro_fornecedor"
+                app:iconTint="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/btn_selecionar_categoria_produto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_imagem_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.24" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_cancelar_cadastro_produto"
+        style="@style/botaoCancelarCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/label_btn_cancelar_cadastro"
+        android:elevation="16dp"
+        app:icon="@drawable/ic_cadastro_cancelar"
+        app:iconTint="@color/yellow"
+        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_cadastro_produto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_salvar_cadastro_produto"
+        style="@style/botaoNovoCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/label_btn_salvar_cadastro"
+        app:icon="@drawable/ic_cadastro_salvar"
+        app:iconTint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
